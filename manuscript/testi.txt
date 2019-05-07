@@ -1,0 +1,78 @@
+(*******************************************
+ *                                         *
+ *  Manuscript Manager -testitiedosto  *
+ *                                         *
+ *******************************************)
+(   SETTINGS
+     (default_lang fi)
+     (voice_directories c:)
+
+     (export testi.mp3)
+     (#
+     (continuous_export True)
+     #)
+     (format mp3)
+     (title MM-kielen testi)
+     (artist Various Artists)
+     (album MM-single number 1)
+     (comments The best Test-file ever!)
+     (date 2019)
+     (genre pop)
+     (#
+     (cover ThePicture.jpg)
+     #)
+     (play_final True)
+
+     (print_text True)
+     (print_defined_actions True)
+     (print_manuscript True)
+
+     (play_while True)
+     (print_executions True)
+     (* (print_commands True) *)
+     (*(speak_executions True *)
+     (*(speak_errors True *)
+)
+Hei
+
+(NARRATOR Narrator (SOUND KERTOJA) (lang en) (speed -0.3))
+(KERTOJA)
+
+(ROLE A (pitch 2))
+(A Ahaa)
+
+Terve!
+(WAIT tauko (time 0.3))
+Mutta tuoltahan saapuu näytelmän kissa!
+(SOUND NAUKAISU (input meow.mp3))
+(NAUKAISU)
+(SOUND ÄÄNIÄ (input Cha_Ching.mp3 NAUKAISU))
+(ÄÄNIÄ)
+Aluksi puhuu Kertoja eli
+(A Minä olen Aa)
+(KERTOJA)
+@
+(NAUKAISU)
+(NARRATOR in English (lang en)).
+(ÄÄNIÄ)
+Määrittelemme seuraavaksi pari henkilöä.
+(tauko (time 1))
+Herra Kekkonen puhuu rauhallisesti suomea.
+(ROLE KEKKONEN (lang fi) (speed -0.5) (pitch -1) (alias Presidentti Kekkonen))
+(KEKKONEN Päivää, olen Presidentti Kekkonen. Hauska tutustua)
+
+Kiitos, hän oli siis (KEKKONEN).
+
+Seuraava henkilö on kaunis nainen, joka puhuu ruotsia.
+(ROLE Annica (lang sv) (speed 0.5) (pitch +0.2) (alias Fröken Annica))
+
+Mutta annetaanpa hänen esittäytyä itse.
+(Annica Hej, jag heter Fröken Annica. Jag bor i Stockholm och gillar bugga.)
+Kiitos, hän on siis (Annica).
+
+Vaan kukapa se tuolta tulee?
+(ROLE SHERLOCK (lang en) (pitch -0.8) (alias Sherlock Holmes))
+
+Ahaa, hän onkin (SHERLOCK (pitch -0.7)), se kuuluisa salapoliisi.
+(SHERLOCK "Yes, that's me!")
+
