@@ -72,7 +72,7 @@ class Definition:
             if val is None:
                 val = kwargs.get(default_value, None)
             if val is None:
-                val = settings.__dict__.get(default_value, None)
+                val = Definition.settings.__dict__.get(default_value, None)
             if val is not None:
                 setattr(self, param, func(val))
             else:

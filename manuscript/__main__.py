@@ -1,3 +1,19 @@
+"""
+Manscript Manger
+The main program
+"""
+import os
+
+from manuscript.language.lexer import ManuscriptLexer
+from manuscript.language.parser import ManuscriptParser
+import manuscript.language.constants as mc
+from manuscript.actions.definition import Definition
+from manuscript.actions.role import Role
+from manuscript.actions.wait import Wait
+from manuscript.actions.settings import Settings
+from manuscript.tools.box_text import box_text
+from manuscript.tools.print_list import print_list
+
 
 if __name__ == "__main__":
     """ Manuscript manager
@@ -25,12 +41,12 @@ if __name__ == "__main__":
     # ----------------------------------
     # Default actors and actions
     # ----------------------------------
-    defined_actions[NARRATOR] = Role(name=NARRATOR, lang='en')
-    settings = Settings()   #  Default settings
-    defined_actions[BREAK] = Wait(name=BREAK)
-    manuscript += [
-        (ROLE, Role, {'name': NARRATOR}),
-        (WAIT, Wait, {'name': BREAK})
+    Definition.defined_actions[mc.NARRATOR] = Role(name=mc.NARRATOR, lang='en')
+    Definition.settings = Settings()        #  Default settings
+    Definition.defined_actions[mc.BREAK] = Wait(name=mc.BREAK)
+    manuscript = [
+        (mc.ROLE, {'name': mc.NARRATOR}),
+        (mc.WAIT, {'name': mc.BREAK})
     ]
 
     cwd = os.getcwd()
@@ -44,38 +60,38 @@ if __name__ == "__main__":
         manuscript += pp
     print("Manuscript file parsed")
 
-    if settings.print_text:
-        lprint("Text", text.splitlines())
+    if Definition.settings.print_text:
+        print_list("Text", text.splitlines())
 
-    if settings.print_defined_actions:
+    if Definition.settings.print_defined_actions:
         print("Defined actions:")
-        for name, action in defined_actions.items():
+        for name, action in Definition.defined_actions.items():
             print(f"\n{name} {type(action)}")
             length = max([len(value) for value in action.__dict__]) + 1
             for key, value in action.__dict__.items():
                 if key != 'params':
                     print(f"   {key:{length}} {value}")
-        lprint("Defined actions", defined_actions)
+        print_list("Defined actions", defined_actions)
 
-    if settings.print_manuscript:
-        lprint(" Manuscript", manuscript)
+    if Definition.settings.print_manuscript:
+        print_list(" Manuscript", manuscript)
 
     print("Create play")
     create_playlist(manuscript)
 
     playlist.export(
         settings.export,
-        format=settings.format,
-        tags={"title": settings.title,
-              'artist': settings.artist,
-              'album': settings.album,
-              'comments': settings.comments,
+        format=Definition.settings.format,
+        tags={"title": Definition.settings.title,
+              'artist': Definition.settings.artist,
+              'album': Definition.settings.album,
+              'comments': Definition.settings.comments,
               },
-        cover=settings.cover,
+        cover=Definition.settings.cover,
     )
-    print(f"Playlist saved as {settings.export}")
+    print(f"Playlist saved as {Definition.settings.export}")
 
-    if settings.play_final:
+    if Definition.settings.play_final:
         time.sleep(5)
         print(f"Play result")
         playsound(settings.export)

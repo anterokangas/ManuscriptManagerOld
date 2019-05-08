@@ -36,11 +36,11 @@ class Settings(Definition):
 
     def __init__(self, **kwargs):
         """ Define Group object """
-        global settings
-        kwargs["name"] = SETTINGS
+        kwargs["name"] = mc.SETTINGS
         super().__init__(**kwargs)
-        settings = self
-        defined_actions[NARRATOR].__dict__['lang'] = settings.__dict__['default_lang']
+        Definition.settings = self
+        Definition.defined_actions[mc.NARRATOR].__dict__['lang'] = \
+            Definition.settings.__dict__['default_lang']
 
 
 

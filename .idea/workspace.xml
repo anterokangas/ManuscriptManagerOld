@@ -2,28 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52ff5cae-5db5-45de-92cf-93304a36c2ed" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/manuscript/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manuscript/Jemma/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manuscript/tools/print_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manuscript/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/__main__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manuscript/actions/definition.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/definition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/actions/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/group.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/actions/playlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/playlist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/actions/role.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/role.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manuscript/actions/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/actions/sound.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/sound.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/actions/wait.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/wait.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/language/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/language/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/language/lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/language/lexer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/language/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/language/parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manuscript/language/process_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/language/process_command.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/manuscript.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/manuscript.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/testi.txt" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/testi.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/manuscript.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/Jemma/manuscript.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manuscript/tools/box_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/tools/box_text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manuscript/tools/castings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/tools/castings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_box_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_box_text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_castings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_castings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_lexer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_parser.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,128 +20,110 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/manuscript/__main__.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/manuscript/tools/box_text.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
-                  <caret line="14" column="47" lean-forward="true" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/manuscript/tools/castings.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="85">
-                  <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/manuscript/manuscript.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-27">
-                  <caret line="850" lean-forward="true" selection-start-line="842" selection-end-line="850" />
-                  <folding>
-                    <element signature="e#25#46#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tests/parser.out">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1197" />
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/manuscript/language/parser.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="731">
-                  <caret line="43" selection-start-line="43" selection-end-line="43" />
-                  <folding>
-                    <element signature="e#41#63#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/manuscript/language/process_command.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="529">
-                  <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
-                  <folding>
-                    <element signature="e#0#42#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/manuscript/actions/role.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="425">
-                  <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tests/test_box_text.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tests/test_parser.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="156">
-                  <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-                  <folding>
-                    <element signature="e#0#53#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/tests/test_castings.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="580">
-                  <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
-                  <folding>
-                    <element signature="e#0#43#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manuscript/__main__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1">
+              <caret line="29" column="33" lean-forward="true" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+              <folding>
+                <element signature="e#42#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/manuscript/tools/box_text.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manuscript/tools/castings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manuscript/language/constants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-68">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manuscript/actions/definition.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manuscript/Jemma/manuscript.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="783" column="34" selection-start-line="774" selection-end-line="783" selection-end-column="34" />
+              <folding>
+                <element signature="e#25#46#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manuscript/tools/print_list.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manuscript/language/process_command.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manuscript/actions/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_box_text.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="42" column="19" lean-forward="true" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -173,6 +143,7 @@
       <find>DE</find>
       <find>mm.</find>
       <find>'__VALUES__'</find>
+      <find>lprint</find>
     </findStrings>
     <replaceStrings>
       <replace>mm.VALUES</replace>
@@ -184,6 +155,7 @@
       <replace>mm.SETTINGS</replace>
       <replace>mc.</replace>
       <replace>mc.VALUES</replace>
+      <replace>print_list</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -208,20 +180,21 @@
         <option value="$PROJECT_DIR$/manuscript/actors/sound.py" />
         <option value="$PROJECT_DIR$/manuscript/actors/group.py" />
         <option value="$PROJECT_DIR$/manuscript/actors/settings.py" />
-        <option value="$PROJECT_DIR$/manuscript/actions/settings.py" />
         <option value="$PROJECT_DIR$/manuscript/__init__.py" />
-        <option value="$PROJECT_DIR$/manuscript/actions/definition.py" />
         <option value="$PROJECT_DIR$/manuscript/language/parser.py" />
-        <option value="$PROJECT_DIR$/manuscript/manuscript.py" />
         <option value="$PROJECT_DIR$/tests/test_parser.py" />
         <option value="$PROJECT_DIR$/manuscript/actions/role.py" />
         <option value="$PROJECT_DIR$/tests/test_tools.py" />
         <option value="$PROJECT_DIR$/manuscript/tools/castings.py" />
         <option value="$PROJECT_DIR$/tests/test_castings.py" />
-        <option value="$PROJECT_DIR$/manuscript/tools/box_text.py" />
-        <option value="$PROJECT_DIR$/tests/test_box_text.py" />
-        <option value="$PROJECT_DIR$/manuscript/__main__.py" />
+        <option value="$PROJECT_DIR$/manuscript/manuscript.py" />
+        <option value="$PROJECT_DIR$/manuscript/actions/settings.py" />
         <option value="$PROJECT_DIR$/manuscript/language/process_command.py" />
+        <option value="$PROJECT_DIR$/manuscript/actions/definition.py" />
+        <option value="$PROJECT_DIR$/manuscript/tools/print_list.py" />
+        <option value="$PROJECT_DIR$/manuscript/__main__.py" />
+        <option value="$PROJECT_DIR$/tests/test_box_text.py" />
+        <option value="$PROJECT_DIR$/manuscript/tools/box_text.py" />
       </list>
     </option>
   </component>
@@ -255,6 +228,12 @@
               <item name="ManuscriptManager" type="b2602c69:ProjectViewProjectNode" />
               <item name="ManuscriptManager" type="462c0819:PsiDirectoryNode" />
               <item name="manuscript" type="462c0819:PsiDirectoryNode" />
+              <item name="Jemma" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ManuscriptManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ManuscriptManager" type="462c0819:PsiDirectoryNode" />
+              <item name="manuscript" type="462c0819:PsiDirectoryNode" />
               <item name="language" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -282,6 +261,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\anter_000\PycharmProjects\ManuscriptManager\manuscript\Jemma" />
       <recent name="C:\Users\anter_000\PycharmProjects\ManuscriptManager\manuscript\actions" />
       <recent name="C:\Users\anter_000\PycharmProjects\ManuscriptManager\manuscript\actors" />
     </key>
@@ -303,7 +283,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Python tests.pytest for test_box_text.test_box_text">
-    <configuration name="test_parser" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="__main__" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ManuscriptManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -311,11 +291,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/manuscript" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_parser.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manuscript/__main__.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -387,10 +367,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.pytest for test_box_text.test_box_text" />
+        <item itemvalue="Python.__main__" />
         <item itemvalue="Python tests.pytest for test_castings.test_as" />
         <item itemvalue="Python tests.pytest for test_castings.test_list_" />
         <item itemvalue="Python tests.pytest for test_castings.test_bool_" />
-        <item itemvalue="Python.test_parser" />
       </list>
     </recent_temporary>
   </component>
@@ -408,34 +388,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 01m 37s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 26m 24s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 02m 41s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 26m 57s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 03m 39s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 28m 19s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 04m 29s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 30m 18s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 05m 20s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 30m 48s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 06m 46s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 31m 11s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 07m 14s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 32m 40s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 08m 32s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 34m 13s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 09m 00s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 34m 49s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 13m 52s.xml">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 13h 35m 10s.xml">
       <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
     </history-entry>
   </component>
@@ -444,16 +424,16 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09483667" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21654373" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" weight="0.30278233" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.20910075" />
+      <window_info anchor="bottom" id="Terminal" weight="0.34777898" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.60455036" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.60455036" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -463,16 +443,16 @@
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.13467261" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.21654373" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" weight="0.17399268" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.34777898" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" />
-      <window_info anchor="bottom" id="Python Console" order="3" weight="0.3043478" />
+      <window_info anchor="bottom" id="Python Console" order="3" weight="0.30278233" />
       <window_info anchor="bottom" id="Message" order="4" />
-      <window_info anchor="bottom" id="Find" order="5" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.44517186" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.60455036" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -480,6 +460,17 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/manuscript/__main__.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../Manuscript/manuscript.py">
@@ -526,13 +517,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manuscript/language/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manuscript/actions/playlist.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -570,25 +554,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manuscript/actions/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manuscript/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manuscript/actions/definition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/manuscript/language/lexer.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -631,51 +598,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manuscript/tools/castings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manuscript/manuscript.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="850" lean-forward="true" selection-start-line="842" selection-end-line="850" />
-          <folding>
-            <element signature="e#25#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manuscript/tools/box_text.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="47" lean-forward="true" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manuscript/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_castings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
+        <state relative-caret-position="215">
           <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_box_text.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -684,13 +613,85 @@
         <state relative-caret-position="-1197" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/tools/castings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/language/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/manuscript/language/process_command.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+        <state relative-caret-position="105">
+          <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/definition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/Jemma/manuscript.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="783" column="34" selection-start-line="774" selection-end-line="783" selection-end-column="34" />
+          <folding>
+            <element signature="e#25#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1">
+          <caret line="29" column="33" lean-forward="true" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+          <folding>
+            <element signature="e#42#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/tools/print_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_box_text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="42" column="19" lean-forward="true" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/tools/box_text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
         </state>
       </provider>
     </entry>

@@ -29,7 +29,7 @@ def process_command(name, params, values, line_number):
         if values == "":
             raise ValueError(
                 f" *** Line {p.lineno}: Illegal use of '{name}' - no values")
-        if values not in set(defined_actions.keys()):
+        if values not in set(Definition.defined_actions.keys()):
             object_ = Definition.defining_actions[name](name=values, **params)
             Definition.defined_actions[values] = object_
             return name, {"name": values, **params}

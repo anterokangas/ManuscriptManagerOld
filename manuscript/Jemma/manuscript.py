@@ -409,7 +409,7 @@ def create_sound(sound_name, **kwargs):
     defined_actions[sound_name] = object_
     return sound_name, \
        object_, \
-       {"name": , VALUES: sound_name, **kwargs}
+       {"name": sound_name, VALUES: sound_name, **kwargs}
 
 
 class Sound(Definition):
@@ -681,9 +681,8 @@ class ManuscriptParser(Parser):
                 """
                 ill_char = ascii(t.value[0])
                 print(highlight(
-                    f"*** Lexigal error: illegal character '{ill_char}' in line {self.lineno} column {find_column(text,
-                                                                                                                  t)}",
-                    color='red'))
+                    f"*** Lexigal error: illegal character '{ill_char}' in line {self.lineno} column {find_column(text, t)}",
+                    color='red')
                 print(text.splitlines()[self.lineno - 1])
                 print(find_column(text, t) * " ", "^ ILLEGAL CHAR")
                 self.index += 1
