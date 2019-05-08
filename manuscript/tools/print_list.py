@@ -7,7 +7,7 @@ def print_list(header=None, the_list=[], numbers=True):
     :param numbers: bool should lines be numebered or not
     :return: None
     """
-    if heaer is not None:
+    if header is not None:
         print(header)
     num_len = len(str(len(the_list)))
     for ielement, element in enumerate(the_list):

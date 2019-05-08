@@ -24,17 +24,16 @@ if __name__ == "__main__":
     5. play result file
     """
     #global playlist
-    print(box_text(
-        [
-            "Manuscript Manager",
-            "==================",
-            "30.4.2019 (c) Antero Kangas",
-            "",
-            "Manuscript to mp3 file:",
-            "+-------+    +----+    +-----+    +------+    +----+",
-            "|MM-file| -> |read| -> |parse| -> |create| -> |play|",
-            "+-------+    +----+    +-----+    +------+    +----+"
-        ]
+    print(box_text("""
+        Manuscript Manager
+        ==================
+        8.5.2019 (c) Antero Kangas
+        
+        Manuscript to mp3 file:
+        +-------+    +----+    +-----+    +------+    +----+
+        |MM-file| -> |read| -> |parse| -> |create| -> |play|
+        +-------+    +----+    +-----+    +------+    +----+
+        """
     ))
     lexer = ManuscriptLexer()
     parser = ManuscriptParser()
