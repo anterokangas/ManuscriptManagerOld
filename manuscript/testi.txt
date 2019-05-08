@@ -3,10 +3,11 @@
  *  Manuscript Manager -testitiedosto  *
  *                                         *
  *******************************************)
-(   SETTINGS
+(    SETTINGS
+    (********)
      (default_lang fi)
      (voice_directories c:)
-
+    (* mp3 settings *)
      (export testi.mp3)
      (#
      (continuous_export True)
@@ -21,6 +22,7 @@
      (#
      (cover ThePicture.jpg)
      #)
+     (* results *)
      (play_final True)
 
      (print_text True)

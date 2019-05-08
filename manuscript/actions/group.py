@@ -1,8 +1,6 @@
-from manuscript.actors.definition import Definition
+from manuscript.actions.definition import Definition
 import manuscript.language.constants as mc
-from manuscript.tools.castings import bool_
 from manuscript.tools.castings import list_
-from manuscript.tools.castings import as_is
 
 
 class Group(Definition):

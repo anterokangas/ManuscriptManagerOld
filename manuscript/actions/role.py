@@ -1,4 +1,4 @@
-from manuscript.actors.definition import Definition
+from manuscript.actions.definition import Definition
 import manuscript.language.constants as mc
 
 
@@ -11,11 +11,11 @@ class Role(Definition):
         {"pitch": (float, 0.0),
          "speed": (float, 0.0),
          "gain": (float, 1.0),
-         "noname": (bool, False),   # name is never spoken
-         "like": (str, mc.NARRATOR),   # speak as 'like' except lang, default text == alias
-         mc.SOUND: (str, None)},       # generate SOUND object
-        {"alias": (str, "name"),    # default value == dependent on
-         "lang": (str, "default_lang")} # look first self, then settings
+         "noname": (bool, False),        # name is never spoken
+         "like": (str, mc.NARRATOR),     # speak as 'like' except lang, default text == alias
+         mc.SOUND: (str, None)},         # generate SOUND object
+        {"alias": (str, "name"),         # default value == dependent on
+         "lang": (str, "default_lang")}  # look first self, then settings
     ]
 
     def __init__(self, **kwargs):

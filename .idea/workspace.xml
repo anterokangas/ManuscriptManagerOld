@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="52ff5cae-5db5-45de-92cf-93304a36c2ed" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/manuscript/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/actions/definition.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/definition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/actions/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/actions/playlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/playlist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/actions/role.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/role.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/actions/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/actions/sound.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/sound.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/actions/wait.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/actions/wait.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/language/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/language/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/language/lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/language/lexer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/language/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/language/parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/language/process_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/language/process_command.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/manuscript.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/manuscript.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/testi.txt" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/testi.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/tools/box_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/tools/box_text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manuscript/tools/castings.py" beforeDir="false" afterPath="$PROJECT_DIR$/manuscript/tools/castings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_box_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_box_text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_castings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_castings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_lexer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_lexer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_parser.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/manuscript/__main__.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="170">
+                  <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/manuscript/tools/box_text.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="238">
+                  <caret line="14" column="47" lean-forward="true" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/manuscript/tools/castings.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="85">
+                  <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/manuscript/manuscript.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-27">
+                  <caret line="850" lean-forward="true" selection-start-line="842" selection-end-line="850" />
+                  <folding>
+                    <element signature="e#25#46#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/parser.out">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-1197" />
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/manuscript/language/parser.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="731">
+                  <caret line="43" selection-start-line="43" selection-end-line="43" />
+                  <folding>
+                    <element signature="e#41#63#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/manuscript/language/process_command.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="529">
+                  <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+                  <folding>
+                    <element signature="e#0#42#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/manuscript/actions/role.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="425">
+                  <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/test_box_text.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="204">
+                  <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/test_parser.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="156">
+                  <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+                  <folding>
+                    <element signature="e#0#53#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/tests/test_castings.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="580">
+                  <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+                  <folding>
+                    <element signature="e#0#43#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Setup Script" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>VALUES</find>
+      <find>SETTINGS</find>
+      <find>pl.</find>
+      <find>defined_actions</find>
+      <find>DEFINING_ACTIONS</find>
+      <find>DE</find>
+      <find>mm.</find>
+      <find>'__VALUES__'</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>mm.VALUES</replace>
+      <replace>mm.NARRATOR</replace>
+      <replace>mm.</replace>
+      <replace>Playlist.</replace>
+      <replace>Playlist.defined_actions</replace>
+      <replace>defining_actions</replace>
+      <replace>mm.SETTINGS</replace>
+      <replace>mc.</replace>
+      <replace>mc.VALUES</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/manuscript/testi.txt" />
+        <option value="$PROJECT_DIR$/manuscript/language/definition.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/manuscript/language/lexer.py" />
+        <option value="$PROJECT_DIR$/manuscript/language/x.py" />
+        <option value="$PROJECT_DIR$/manuscript/tools/x.py" />
+        <option value="$PROJECT_DIR$/tests/test_lexer.py" />
+        <option value="$PROJECT_DIR$/manuscript/actors/Playlist.py" />
+        <option value="$PROJECT_DIR$/manuscript/language/constants.py" />
+        <option value="$PROJECT_DIR$/manuscript/actors/playlist.py" />
+        <option value="$PROJECT_DIR$/manuscript/actors/role.py" />
+        <option value="$PROJECT_DIR$/manuscript/actors/wait.py" />
+        <option value="$PROJECT_DIR$/manuscript/actors/definition.py" />
+        <option value="$PROJECT_DIR$/manuscript/actors/sound.py" />
+        <option value="$PROJECT_DIR$/manuscript/actors/group.py" />
+        <option value="$PROJECT_DIR$/manuscript/actors/settings.py" />
+        <option value="$PROJECT_DIR$/manuscript/actions/settings.py" />
+        <option value="$PROJECT_DIR$/manuscript/__init__.py" />
+        <option value="$PROJECT_DIR$/manuscript/actions/definition.py" />
+        <option value="$PROJECT_DIR$/manuscript/language/parser.py" />
+        <option value="$PROJECT_DIR$/manuscript/manuscript.py" />
+        <option value="$PROJECT_DIR$/tests/test_parser.py" />
+        <option value="$PROJECT_DIR$/manuscript/actions/role.py" />
+        <option value="$PROJECT_DIR$/tests/test_tools.py" />
+        <option value="$PROJECT_DIR$/manuscript/tools/castings.py" />
+        <option value="$PROJECT_DIR$/tests/test_castings.py" />
+        <option value="$PROJECT_DIR$/manuscript/tools/box_text.py" />
+        <option value="$PROJECT_DIR$/tests/test_box_text.py" />
+        <option value="$PROJECT_DIR$/manuscript/__main__.py" />
+        <option value="$PROJECT_DIR$/manuscript/language/process_command.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1358" />
+    <option name="y" value="-1" />
+    <option name="width" value="913" />
+    <option name="height" value="474" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ManuscriptManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ManuscriptManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ManuscriptManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ManuscriptManager" type="462c0819:PsiDirectoryNode" />
+              <item name="manuscript" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ManuscriptManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ManuscriptManager" type="462c0819:PsiDirectoryNode" />
+              <item name="manuscript" type="462c0819:PsiDirectoryNode" />
+              <item name="language" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ManuscriptManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ManuscriptManager" type="462c0819:PsiDirectoryNode" />
+              <item name="manuscript" type="462c0819:PsiDirectoryNode" />
+              <item name="tools" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ManuscriptManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ManuscriptManager" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/manuscript" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\anter_000\PycharmProjects\ManuscriptManager\manuscript\actions" />
+      <recent name="C:\Users\anter_000\PycharmProjects\ManuscriptManager\manuscript\actors" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\anter_000\PycharmProjects\ManuscriptManager\manuscript" />
+      <recent name="C:\Users\anter_000\PycharmProjects\Manuscript" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python tests.pytest for test_box_text.test_box_text">
+    <configuration name="test_parser" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ManuscriptManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_parser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_box_text.test_box_text" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="ManuscriptManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_box_text.test_box_text&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_castings.test_as" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="ManuscriptManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_castings.test_as&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_castings.test_bool_" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="ManuscriptManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_castings.test_bool_&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_castings.test_list_" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="ManuscriptManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_castings.test_list_&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.pytest for test_box_text.test_box_text" />
+        <item itemvalue="Python tests.pytest for test_castings.test_as" />
+        <item itemvalue="Python tests.pytest for test_castings.test_list_" />
+        <item itemvalue="Python tests.pytest for test_castings.test_bool_" />
+        <item itemvalue="Python.test_parser" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="52ff5cae-5db5-45de-92cf-93304a36c2ed" name="Default Changelist" comment="" />
+      <created>1557227615948</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1557227615948</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 01m 37s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 02m 41s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 03m 39s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 04m 29s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 05m 20s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 06m 46s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 07m 14s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 08m 32s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 09m 00s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_box_text_test_box_text - 2019.05.08 at 12h 13m 52s.xml">
+      <configuration name="pytest for test_box_text.test_box_text" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1358" y="-1" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09483667" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" weight="0.30278233" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.20910075" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.60455036" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.13467261" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.17399268" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="2" />
+      <window_info anchor="bottom" id="Python Console" order="3" weight="0.3043478" />
+      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info anchor="bottom" id="Find" order="5" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.44517186" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../Manuscript/manuscript.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Manuscript/testi.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/language/x.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/tools/x.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-1810076560/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="476" lean-forward="true" selection-start-line="476" selection-end-line="476" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_lexer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/language/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/playlist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/wait.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="38" column="39" lean-forward="true" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/sound.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" selection-end-line="3" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/group.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="43" lean-forward="true" selection-start-line="1" selection-start-column="42" selection-end-line="2" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/definition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/language/lexer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/testi.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/language/parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+          <folding>
+            <element signature="e#41#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/actions/role.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/tools/castings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/manuscript.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="850" lean-forward="true" selection-start-line="842" selection-end-line="850" />
+          <folding>
+            <element signature="e#25#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/tools/box_text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="47" lean-forward="true" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_castings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_box_text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/parser.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1197" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manuscript/language/process_command.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

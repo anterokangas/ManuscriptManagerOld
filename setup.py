@@ -3,7 +3,8 @@ from setuptools import setup
 setup(
     name='ManuscriptManager',
     version='00.00.01',
-    packages=['tests', 'manuscript', 'manuscript.tools', 'manuscript.actors', 'manuscript.language'],
+    packages=['sly',
+        'tests', 'manuscript', 'manuscript.tools', 'manuscript.actors', 'manuscript.language'],
     url='',
     license='MIT',
     author='Antero Kangas',

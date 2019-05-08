@@ -9,7 +9,7 @@ class Definition:
 
     defining_actions = {}   # add defining actions == subclasses
 
-    defined_actions = []    # add defined actions == objects of subclasses
+    defined_actions = {}   # add defined actions == objects of subclasses
 
     manuscript = []
 

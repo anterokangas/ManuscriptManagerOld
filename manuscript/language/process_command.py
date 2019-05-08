@@ -32,12 +32,15 @@ def process_command(name, params, values, line_number):
         if values not in set(defined_actions.keys()):
             object_ = Definition.defining_actions[name](name=values, **params)
             Definition.defined_actions[values] = object_
+            return name, {"name": values, **params}
             return name, Definition.defining_actions[name], {"name": values, **params}
         raise ValueError(
             f" *** Line {line_number}: Double {name} definition '{values}'")
     if name in Definition.defined_actions.keys():
+        return name, {mc.VALUES: values, **params}
         return name, Definition.defined_actions[name], {mc.VALUES: values, **params}
     #
     # Non-defined action -> solve later
     #
+    return name, {mc.VALUES: values, **params}
     return name, None, {mc.VALUES: values, **params}
