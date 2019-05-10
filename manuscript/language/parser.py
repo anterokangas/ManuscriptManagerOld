@@ -5,7 +5,7 @@ Syntax parser
 from sly import Parser
 from manuscript.language.lexer import ManuscriptLexer
 import manuscript.language.constants as mc
-from manuscript.actions.definition import Definition
+from manuscript.elements.definition import Definition
 from manuscript.language.process_command import process_command
 
 
@@ -73,7 +73,9 @@ class ManuscriptParser(Parser):
 
     @_('NAME values RPAREN')
     def param(self, p):
-        return {p.NAME[1:].strip(): p.values}
+        name = p.NAME[1:].strip()
+        values = p.values
+        return {name: values}
 
     @_('values STRING')
     def values(self, p):

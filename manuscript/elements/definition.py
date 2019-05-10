@@ -1,3 +1,4 @@
+import copy
 import manuscript.language.constants as mc
 
 
@@ -107,7 +108,8 @@ class Definition:
             #
             func = self.params[0].get(key,
                        self.params[1].get(key,
-                           self.params[2].get(key, ("", (str, "")))))[0]
+                           self.params[2].get(key, ("",
+                                (str, "")))))[0]
 
             if key == mc.VALUES:
                 print(f"==>\nkey={key}\nvalue={value}\nfunc={func}\nfunc(value)={func(value)}")

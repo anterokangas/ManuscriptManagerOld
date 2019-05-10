@@ -1,5 +1,9 @@
+import copy
 from manuscript.actions.definition import Definition
+from manuscript.actions.sound import create_sound
 import manuscript.language.constants as mc
+from manuscript.tools.process_sound import speak
+from manuscript.tools.castings import bool_
 
 
 class Role(Definition):
@@ -11,7 +15,7 @@ class Role(Definition):
         {"pitch": (float, 0.0),
          "speed": (float, 0.0),
          "gain": (float, 1.0),
-         "noname": (bool, False),        # name is never spoken
+         "noname": (bool_, False),        # name is never spoken
          "like": (str, mc.NARRATOR),     # speak as 'like' except lang, default text == alias
          mc.SOUND: (str, None)},         # generate SOUND object
         {"alias": (str, "name"),         # default value == dependent on
@@ -25,6 +29,32 @@ class Role(Definition):
             print(f">{key} = {value}")
         super().__init__(**kwargs)
 
+    def speak(self, text_):
+        """ Convert text to AudioSegment (sound) object"""
+        if re.sub('[(){}<> .!?,;]', '', text_) == "":
+            # Nothing to say!
+            return
+
+        tts = gTTS(text=text_,
+                   lang=self.lang)
+
+        tf = NamedTemporaryFile(delete=False)
+        tmp_file = tf.name
+        tts.save(tmp_file)
+        sound = AudioSegment.from_mp3(tmp_file)
+        sound = speed_change(sound, self.speed)
+        sound = pitch_change(sound, self.pitch)
+
+        if Definition.settings.play_while:
+            with Counter(prefix) as counter:
+                tmp_file = prefix + f"_{counter:04d}.mp3"
+                sound.export(tmp_file)
+
+            playsound(tmp_file)
+            os.remove(tmp_file)
+
+        return sound
+
     def do(self, **kwargs):
         """
         Do Role object call
@@ -35,7 +65,7 @@ class Role(Definition):
         for key, value in kwargs.items():
             print(f">{key} = {value}")
         text_ = kwargs.pop(mc.VALUES, "")
-        sound_name = kwargs.get(SOUND, None)
+        sound_name = kwargs.get(mc.SOUND, None)
         if text_ == "":
             text_ = self.alias
             kwargs[mc.VALUES] = text_
@@ -44,7 +74,7 @@ class Role(Definition):
             # ONLY IF speaking alias name == no initial text
             try:
                 # First use "like"'s parameters
-                me = copy.deepcopy(defined_actions[like])
+                me = copy.deepcopy(Definition.defined_actions[like])
                 like_kwargs = me.__dict__
                 # Always override "lang" by original's (==self)
                 like_kwargs['lang'] = self.lang
@@ -64,7 +94,7 @@ class Role(Definition):
         sound = speak(text_, create_sound=sound_name, **me.__dict__)
         if sound_name is None:
             return me  #  if no sound then return the Role object
-        if sound_name in defined_actions.keys():
+        if sound_name in Definition.defined_actions.keys():
             raise ValueError(
                 f" *** Line {p.lineno}: Double {sound_name} definition")
 

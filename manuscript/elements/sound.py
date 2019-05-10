@@ -1,7 +1,9 @@
-from manuscript.actions.definition import Definition
+from manuscript.elements.definition import Definition
+from manuscript.elements.action import Action
 import manuscript.language.constants as mc
 from manuscript.tools.castings import list_
 from manuscript.tools.castings import as_is
+from manuscript.tools.process_sound import get_sound
 
 
 def create_sound(sound_name, **kwargs):
@@ -15,7 +17,7 @@ def create_sound(sound_name, **kwargs):
        {"name": sound_name, mc.VALUES: sound_name, **kwargs}
 
 
-class Sound(Definition):
+class Sound(Action):
     """ Define Sound object
     (SOUND name (input list of sounds and filenames  to be joined
     (gain g)  (start s) (end e)
@@ -59,6 +61,25 @@ class Sound(Definition):
             audio += sound
         self.audio = audio
 
+    @classmethod
+    def from_audio(cls, **kwargs):
+        # Accept only those keargs that are also Sound attributes
+
+        print("\nSound.from_audio():")
+        for key, value in kwargs.items():
+            print(f">{key} = {value}")
+        audio = kwargs.pop("audio", None)
+        if audio is None:
+            raise ValueError(f"*** Trying to create Sound object from audio without audio")
+
+        kwargs = {key: kwargs[key] for key in
+                  set(kwargs.keys()).intersection(
+                      set(Sound.__dict__.keys()))}
+        obj = cls(**kwargs)
+        obj.audio = audio
+        return obj
+
+
     def do(self, **kwargs):
         """
         Do Sound object call
@@ -81,14 +102,15 @@ class Sound(Definition):
             print(f">>{key} = {value}")
 
         me = super().do(**kwargs)
-        print(f">>>  Sound.do ()->sounds={me.__dict__['input']}")
-        sounds_and_files = me.__dict__["input"]
+        print(f">>>  Sound.do ()->sounds={me.input}")
+        print(f"Sound._init__. input={me.input})")"
+        sounds_and_files = me.input
         #### VALUES --> input!!!!!
         sounds = []################VVVVVVV ON STRING!
         for sound_or_file in sounds_and_files:
             sound_or_file = remove_quotes(sound_or_file)
             print(f"-1->sound_or_file={sound_or_file}")
-            sound = Playlist.defined_actions.get(sound_or_file, None)
+            sound = Definition.defined_actions.get(sound_or_file, None)
             print(f"-2---->sound={sound}")
             if sound is None:
                 try:
@@ -117,6 +139,8 @@ class Sound(Definition):
         if export != "":
             sounds[0].export(export)
 
+    @classmethod
+    def get_audio(cls,
 
 
 # --------------------------------------------------

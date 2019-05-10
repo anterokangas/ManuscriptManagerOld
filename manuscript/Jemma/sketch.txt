@@ -1,0 +1,153 @@
+Actions
+    Role, Sound, Wait, Group, Settings =: defining actions
+    (derived from Definition)
+    Wait is inherited from Sound
+
+ Action
+    common: init, do
+    specific like Role: speak
+
+ init
+    create object
+
+ do
+    objects default action, e.g. Role-object generate sound and speak (say)
+
+ Examples params = (p1 v1) (p2 v2) etc.
+    (Role A) --> create Role-object A using default values
+    (Role A params)) --> create role A, params override corresp. params
+
+    (Sound B (input list)) --> create sound-object B with audio (sound) generated from list sing defaut params
+    (Sound B (input list) params) --> create sound-object B with audio (sound) generated from list, params override corresp. params
+
+    (A text) --> A says 'text')
+    (A text (SOUND B)) --> create Sound-object B
+    (A text (SOUND B) params) --> Sound object B, params override corresp. params
+
+    (A) --> A says default text == A.alias
+    (A paramss) --> above, params override corresp. params
+    (A (SOUND B) params)
+
+    Maybe(?): (A (ROLE AA) params) --> create Role-object AA, params override A's params
+
+    (B) --> plays audio of B
+    (B params) --> plays audio of B, params override corresp. params
+    (B text [params]) --> error
+
+    (Wait C (time t)) --> generate Wait object C of t seconds of silence
+    (C) --> Wait C's time
+    (C (time t2)) Wait t2 second
+    (C text [params]) --> error?
+
+    (Group text (input list of Roles)) --> Role-objects of list say text at same time
+    (Group text (input list) (SOUND G)) --> create Sound object G -"-
+
+Class Diagram
+
+
+
+
+                                                  +------------+
+                                                  | Definition |
+                                                  +------------+
+                                                        /_\
+                                                         |
+                                              +--------------------+
+                                              |                    |
+                                   1..*  +--------+           +----------+
+                     +-------------------| Action |           | Settings |
+                     |                   +--------+           +----------+
+                     |                       /_\
+                     |                        |
+                     |            +-----------+----------+
+                     |            |                      |
+                     |        +-------+    creates   +-------+
+                     |        | Role  |------------->| Sound |
+                     |        +-------+              +-------+
+                     |           /_\                    /_\
+                     |            |                      |
+                     |        +-------+              +-------+
+                     +------<>| Group |              | Wait  |
+                              +-------+              +-------+
+
+     Definition
+     - params (common to all): [{name, VALUES},[},{}]
+       required, optional, dependent
+     - init: create object with attributes=super.attributes overrided by params
+     - do: create deepcopy of object, attributes overried by params
+
+    Action
+    - params + maybe name of default action
+    - init: super_init
+    - do: super_do
+
+     Role
+     - [{}, {pitch, speed, gain, noname, like, SOUND},{alias=name, lang=default_lang}]
+     - init=create Role object
+     - default_action=speak&play
+     - do=choose action(s)
+     - speak=make audio object from VALUES
+     - SOUND=create Sound object
+     - say=play audio object
+     - actions = [speak, create_sound
+
+     Sound
+     - [{},
+        {VALUES, gain, input, audio, export, repeat,
+        start, end, remove_start, remove_end,
+        fade (join}, fade_in, fade_out},
+        {}]
+     - default_action=get_audio&play
+     - init=create Sound Object
+     - do=choose action(s)
+     - get_audio=read mp3 or get from Sound obect
+     - play=play audio object
+
+     Wait
+     - [{},{time},{}]
+     - init=create Wait-object with audio= t seconds of silence
+     - do: play audio (== silence)
+
+     Group
+     - [{},{input+Role params},{}]
+     - init= create Group object= collection of Role/Sound objects
+     - do= choose action(s)
+     - speak= make audio objects from VALUES using all input(s9
+     - play= play all audio objects at same time
+     + init: accept also Sound objects
+     + do: play=play also Sound objects (once or repeat)
+
+
+Workflow
+    lex -> TOKENS -> yacc -> STRUCTURED MANUSCRIPT -> execute -> mp3
+      structured manuscript (list of actions=(name, object, parameters))
+      object = {
+        defining_action (class)
+        defined_action (object)
+        None (lazy object(?) evaluation)
+
+Playlist
+    - single object
+
+Example
+    (Role A params)
+        ->('Role', Role, {name='A', **params}) --> da['A'] = Role object A)
+    (A text params1)
+        ->('A', A.do, {VALUES=text, **params}) --> playlist += A.speak(text, params1)
+    (A text (SOUND B) params2)
+        ->('A', A.do, {VALUES=text, {SOUND=B, **params2) --> da['B'] = Sound object B(audio=B.audio)
+    (B params3)
+        ->('B', B.do, (VALUES="", **params3))) --> playlist += B.play(B.audio, params3)
+    (Sound S (input K L M) params4)
+        ->('Sound', Sound, (name='S', input="K L M", params4)) --> da['S'] = Sound object S(audio=audios of K L M joined)
+    (S params5)
+        ->('S', S.do, (action=play(audio=S.audio, params5))) --> playlist += S.play(S.audio, params5)
+
+    (Sound _tmp params) --> new da
+    (Sound _tmp params) --> overrides previous _tmp
+
+
+
+ ==>    da = [A, B, S]
+        playlist = A.speak+B.audio+S.audio
+
