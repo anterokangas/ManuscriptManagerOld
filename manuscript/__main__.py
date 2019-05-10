@@ -59,6 +59,7 @@ if __name__ == "__main__":
 
     text = """
     (SETTINGS
+        (sound_directories C:\\Users\\anter_000\\Dropbox\\_Kassari)
         (print_text True)
         (print_defined_actions True)
         (print_manuscript True)

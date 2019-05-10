@@ -1,10 +1,12 @@
+import os
+from pydub import AudioSegment
+
 from manuscript.elements.definition import Definition
 from manuscript.elements.action import Action
 import manuscript.language.constants as mc
 from manuscript.tools.castings import list_
 from manuscript.tools.castings import as_is
-from manuscript.tools.process_sound import get_sound
-
+from manuscript.tools.quotes import remove_quotes
 
 def create_sound(sound_name, **kwargs):
     object_ = Sound(name=sound_name,
@@ -51,8 +53,8 @@ class Sound(Action):
         #
         # Process input == list of sound/files
         #
-        print(f"Sound._iinit: {self.input}")
-        sounds = [get_sound(sf) for sf in self.input]
+        print(f"Sound.__init: {self.input}")
+        sounds = [Sound.get_audio(sf) for sf in self.input]
         # Process other parameters
         #---
         # Join
@@ -103,7 +105,7 @@ class Sound(Action):
 
         me = super().do(**kwargs)
         print(f">>>  Sound.do ()->sounds={me.input}")
-        print(f"Sound._init__. input={me.input})")"
+        print(f"Sound._init__. input={me.input})")
         sounds_and_files = me.input
         #### VALUES --> input!!!!!
         sounds = []################VVVVVVV ON STRING!
@@ -140,8 +142,37 @@ class Sound(Action):
             sounds[0].export(export)
 
     @classmethod
-    def get_audio(cls,
-
+    def get_audio(cls, sound_or_file):
+        """
+        :param sound_or_file: string: name of SOUND object or filename
+        :return: AudioSegment object
+        """
+        # sound_or_filesound_or_file is
+        # either _ONE_ SOUND name or filename
+        print(f"1get_sound {sound_or_file}")
+        sound_or_file = remove_quotes(sound_or_file)
+        print(f"2get_sound {sound_or_file}")
+        sound_name = Definition.defined_actions.get(sound_or_file, None)
+        print(f"sound_name={sound_name}")
+        if sound_name is None:
+            for sound_directory in Definition.settings.sound_directories:
+                print(f"sound_directory={sound_directory}:\n  {os.listdir(sound_directory)}")
+                try:
+                    name = os.path.join(
+                        sound_directory,
+                        sound_or_file)
+                    print(f"trying to open mp3 file {name}")
+                    sound = AudioSegment.from_mp3(
+                        os.path.join(
+                            sound_directory,
+                            sound_or_file))
+                    return sound
+                except:
+                    pass
+            raise ValueError(f"*** Sound or file {sound_or_file} not found")
+        else:
+            sound = sound_name.audio
+        return sound
 
 # --------------------------------------------------
 # Add the class to defined actions

@@ -9,8 +9,8 @@ class Settings(Definition):
     params = [
         {"name": (str, mc.SETTINGS)},
         {"default_lang": (str, "fi"),
-         "voice_directories":       # Notice: add, not replace
-             (lambda x: list_(". voice "+x), ". voice"),
+         "sound_directories":       # Notice: add, not replace
+             (lambda x: list_(". sound "+x), ". sound"),
          mc.VALUES: (str, ""),
          # mp3 export
          "export": (str, "output.mp3"),
