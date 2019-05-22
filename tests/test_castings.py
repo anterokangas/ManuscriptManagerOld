@@ -42,7 +42,6 @@ def test_bool_():
 
 
 def test_list_():
-    print(list(""))
     assert list_("") == ['']
     assert list_("a b c dfg") == ['a', 'b', 'c', 'dfg', '']
     assert list_("a 'b c' dfg") == ['a', "'b c'", 'dfg', '']

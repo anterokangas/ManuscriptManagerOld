@@ -41,6 +41,7 @@ class Settings(Definition):
         Definition.settings = self
         Definition.defined_actions[mc.NARRATOR].__dict__['lang'] = \
             Definition.settings.__dict__['default_lang']
+        print(f"Settings: narrator.lang={Definition.defined_actions[mc.NARRATOR].__dict__['lang']}")
 
 
 

@@ -4,6 +4,9 @@ Lexical analyser
 """
 from sly import Lexer
 
+from manuscript.language.find_column import find_column
+from manuscript.tools.highlight import highlight
+
 
 class ManuscriptLexer(Lexer):
     """ Lexical analyser """
@@ -15,12 +18,12 @@ class ManuscriptLexer(Lexer):
     ignore_percentcomment = r'\(%(?s)(.*?)%\)'     # (%...%)
     ignore_asteriskcomment = r'\(\*(?s)(.*?)\*\)'  # (*...*)
 
-    NAME = r'\(\s*[^\s\#%@\*"\'\(\)]+'  # start (, no ",',(,)
+    NAME = r'\(\s*[^\s\#%*@\*"\'\(\)]+'  # starts with (, no ", ', {, ), #, %, *
     RPAREN = r'\)'
     STRING = (
         r'"[^"]*"'           # double quote string
         r"|'[^']*'"          # single quote string
-        r'|[^\s@"\'\(\)]+'     # no {",',(,), ,\s}
+        r'|[^\s@"\'\(\)]+'   # no \s, @, ", ', (, )
     )
 
     @_(r'@(?s)(.*)')
@@ -46,10 +49,8 @@ class ManuscriptLexer(Lexer):
         """
         ill_char = ascii(t.value[0])
         print(highlight(
-            f"*** Lexigal error: illegal character '{ill_char}' in line {self.lineno} column {find_column(text, t)}",
+            f"*** Lexigal error: illegal character '{ill_char}' in line {self.lineno}",
             color='red'))
-        print(text.splitlines()[self.lineno-1])
-        print(find_column(text, t)*" ", "^ ILLEGAL CHAR")
         self.index += 1
 
 

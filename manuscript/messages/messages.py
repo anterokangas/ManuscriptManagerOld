@@ -67,7 +67,7 @@ for code in MESSAGES:
         MESSAGES[code][lang] = code + ": " + txt
 
 
-def message_text(text_=""):
+def message_text(text_="", params=tuple()):
     """ Recognize used language and get the corresponding text."""
     print(f"message_text text_={text_}")
     message_texts = MESSAGES.get(text_, None)
@@ -98,12 +98,15 @@ def message(text_="", params=tuple(), sound=None):
             or len(text_) == 6 and text_[2] > '0':
         return
 
-    text_, lang_, warning = message_text(text_)
+    text_, lang_, warning = message_text(text_, params)
     if warning:
         play(say(MESSAGES["ME4010"].get(
             lang_,
             "Text of code ME4010 {} for lang {} missing.").format(text_, lang_)))
-    print(text_.format(*params), lang_)
-    play(say(text_.format(*params), lang_))
+    # print(text_.format(*params), lang_)
+    # play(say(text_.format(*params), lang_))
+
+    print(text_, lang_)
+    play(say(text_, lang_))
     play(sound)
 

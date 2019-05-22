@@ -5,32 +5,31 @@ Rule 1     manuscript -> part
 Rule 2     manuscript -> manuscript part
 Rule 3     part -> values
 Rule 4     part -> command
-Rule 5     command -> NAME params RPAREN
-Rule 6     params -> values
-Rule 7     params -> empty
-Rule 8     params -> param
-Rule 9     params -> params param
-Rule 10    empty -> <empty>
+Rule 5     command -> NAME RPAREN
+Rule 6     command -> NAME values RPAREN
+Rule 7     command -> NAME params RPAREN
+Rule 8     command -> NAME values params RPAREN
+Rule 9     params -> param
+Rule 10    params -> params param
 Rule 11    param -> NAME values RPAREN
 Rule 12    values -> STRING
 Rule 13    values -> values STRING
 
 Terminals, with rules where they appear:
 
-NAME                 : 5 11
-RPAREN               : 5 11
+NAME                 : 5 6 7 8 11
+RPAREN               : 5 6 7 8 11
 STRING               : 12 13
 error                : 
 
 Nonterminals, with rules where they appear:
 
 command              : 4
-empty                : 7
 manuscript           : 2 0
-param                : 8 9
-params               : 5 9
+param                : 9 10
+params               : 7 8 10
 part                 : 1 2
-values               : 3 6 11 13
+values               : 3 6 8 11 13
 
 
 state 0
@@ -42,7 +41,10 @@ state 0
     (4) part -> . command
     (12) values -> . STRING
     (13) values -> . values STRING
-    (5) command -> . NAME params RPAREN
+    (5) command -> . NAME RPAREN
+    (6) command -> . NAME values RPAREN
+    (7) command -> . NAME params RPAREN
+    (8) command -> . NAME values params RPAREN
     STRING          shift and go to state 5
     NAME            shift and go to state 6
 
@@ -59,7 +61,10 @@ state 1
     (4) part -> . command
     (12) values -> . STRING
     (13) values -> . values STRING
-    (5) command -> . NAME params RPAREN
+    (5) command -> . NAME RPAREN
+    (6) command -> . NAME values RPAREN
+    (7) command -> . NAME params RPAREN
+    (8) command -> . NAME values params RPAREN
     STRING          shift and go to state 5
     NAME            shift and go to state 6
 
@@ -104,23 +109,21 @@ state 5
 
 state 6
 
-    (5) command -> NAME . params RPAREN
-    (6) params -> . values
-    (7) params -> . empty
-    (8) params -> . param
-    (9) params -> . params param
+    (5) command -> NAME . RPAREN
+    (6) command -> NAME . values RPAREN
+    (7) command -> NAME . params RPAREN
+    (8) command -> NAME . values params RPAREN
     (12) values -> . STRING
     (13) values -> . values STRING
-    (10) empty -> .
+    (9) params -> . param
+    (10) params -> . params param
     (11) param -> . NAME values RPAREN
-  ! shift/reduce conflict for NAME resolved as shift
+    RPAREN          shift and go to state 10
     STRING          shift and go to state 5
-    RPAREN          reduce using rule 10 (empty -> .)
     NAME            shift and go to state 9
 
-    params                         shift and go to state 10
     values                         shift and go to state 11
-    empty                          shift and go to state 12
+    params                         shift and go to state 12
     param                          shift and go to state 13
 
 state 7
@@ -151,68 +154,100 @@ state 9
 
 state 10
 
-    (5) command -> NAME params . RPAREN
-    (9) params -> params . param
-    (11) param -> . NAME values RPAREN
-    RPAREN          shift and go to state 15
-    NAME            shift and go to state 9
+    (5) command -> NAME RPAREN .
+    STRING          reduce using rule 5 (command -> NAME RPAREN .)
+    NAME            reduce using rule 5 (command -> NAME RPAREN .)
+    $end            reduce using rule 5 (command -> NAME RPAREN .)
 
-    param                          shift and go to state 16
 
 state 11
 
-    (6) params -> values .
+    (6) command -> NAME values . RPAREN
+    (8) command -> NAME values . params RPAREN
     (13) values -> values . STRING
-    RPAREN          reduce using rule 6 (params -> values .)
-    NAME            reduce using rule 6 (params -> values .)
+    (9) params -> . param
+    (10) params -> . params param
+    (11) param -> . NAME values RPAREN
+    RPAREN          shift and go to state 15
     STRING          shift and go to state 8
+    NAME            shift and go to state 9
 
+    params                         shift and go to state 16
+    param                          shift and go to state 13
 
 state 12
 
-    (7) params -> empty .
-    RPAREN          reduce using rule 7 (params -> empty .)
-    NAME            reduce using rule 7 (params -> empty .)
+    (7) command -> NAME params . RPAREN
+    (10) params -> params . param
+    (11) param -> . NAME values RPAREN
+    RPAREN          shift and go to state 17
+    NAME            shift and go to state 9
 
+    param                          shift and go to state 18
 
 state 13
 
-    (8) params -> param .
-    RPAREN          reduce using rule 8 (params -> param .)
-    NAME            reduce using rule 8 (params -> param .)
+    (9) params -> param .
+    RPAREN          reduce using rule 9 (params -> param .)
+    NAME            reduce using rule 9 (params -> param .)
 
 
 state 14
 
     (11) param -> NAME values . RPAREN
     (13) values -> values . STRING
-    RPAREN          shift and go to state 17
+    RPAREN          shift and go to state 19
     STRING          shift and go to state 8
 
 
 state 15
 
-    (5) command -> NAME params RPAREN .
-    STRING          reduce using rule 5 (command -> NAME params RPAREN .)
-    NAME            reduce using rule 5 (command -> NAME params RPAREN .)
-    $end            reduce using rule 5 (command -> NAME params RPAREN .)
+    (6) command -> NAME values RPAREN .
+    STRING          reduce using rule 6 (command -> NAME values RPAREN .)
+    NAME            reduce using rule 6 (command -> NAME values RPAREN .)
+    $end            reduce using rule 6 (command -> NAME values RPAREN .)
 
 
 state 16
 
-    (9) params -> params param .
-    RPAREN          reduce using rule 9 (params -> params param .)
-    NAME            reduce using rule 9 (params -> params param .)
+    (8) command -> NAME values params . RPAREN
+    (10) params -> params . param
+    (11) param -> . NAME values RPAREN
+    RPAREN          shift and go to state 20
+    NAME            shift and go to state 9
 
+    param                          shift and go to state 18
 
 state 17
+
+    (7) command -> NAME params RPAREN .
+    STRING          reduce using rule 7 (command -> NAME params RPAREN .)
+    NAME            reduce using rule 7 (command -> NAME params RPAREN .)
+    $end            reduce using rule 7 (command -> NAME params RPAREN .)
+
+
+state 18
+
+    (10) params -> params param .
+    RPAREN          reduce using rule 10 (params -> params param .)
+    NAME            reduce using rule 10 (params -> params param .)
+
+
+state 19
 
     (11) param -> NAME values RPAREN .
     RPAREN          reduce using rule 11 (param -> NAME values RPAREN .)
     NAME            reduce using rule 11 (param -> NAME values RPAREN .)
 
 
+state 20
+
+    (8) command -> NAME values params RPAREN .
+    STRING          reduce using rule 8 (command -> NAME values params RPAREN .)
+    NAME            reduce using rule 8 (command -> NAME values params RPAREN .)
+    $end            reduce using rule 8 (command -> NAME values params RPAREN .)
+
+
 Conflicts:
 
 shift/reduce conflict for STRING in state 3 resolved as shift
-shift/reduce conflict for NAME in state 6 resolved as shift

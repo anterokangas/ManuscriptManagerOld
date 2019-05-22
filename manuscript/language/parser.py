@@ -12,11 +12,12 @@ class ManuscriptParser(Parser):
     """ Syntax parser
     manuscript ::= manuscript part | part
     part ::= command | values
-    command ::= name params ')'
-    params ::= params param | param | empty
-    param ::= name values ')' | values
+    command ::= NAME values params ')' | NAME params ')' | NAME values ')' | NAME ')' |
+    params ::= params param | param
+    param ::= NAME values ')'
     values ::= values STRING | STRING
-    STRING ::= "..." | '...' | non-terminal string
+    NAME ::= "("+string_without \s, (, ), ", ', @, #, %, *
+    STRING ::= "..." | '...' | string not starting by ( and not having \s, (, ), ", ', @
     comment ::= (*...*) | (#...#) | (%...%)
     """
     debugfile = "parser.out"
@@ -42,11 +43,35 @@ class ManuscriptParser(Parser):
     def part(self, p):
         return mc.NARRATOR, self.producer.defined_actions[mc.NARRATOR], {mc.VALUES: p.values}
 
+    @_('NAME values params RPAREN')
+    def command(self, p):
+        name = p.NAME[1:].strip()
+        params = p.params
+        values = p.values  # params.pop(mc.VALUES, "")
+        line_number = p.lineno
+        return process_command(name, params, values, line_number, self.producer)
+
     @_('NAME params RPAREN')
     def command(self, p):
         name = p.NAME[1:].strip()
         params = p.params
-        values = params.pop(mc.VALUES, "")
+        values = ""  # p.values  # params.pop(mc.VALUES, "")
+        line_number = p.lineno
+        return process_command(name, params, values, line_number, self.producer)
+
+    @_('NAME values RPAREN')
+    def command(self, p):
+        name = p.NAME[1:].strip()
+        params = {}
+        values = p.values  # params.pop(mc.VALUES, "")
+        line_number = p.lineno
+        return process_command(name, params, values, line_number, self.producer)
+
+    @_('NAME RPAREN')
+    def command(self, p):
+        name = p.NAME[1:].strip()
+        params = {}
+        values = ""  # params.pop(mc.VALUES, "")
         line_number = p.lineno
         return process_command(name, params, values, line_number, self.producer)
 
@@ -58,17 +83,17 @@ class ManuscriptParser(Parser):
     def params(self, p):
         return p.param
 
-    @_('empty')
-    def params(self, p):
-        return {}
+    # @_('empty')
+    # def params(self, p):
+    #     return {}
+    #
+    # @_('')
+    # def empty(self, p):
+    #     pass
 
-    @_('')
-    def empty(self, p):
-        pass
-
-    @_('values')
-    def params(self, p):
-        return {mc.VALUES: p.values}
+    # @_('values')
+    # def params(self, p):
+    #     return {mc.VALUES: p.values}
 
     @_('NAME values RPAREN')
     def param(self, p):

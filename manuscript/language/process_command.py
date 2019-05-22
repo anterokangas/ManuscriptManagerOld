@@ -1,4 +1,5 @@
 import manuscript.tools.constants as mc
+from manuscript.messages.messages import message_text
 
 
 def process_command(name, params, values, line_number, producer):
@@ -50,12 +51,12 @@ def process_command(name, params, values, line_number, producer):
             #       Perhaps allowing temporary names, e.g. starung with _-character
             object_ = producer.defining_actions[name](name=values, **params)
             producer.define_action(values, object_)
-            #print(f"-->Defining action!")
+            # print(f"-->Defining action!")
             return name, producer.defining_actions[name], {"name": values, **params}
-        raise ValueError(message_text("C8020", (p.lineno, name, values)))
+        raise ValueError(message_text("C8020", (line_number, name, values)))
 
     if name in producer.defined_actions.keys():
-        #print(f"-->Defined action")
+        # print(f"-->Defined action")
         return name, producer.defined_actions[name], {mc.VALUES: values, **params}
     #
     # Non-defined action -> solve later

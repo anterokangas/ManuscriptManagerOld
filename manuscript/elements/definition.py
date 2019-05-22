@@ -28,9 +28,6 @@ class Definition:
         :param kwargs: list of read parameters {key: value}
         :return: None
         """
-        assert isinstance(self.params, list)
-        assert len(self.params) == 3
-
         #
         # Complete params
         #

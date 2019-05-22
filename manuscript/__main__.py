@@ -33,17 +33,10 @@ if __name__ == "__main__":
                    ))
 
     manuscript = """
-    (SETTINGS
+    (SETTINGS General
         (default_lang fi)
-        (sound_directories )
-        (#
-            C:\\Users\\anter_000\\Dropbox\\_Kassari)
-        *#)
         (* mp3 settings *)
         (export testi.mp3)
-        (#
-        (continuous_export True)
-        #)
         (format mp3)
         (title MM-kielen testi)
         (artist Various Artists)
@@ -51,11 +44,6 @@ if __name__ == "__main__":
         (comments The best Test-file ever!)
         (date 2019)
         (genre pop)
-        (#
-        (cover ThePicture.jpg)
-        #)
-
-
         (play_final True)
         (print_text True)
         (print_defined_actions True)
@@ -63,6 +51,11 @@ if __name__ == "__main__":
         (print_executions False)
         (play_while True)
     )
+    (##################
+    (SETTINGS mp3 (x x))
+    (SETTINGS text_processing (x x))
+    (SETTINGS debug (x x))
+    #############)
     Tervepä terve!
 
     (ROLE A (speed 0.9))
@@ -74,17 +67,22 @@ if __name__ == "__main__":
 
     print("Manuscript file read in")
 
-    drama = Work(manuscript)
+    work = Work(manuscript)
 
     # if drama.settings.export:
     #     drama.export()
     #     print(f"Drama exported as {Definition.settings.export}")
 
-    if drama.settings.play_final:
+    if work.settings.print_manuscript:
+        print("Parse manuscript:")
+        for i, (command, action, params) in enumerate(work.parsed_manuscript):
+            print(f"{i:4}: {command}, {action}, {params}")
+
+    if work.settings.play_final:
         message("ME0010")
         print("Defined actions:")
-        for key, value in drama.defined_actions.items():
+        for key, value in work.defined_actions.items():
             print(f"===> defined action {key}={value}")
-        drama.play()
+        work.play()
 
-    print("READY.")
+    print("\nREADY.")

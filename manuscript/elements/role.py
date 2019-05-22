@@ -25,35 +25,36 @@ class Role(Action):
          "gain": (float, 1.0),
          "noname": (bool_, False),        # name is never spoken
          "lang_like": (str, mc.NARRATOR), # speak as 'like' except lang, default text == alias
-         mc.SOUND: (str, "")},            # generate SOUND object
-         "audio_like", (str, ""),
-         "text_like", (str, ""),
-         "paragraph", (str, ""),          # paragraph format
-         "left_margin", (int, fmt.LEFT_MARGIN),
-         "right_margin", (int, fmt.RIGHT_MARGIN),
-         "align", (str, fmt.ALIGN),
-         "caps", (bool_, fmt.CAPS),
-         "underline", (str, fmt.UNDERLINE),
-         "leading_newline", (bool_:, fmt.LEADING_NEWLINE),
-         "trailing_newline", (bool_:, fmt.TRAILING_NEWLINE),
+         mc.SOUND: (str, ""),            # generate SOUND object
+         "audio_like": (str, ""),
+         "text_like": (str, ""),
+         "paragraph": (str, ""),          # paragraph format
+         "left_margin": (int, mc.LEFT_MARGIN),
+         "right_margin": (int, mc.RIGHT_MARGIN),
+         "align": (str, mc.ALIGN),
+         "caps": (bool_, mc.CAPS),
+         "underline": (str, mc.UNDERLINE),
+         "leading_newline": (bool_, mc.LEADING_NEWLINE),
+         "trailing_newline": (bool_, mc.TRAILING_NEWLINE)
+        },
         {"alias": (str, "name"),          # default value == dependent on
          "lang": (str, "default_lang")}   # look first self, then settings
     ]
 
     def __init__(self, **kwargs):
         """ define Role object """
-        # for key, value in kwargs.items():
-        #     print(f">{key} = {value}")
         super().__init__(**kwargs)
         # Created Role element {} with language {}
+        print(f"Role.__init__: {self.name} {self.lang}")
         #message("RO0010", (self.name, self.lang))
 
     def speak(self, text_):
         """ Convert text to AudioSegment (sound) object"""
+        # If the line contais only following special chars, it is considered ass empty
         if re.sub('[(){}<> .!?,;]', '', text_) == "":
             # Nothing to say!
             return None
-        #print(f"speak: text_={text_}")
+        print(f"speak: text_={text_} lang={self.lang}")
         sound = say(text_, lang=self.lang)
         sound = Role.speed_change(sound, self.speed)
         sound = Role.pitch_change(sound, self.pitch)
@@ -117,7 +118,7 @@ class Role(Action):
         lang_like = kwargs.pop("lang_like", "")
         lang = kwargs.get("lang", "")
         if lang_like != "" and lang != "":
-            raise ValueError(message_text("RO8010", (lang_like, like)))
+            raise ValueError(message_text("RO8010", (lang_like, lang)))
         if lang_like != "":
             like = Definition.defined_actions.get(lang_like, None)
             if like is None or not isinstance(like, Role):

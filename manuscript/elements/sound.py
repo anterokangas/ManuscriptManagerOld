@@ -45,16 +45,13 @@ class Sound(Action):
 
     def __init__(self, **kwargs):
         """ Define Sound object """
-        #print("\nSound.__init__():")
-        #for key, value in kwargs.items():
-        #    print(f">{key} = {value}")
         super().__init__(**kwargs)
         #
         # Process input == list of sound/files
         #
         sounds = [Sound.get_audio(sf) for sf in self.input]
         # Process other parameters before join
-        #---
+        # ---
         # Join
         if sounds:
             audio = sounds[0]
@@ -69,10 +66,6 @@ class Sound(Action):
     @classmethod
     def from_audio(cls, **kwargs):
         # Accept only those keargs that are also Sound attributes
-
-        # print("\nSound.from_audio():")
-        #for key, value in kwargs.items():
-        #    print(f">{key} = {value}")
         audio = kwargs.pop("audio", None)
         if audio is None:
             raise ValueError(f"*** Trying to create Sound object from audio without audio")
