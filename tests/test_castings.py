@@ -42,11 +42,12 @@ def test_bool_():
 
 
 def test_list_():
-    assert list_("") == []
-    assert list_("a b c dfg") == ['a', 'b', 'c', 'dfg']
-    assert list_("a 'b c' dfg") == ['a', "'b c'", 'dfg']
-    assert list_('a "b c" dfg') == ['a', '"b c"', 'dfg']
-    assert list_(' a  "b c" dfg' + " 'h i j' ") == ['a', '"b c"', 'dfg', "'h i j'"]
+    print(list(""))
+    assert list_("") == ['']
+    assert list_("a b c dfg") == ['a', 'b', 'c', 'dfg', '']
+    assert list_("a 'b c' dfg") == ['a', "'b c'", 'dfg', '']
+    assert list_('a "b c" dfg') == ['a', '"b c"', 'dfg', '']
+    assert list_(' a  "b c" dfg' + " 'h i j' ") == ['a', '"b c"', 'dfg', "'h i j'", '']
 
 
 def test_as_is():

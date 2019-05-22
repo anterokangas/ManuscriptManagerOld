@@ -1,7 +1,7 @@
 import copy
 from manuscript.actions.definition import Definition
 from manuscript.actions.sound import create_sound
-import manuscript.language.constants as mc
+import manuscript.tools.constants as mc
 from manuscript.tools.process_sound import speak
 from manuscript.tools.castings import bool_
 

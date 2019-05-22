@@ -1,5 +1,5 @@
 import copy
-import manuscript.language.constants as mc
+import manuscript.tools.constants as mc
 
 
 class Definition:

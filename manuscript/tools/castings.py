@@ -19,11 +19,23 @@ def bool_(input_):
         else False
 
 
-def list_(input_):
-    """ Convert sep-separated string to list """
-    return shlex.split(str(input_), posix=False)
+def list_(input_, tail=None):
+    """ Convert sep-separated string to list
+        Add empty string element to the end (for net addresses)
+    """
+    if tail is None:
+        return shlex.split(str(input_), posix=False)
+    else:
+        return shlex.split(str(input_), posix=False) + [tail]
 
 
 def as_is(object_):
     """ Do nothing """
     return object_
+
+
+def int_(object_):
+    try:
+        return int(object_)
+    except Exception as e:
+        return e == 0

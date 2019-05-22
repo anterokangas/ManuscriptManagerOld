@@ -1,22 +1,16 @@
 """
-Manscript Manger
+Manuscript Manger
 The main program
 """
-import os
 
-from manuscript.language.lexer import ManuscriptLexer
-from manuscript.language.parser import ManuscriptParser
-import manuscript.language.constants as mc
+from manuscript.elements.work import Work
 
-from manuscript.elements.definition import Definition
-from manuscript.elements.role import Role
 #from manuscript.elements.wait import Wait
-from manuscript.elements.settings import Settings
-from manuscript.elements.playlist import Playlist
+#from manuscript.elements.settings import Group
+
+from manuscript.messages.messages import message
 
 from manuscript.tools.box_text import box_text
-from manuscript.tools.print_list import print_list
-
 
 if __name__ == "__main__":
     """ Manuscript manager
@@ -37,73 +31,60 @@ if __name__ == "__main__":
         +-------+    +----+    +-----+    +------+    +----+
         """
                    ))
-    lexer = ManuscriptLexer()
-    parser = ManuscriptParser()
-    # ----------------------------------
-    # Default actors and actions
-    # ----------------------------------
-    # Notice! 'lang' must be given if defined before Settings
-    Definition.defined_actions[mc.NARRATOR] = Role(name=mc.NARRATOR, lang='en')
-    Definition.settings = Settings()
-    #Definition.defined_actions[mc.BREAK] = Wait(name=mc.BREAK)
-    # The default 'Settings' is not added to structured manuscript
-    manuscript = [
-    #    (mc.ROLE, Definition.defined_actions[mc.NARRATOR], {'name': mc.NARRATOR}),
-    #    (mc.WAIT, Definition.defined_actions[mc.WAIT], {'name': mc.BREAK})
-    ]
 
-    #cwd = os.getcwd()
-    #files = os.listdir()
-    #with open("testi.txt", "rb") as file:
-    #    text = file.read().decode("UTF-8")
-
-    text = """
+    manuscript = """
     (SETTINGS
-        (sound_directories C:\\Users\\anter_000\\Dropbox\\_Kassari)
+        (default_lang fi)
+        (sound_directories )
+        (#
+            C:\\Users\\anter_000\\Dropbox\\_Kassari)
+        *#)
+        (* mp3 settings *)
+        (export testi.mp3)
+        (#
+        (continuous_export True)
+        #)
+        (format mp3)
+        (title MM-kielen testi)
+        (artist Various Artists)
+        (album MM-single number 1)
+        (comments The best Test-file ever!)
+        (date 2019)
+        (genre pop)
+        (#
+        (cover ThePicture.jpg)
+        #)
+
+
+        (play_final True)
         (print_text True)
         (print_defined_actions True)
         (print_manuscript True)
-        (print_executions True)
+        (print_executions False)
         (play_while True)
     )
-    (SOUND NAUKAISU (input meow.mp3)) 
-    (NARRATOR Narrator (SOUND KERTOJA) (lang en))
+    Tervepä terve!
+
+    (ROLE A (speed 0.9))
+    (A Missä kisu?)
     
-    Nyt puhuu kertoja eli NARRATORI
-    (ROLE A (lang fi))
-    (A Terve)
+    Tule tule, kiss, kiss.
+    (A No siellähän sinä olet.)
     """
 
     print("Manuscript file read in")
-    pp = parser.parse(lexer.tokenize(text))
-    if pp is not None:
-        manuscript += pp
-    print(f"Manuscript file parsed {len(manuscript)}")
 
-    if Definition.settings.print_text:
-        print_list("Text", text.splitlines())
+    drama = Work(manuscript)
 
-    if Definition.settings.print_defined_actions:
-        print(f"Defined actions {len(Definition.defined_actions)}:")
-        for name, action in Definition.defined_actions.items():
-            print(f"\n{name} {type(action)}")
-            length = max([len(value) for value in action.__dict__]) + 1
-            for key, value in action.__dict__.items():
-                if key != 'params':
-                    print(f"   {key:{length}} {value}")
-        print_list("Defined actions", Definition.defined_actions)
+    # if drama.settings.export:
+    #     drama.export()
+    #     print(f"Drama exported as {Definition.settings.export}")
 
-    if Definition.settings.print_manuscript:
-        print_list(" Manuscript", manuscript)
-
-    the_play = Playlist(manuscript)
-
-    print_list("Re-defined actions", Definition.defined_actions)
-
-    the_play.export()
-    print(f"Playlist exported as {Definition.settings.export}")
-
-    if Definition.settings.play_final:
-        the_play.play()
+    if drama.settings.play_final:
+        message("ME0010")
+        print("Defined actions:")
+        for key, value in drama.defined_actions.items():
+            print(f"===> defined action {key}={value}")
+        drama.play()
 
     print("READY.")

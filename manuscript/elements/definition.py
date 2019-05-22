@@ -1,16 +1,20 @@
 import copy
-import manuscript.language.constants as mc
+import manuscript.tools.constants as mc
 
 
 class Definition:
     """ Super class for defining actions """
-    params = [{"name": (str, None)},    #  Required (== not overriddable)
-              {mc.VALUES: (str, "")},   #  Optional
-              {}]                       #  Dependent
+    params = [{"name": (str, None)},    # Required (== not overriddable)
+              {mc.VALUES: (str, "")},   # Optional
+              {}]                       # Dependent
 
     defining_actions = {}   # add defining actions == subclasses
 
     defined_actions = {}   # add defined actions == objects of subclasses
+
+    narrator = None
+
+    settings = None
 
     manuscript = []
 
@@ -55,10 +59,10 @@ class Definition:
                 setattr(self, param, func(val))
             else:
                 setattr(self, param, default_value)
-            if param == 'input':
-                print(
-                    f"super__init1 after func {param} = {self.__dict__[param]}")
-                print(f"That is {self.input}")
+            # if param == 'input':
+            #     print(
+            #         f"super__init after func {param} = {self.__dict__[param]}")
+            #     print(f"That is '{self.input}'")
         #
         # set dependent parameters
         #
@@ -73,7 +77,7 @@ class Definition:
             if val is None:
                 val = kwargs.get(default_value, None)
             if val is None:
-                val = Definition.settings.__dict__.get(default_value, None)
+                val = Definition.producer.settings.__dict__.get(default_value, None)
             if val is not None:
                 setattr(self, param, func(val))
             else:

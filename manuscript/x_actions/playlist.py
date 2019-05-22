@@ -1,5 +1,5 @@
 class Playlist:
-    import manuscript.language.constants as mc
+    import manuscript.tools.constants as mc
     from manuscript.actions.role import Role
     from manuscript.actions.sound import Sound
     from manuscript.actions.group import Group

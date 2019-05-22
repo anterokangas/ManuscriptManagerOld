@@ -1,65 +1,62 @@
 import re
-import os
-from gtts import gTTS
-from pydub import AudioSegment
-from playsound import playsound
-from tempfile import NamedTemporaryFile
 
 from manuscript.elements.definition import Definition
 from manuscript.elements.action import Action
 from manuscript.elements.sound import Sound
-from manuscript.elements.sound import create_sound
-import manuscript.language.constants as mc
+
+import manuscript.tools.constants as mc
+
+from manuscript.messages.messages import message_text
+
 from manuscript.tools.castings import bool_
-from manuscript.tools.counter import Counter
+from manuscript.tools.say import say
+import manuscript.tools.format as fmt
 
 
 class Role(Action):
     """ Definition of Role object and dialogue """
     # params[required, optional, dependent]
     # (attribute name, type conversion function, default value)
+    COMMAND = mc.ROLE
     params = [
-        #{"actions": (as_is, [speak])},
         {},
         {"pitch": (float, 0.0),
          "speed": (float, 0.0),
          "gain": (float, 1.0),
          "noname": (bool_, False),        # name is never spoken
-         "lang_like": (str, mc.NARRATOR),     # speak as 'like' except lang, default text == alias
-         mc.SOUND: (str, "")},         # generate SOUND object
-        {"alias": (str, "name"),         # default value == dependent on
-         "lang": (str, "default_lang")}  # look first self, then settings
+         "lang_like": (str, mc.NARRATOR), # speak as 'like' except lang, default text == alias
+         mc.SOUND: (str, "")},            # generate SOUND object
+         "audio_like", (str, ""),
+         "text_like", (str, ""),
+         "paragraph", (str, ""),          # paragraph format
+         "left_margin", (int, fmt.LEFT_MARGIN),
+         "right_margin", (int, fmt.RIGHT_MARGIN),
+         "align", (str, fmt.ALIGN),
+         "caps", (bool_, fmt.CAPS),
+         "underline", (str, fmt.UNDERLINE),
+         "leading_newline", (bool_:, fmt.LEADING_NEWLINE),
+         "trailing_newline", (bool_:, fmt.TRAILING_NEWLINE),
+        {"alias": (str, "name"),          # default value == dependent on
+         "lang": (str, "default_lang")}   # look first self, then settings
     ]
 
     def __init__(self, **kwargs):
         """ define Role object """
-        print(f"\nRole __init__ ()")
-        for key, value in kwargs.items():
-            print(f">{key} = {value}")
+        # for key, value in kwargs.items():
+        #     print(f">{key} = {value}")
         super().__init__(**kwargs)
+        # Created Role element {} with language {}
+        #message("RO0010", (self.name, self.lang))
 
     def speak(self, text_):
         """ Convert text to AudioSegment (sound) object"""
         if re.sub('[(){}<> .!?,;]', '', text_) == "":
             # Nothing to say!
-            return
-
-        tts = gTTS(text=text_,
-                   lang=self.lang)
-
-        tf = NamedTemporaryFile(delete=False)
-        tmp_file = tf.name
-        tts.save(tmp_file)
-        sound = AudioSegment.from_mp3(tmp_file)
+            return None
+        #print(f"speak: text_={text_}")
+        sound = say(text_, lang=self.lang)
         sound = Role.speed_change(sound, self.speed)
         sound = Role.pitch_change(sound, self.pitch)
-
-        if Definition.settings.play_while:
-            with Counter() as counter:
-                tmp_file = f"_tmp_{counter:04d}.mp3"
-                sound.export(tmp_file)
-                playsound(tmp_file)
-            os.remove(tmp_file)
 
         return sound
 
@@ -104,9 +101,8 @@ class Role(Action):
         :param kwargs: overriding parameters
         :return: None
         """
-        print(f"\nRole do()")
-        for key, value in kwargs.items():
-            print(f">{key} = {value}")
+        #for key, value in kwargs.items():
+        #    print(f">{key} = {value}")
         # ----------------------------------
         # text to speak
         # ----------------------------------
@@ -121,17 +117,18 @@ class Role(Action):
         lang_like = kwargs.pop("lang_like", "")
         lang = kwargs.get("lang", "")
         if lang_like != "" and lang != "":
-            raise ValueError(
-                f"** Double lang definition: cf. lang_like={lang_like} lang={lang} ")
+            raise ValueError(message_text("RO8010", (lang_like, like)))
         if lang_like != "":
             like = Definition.defined_actions.get(lang_like, None)
             if like is None or not isinstance(like, Role):
-                raise ValueError(f"*** lang_like Role {lang_like} not defined")
+                raise ValueError(message_text("RO8020", (lang_like,)))
             kwargs["lang"] = like.lang
 
         super().do(**kwargs)
 
         audio = self.speak(text_)
+
+        #message(f"Created speak: {self.name} says,", audio)
 
         sound_name = kwargs.pop(mc.SOUND, "")
         if sound_name == "":
@@ -142,11 +139,4 @@ class Role(Action):
             Definition.defined_actions[sound_name] = object_
             return None
 
-        raise ValueError(f"*** Action named {sound_name} already defined")
-
-
-# --------------------------------------------------
-# Add the class to defining actions
-# --------------------------------------------------
-Definition.defining_actions[mc.ROLE] = Role
-
+        raise ValueError(message_text("RO8030", (sound_name,)))

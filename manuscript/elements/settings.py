@@ -1,17 +1,25 @@
 from manuscript.elements.definition import Definition
-import manuscript.language.constants as mc
-from manuscript.tools.castings import bool_
-from manuscript.tools.castings import list_
+import manuscript.tools.constants as mc
+#from manuscript.messages.messages import message
+from manuscript.tools.castings import bool_, list_
+import manuscript.tools.format as fmt
 
 
 class Settings(Definition):
     """ Definition of Group object and action"""
+    COMMAND = mc.SETTINGS
     params = [
         {"name": (str, mc.SETTINGS)},
         {"default_lang": (str, "fi"),
-         "sound_directories":       # Notice: add, not replace
-             (lambda x: list_(". sound "+x), ". sound"),
+         "sound_directories":
+             (lambda x: list_(". sound "+x, tail=""),
+              ". sound"),  # Notice: add, not replace
          mc.VALUES: (str, ""),
+         # TODO: text export
+         # text
+         "page_width": fmt.PAGE_WIDTH,
+         "page_length": fmt.PAGE_LENGTH,
+         "text_export": (str, "output.txt"),
          # mp3 export
          "export": (str, "output.mp3"),
          "format": (str, "mp3"),
@@ -38,13 +46,16 @@ class Settings(Definition):
         """ Define Group object """
         kwargs["name"] = mc.SETTINGS
         super().__init__(**kwargs)
-        Definition.settings = self
-        Definition.defined_actions[mc.NARRATOR].__dict__['lang'] = \
-            Definition.settings.__dict__['default_lang']
-
-
-
-# --------------------------------------------------
-# Add the class to defined actions
-# --------------------------------------------------
-Definition.defining_actions[mc.SETTINGS] = Settings
+        Settings.producer.settings = self
+        # Definition.defined_actions[mc.NARRATOR].lang = \
+        #     Definition.settings.default_lang
+        # copy self's attributes to class variables
+        for key, value in self.__dict__.items():
+            if key == 'params':
+                continue
+            setattr(Settings, key, value)
+        print(Settings.defined_actions)
+        if Settings.defined_actions.get(mc.NARRATOR, None) is not None:
+            Settings.defined_actions[mc.NARRATOR].lang = \
+                Settings.producer.settings.__dict__.get("default_lang")
+        #message("SE0010")

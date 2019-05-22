@@ -1,0 +1,71 @@
+@startuml
+
+title ManuscriptManager - Class Diagram
+
+class Definition {
+    __init__()
+}
+class Action {
+    __init__()
+    do()
+}
+together {
+    class Role {
+        COMMAND
+        __init__()
+        speak()
+        do()
+    }
+    class Sound {
+        COMMAND
+        __init__()
+        from_audio()
+        play()
+        do()
+    }
+}
+class Group {
+        COMMAND
+    __init__()
+    do()
+}
+class Wait {
+        COMMAND
+    __init__()
+    do()
+}
+together {
+    class Settings {
+        COMMAND
+        __init__()
+    }
+    class Work {
+        defining_actions
+        defined_actions
+        manuscript_raw
+        manuscript_structured
+        mansuscript_sound
+        __init()
+        save_as_mp3()
+        to_text()
+        play()
+        _create_sound()
+        define_action
+    }
+}
+
+Definition <|-- Settings
+Definition <|-- Action
+Action <|-- Role
+Action <|-- Sound
+Sound <|-- Wait
+Action <|-- Group
+
+Group "1" -right- "many" Role
+
+Work -- Settings
+Work o-- Action
+
+Role -right-> "creates" Sound
+
+@enduml

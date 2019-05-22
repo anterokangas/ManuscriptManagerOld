@@ -1,5 +1,5 @@
 from manuscript.actions.definition import Definition
-import manuscript.language.constants as mc
+import manuscript.tools.constants as mc
 
 
 class Wait(Definition):

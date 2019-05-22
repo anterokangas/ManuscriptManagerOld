@@ -1,10 +1,10 @@
-from manuscript.elements.definition import Definition
 from manuscript.elements.sound import Sound
-import manuscript.language.constants as mc
+import manuscript.tools.constants as mc
 
 
 class Wait(Sound):
     """ Definition of Wait object and waiting """
+    COMMAND = mc.WAIT
     params = [
         {},
         {"time": (float, 0.5)},
@@ -27,14 +27,6 @@ class Wait(Sound):
         time = kwargs.get(mc.VALUES, "")
         me = super().do(**kwargs)
         if text != "" and time != "":
-            #  error
-            raise ValueError(f"property 'time' defined twice: values='{text_}' time='{time}'")
+            raise ValueError(message_text("WA80101", (text_, time)))
         if text_ == "":
             add_silence(me.time)
-
-
-
-# --------------------------------------------------
-# Add the class to defined actions
-# --------------------------------------------------
-Definition.defining_actions[mc.WAIT] = Wait

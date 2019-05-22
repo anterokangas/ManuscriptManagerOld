@@ -10,8 +10,7 @@ def test_add_quotes():
     assert add_quotes("abc\"def\"") == "abc\"def\""
     assert add_quotes("abc\" def\"") == "'abc\" def\"'"
     assert add_quotes("abc'cde\"fgg") == "abc'cde\"fgg"
-    with pytest.raises(Exception):
-        assert add_quotes("abc 'cde\"fgg")
+    assert add_quotes("abc 'cde\"fgg") == '"abc \'cde\"fgg"'
 
 def test_remove_quotes():
     assert remove_quotes("") == ""

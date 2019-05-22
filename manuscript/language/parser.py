@@ -4,8 +4,7 @@ Syntax parser
 """
 from sly import Parser
 from manuscript.language.lexer import ManuscriptLexer
-import manuscript.language.constants as mc
-from manuscript.elements.definition import Definition
+import manuscript.tools.constants as mc
 from manuscript.language.process_command import process_command
 
 
@@ -23,9 +22,9 @@ class ManuscriptParser(Parser):
     debugfile = "parser.out"
     tokens = ManuscriptLexer.tokens
 
-    def __init__(self):
+    def __init__(self, producer):
         """ initialization """
-        pass
+        self.producer = producer
 
     @_('manuscript part')
     def manuscript(self, p):
@@ -41,7 +40,7 @@ class ManuscriptParser(Parser):
 
     @_('values')
     def part(self, p):
-        return mc.NARRATOR, Definition.defined_actions[mc.NARRATOR], {mc.VALUES: p.values}
+        return mc.NARRATOR, self.producer.defined_actions[mc.NARRATOR], {mc.VALUES: p.values}
 
     @_('NAME params RPAREN')
     def command(self, p):
@@ -49,7 +48,7 @@ class ManuscriptParser(Parser):
         params = p.params
         values = params.pop(mc.VALUES, "")
         line_number = p.lineno
-        return process_command(name, params, values, line_number)
+        return process_command(name, params, values, line_number, self.producer)
 
     @_('params param')
     def params(self, p):

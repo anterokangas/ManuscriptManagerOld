@@ -2,7 +2,7 @@ from manuscript.language.lexer import ManuscriptLexer
 from manuscript.language.parser import ManuscriptParser
 from manuscript.actions.definition import Definition
 from manuscript.actions.role import Role
-import manuscript.language.constants as mc
+import manuscript.tools.constants as mc
 
 
 lexer = ManuscriptLexer()
