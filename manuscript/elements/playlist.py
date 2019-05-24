@@ -30,7 +30,7 @@ class Playlist:
                 #print(f"Lazy evaluation command={command}")
                 action = Definition.defining_actions.get(command, None)
                 if action is None:
-                    raise ValueError(message_text("PL8010")[0].format(command))
+                    raise ValueError(message_text(sel.work, "PL8010")[0].format(command))
 
             name = params.get("name", "")
             if isinstance(action, Definition):

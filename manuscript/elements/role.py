@@ -1,16 +1,14 @@
 import re
 
-from manuscript.elements.definition import Definition
 from manuscript.elements.action import Action
 from manuscript.elements.sound import Sound
 
 import manuscript.tools.constants as mc
-
-from manuscript.messages.messages import message_text
-
 from manuscript.tools.castings import bool_
 from manuscript.tools.say import say
-import manuscript.tools.format as fmt
+from manuscript.tools.play import play
+
+from manuscript.messages.messages import message_text
 
 
 class Role(Action):
@@ -41,12 +39,11 @@ class Role(Action):
          "lang": (str, "default_lang")}   # look first self, then settings
     ]
 
-    def __init__(self, **kwargs):
+    def __init__(self, work, **kwargs):
         """ define Role object """
-        super().__init__(**kwargs)
-        # Created Role element {} with language {}
-        print(f"Role.__init__: {self.name} {self.lang}")
-        #message("RO0010", (self.name, self.lang))
+        super().__init__(work, **kwargs)
+        super().define_action()
+        #message(work, "RO0010", (self.name, self.lang))
 
     def speak(self, text_):
         """ Convert text to AudioSegment (sound) object"""
@@ -58,7 +55,6 @@ class Role(Action):
         sound = say(text_, lang=self.lang)
         sound = Role.speed_change(sound, self.speed)
         sound = Role.pitch_change(sound, self.pitch)
-
         return sound
 
     @classmethod
@@ -102,8 +98,6 @@ class Role(Action):
         :param kwargs: overriding parameters
         :return: None
         """
-        #for key, value in kwargs.items():
-        #    print(f">{key} = {value}")
         # ----------------------------------
         # text to speak
         # ----------------------------------
@@ -118,26 +112,27 @@ class Role(Action):
         lang_like = kwargs.pop("lang_like", "")
         lang = kwargs.get("lang", "")
         if lang_like != "" and lang != "":
-            raise ValueError(message_text("RO8010", (lang_like, lang)))
+            raise ValueError(message_text("self.work, RO8010", (lang_like, lang)))
         if lang_like != "":
-            like = Definition.defined_actions.get(lang_like, None)
+            like = self.work.defined_actions.get(lang_like, None)
             if like is None or not isinstance(like, Role):
-                raise ValueError(message_text("RO8020", (lang_like,)))
+                raise ValueError(message_text(self.work, "RO8020", (lang_like,)))
             kwargs["lang"] = like.lang
 
         super().do(**kwargs)
 
         audio = self.speak(text_)
 
-        #message(f"Created speak: {self.name} says,", audio)
+        #message(self.work, f"Created speak: {self.name} says,", audio)
 
         sound_name = kwargs.pop(mc.SOUND, "")
         if sound_name == "":
             return audio
 
-        if sound_name[0] != "_" or sound_name not in Definition.defined_actions:
-            object_ = Sound.from_audio(name=sound_name, audio=audio, **kwargs)
-            Definition.defined_actions[sound_name] = object_
+        if self.work.definition_allowed(sound_name):
+            object_ = Sound.from_audio(self.work, name=sound_name, audio=audio, **kwargs)
+
+            self.work.define_action(sound_name, object_)
             return None
 
-        raise ValueError(message_text("RO8030", (sound_name,)))
+        raise ValueError(message_text(self.work, "RO8030", (sound_name,)))

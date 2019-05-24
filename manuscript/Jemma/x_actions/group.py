@@ -11,9 +11,9 @@ class Group(Definition):
         {}
     ]
 
-    def __init__(self, **kwargs):
+    def __init__(self, work, **kwargs):
         """ Define Group object """
-        super().__init__(**kwargs)
+        super().__init__(work, **kwargs)
 
     def do(self, **kwargs):
         """
@@ -24,7 +24,7 @@ class Group(Definition):
         text_ = kwargs.pop(mc.VALUES, "")
         me = super().do(**kwargs)
         for member in me.members:
-            print(f"member {member}: {vars(defined_actions[member])}" )
+            print(f"member {member}: {vars(self.work.defined_actions[member])}" )
 
 
 

@@ -23,9 +23,9 @@ class ManuscriptParser(Parser):
     debugfile = "parser.out"
     tokens = ManuscriptLexer.tokens
 
-    def __init__(self, producer):
+    def __init__(self, work):
         """ initialization """
-        self.producer = producer
+        self.work = work
 
     @_('manuscript part')
     def manuscript(self, p):
@@ -41,7 +41,7 @@ class ManuscriptParser(Parser):
 
     @_('values')
     def part(self, p):
-        return mc.NARRATOR, self.producer.defined_actions[mc.NARRATOR], {mc.VALUES: p.values}
+        return mc.NARRATOR, self.work.defined_actions[mc.NARRATOR], {mc.VALUES: p.values}
 
     @_('NAME values params RPAREN')
     def command(self, p):
@@ -49,7 +49,7 @@ class ManuscriptParser(Parser):
         params = p.params
         values = p.values  # params.pop(mc.VALUES, "")
         line_number = p.lineno
-        return process_command(name, params, values, line_number, self.producer)
+        return process_command(name, params, values, line_number, self.work)
 
     @_('NAME params RPAREN')
     def command(self, p):
@@ -57,7 +57,7 @@ class ManuscriptParser(Parser):
         params = p.params
         values = ""  # p.values  # params.pop(mc.VALUES, "")
         line_number = p.lineno
-        return process_command(name, params, values, line_number, self.producer)
+        return process_command(name, params, values, line_number, self.work)
 
     @_('NAME values RPAREN')
     def command(self, p):
@@ -65,7 +65,7 @@ class ManuscriptParser(Parser):
         params = {}
         values = p.values  # params.pop(mc.VALUES, "")
         line_number = p.lineno
-        return process_command(name, params, values, line_number, self.producer)
+        return process_command(name, params, values, line_number, self.work)
 
     @_('NAME RPAREN')
     def command(self, p):
@@ -73,7 +73,7 @@ class ManuscriptParser(Parser):
         params = {}
         values = ""  # params.pop(mc.VALUES, "")
         line_number = p.lineno
-        return process_command(name, params, values, line_number, self.producer)
+        return process_command(name, params, values, line_number, self.work)
 
     @_('params param')
     def params(self, p):

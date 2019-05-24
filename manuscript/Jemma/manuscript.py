@@ -341,9 +341,9 @@ class Role(Definition):
 
     def __init__(self, **kwargs):
         """ define Role object """
-        print(f"\nRole __init__ ()")
-        for key, value in kwargs.items():
-            print(f">{key} = {value}")
+        #print(f"\nRole __init__ ()")
+        #for key, value in kwargs.items():
+        #    print(f">{key} = {value}")
         super().__init__(**kwargs)
 
     def do(self, **kwargs):
@@ -352,9 +352,9 @@ class Role(Definition):
         :param kwargs: overriding parameterss
         :return: None
         """
-        print(f"\nRole do()")
-        for key, value in kwargs.items():
-            print(f">{key} = {value}")
+        #print(f"\nRole do()")
+        #for key, value in kwargs.items():
+        #    print(f">{key} = {value}")
         text_ = kwargs.pop(VALUES, "")
         sound_name = kwargs.get(SOUND, None)
         if text_ == "":
@@ -439,14 +439,14 @@ class Sound(Definition):
 
     def __init__(self, **kwargs):
         """ Define Sound object """
-        print("\nSound.__init__():")
-        for key, value in kwargs.items():
-            print(f">{key} = {value}")
+        #print("\nSound.__init__():")
+        #for key, value in kwargs.items():
+        #    print(f">{key} = {value}")
         super().__init__(**kwargs)
         #
         # Process input == list of sound/files
         #
-        print(f"Sound._iinit: {self.input}")
+        #print(f"Sound._iinit: {self.input}")
         sounds = [get_sound(sf) for sf in self.input]
         # Process other parameters
         #---
@@ -605,7 +605,7 @@ class Settings(Definition):
         kwargs["name"] = SETTINGS
         super().__init__(**kwargs)
         settings = self
-        defined_actions[NARRATOR].__dict__['lang'] = settings.__dict__['default_lang']
+        defined_actions[NARRATOR].__dict__['lang'] = settings.__dict__.get('default_lang', 'en')
 
 
 DEFINING_ACTIONS = {

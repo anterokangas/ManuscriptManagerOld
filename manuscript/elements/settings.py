@@ -12,8 +12,8 @@ class Settings(Definition):
         {"name": (str, mc.SETTINGS)},
         {"default_lang": (str, "fi"),
          "data_dirs":
-             (lambda x: list_(". sound "+x, tail=""),
-              ". sound"),  # Notice: add, not replace
+             (lambda x: list_(". data "+x, tail=None),
+              ""),  # Notice: add, not replace
          mc.VALUES: (str, ""),
          # TODO: text export
          # text
@@ -42,35 +42,24 @@ class Settings(Definition):
         {}
     ]
 
-    def __init__(self, **kwargs):
+    def __init__(self, work, **kwargs):
         """ Define Settings object """
         #
-        # defining_actios
+        # defining_actions
         # defined_actions
         # settings          Setting-obj
         #
-        print(f"Settings.__init__ kwargs={kwargs}")
         kwargs["name"] = mc.SETTINGS
-        super().__init__(**kwargs)
-        Settings.settings = self
-        # Definition.defined_actions[mc.NARRATOR].lang = \
-        #     Definition.settings.default_lang
-        # copy self's attributes to class variables
-        for key, value in self.__dict__.items():
-            if key == 'params':
-                continue
-            setattr(Settings, key, value)
-        print(f"Settings -->\n{self.__dict__}")
-        for key, value in self.__dict__.items():
-            print(f"{key}-->{value}")
-        print(f"Settings.defined_actions={Settings.defined_actions}")
-        print(f"Settings.defined_actions.get(mc.NARRATOR, None)={Settings.defined_actions.get(mc.NARRATOR, None)}")
-        if Settings.defined_actions.get(mc.NARRATOR, None) is not None:
-            print("NARRATOR")
-            for key, value in Settings.defined_actions[mc.NARRATOR].items():
-                print(f"{key}-->{value}")
-            print(f'Settings.producer.settings.__dict__.get("default_lang")={Settings.producer.settings.__dict__.get("default_lang")}')
-            Settings.defined_actions[mc.NARRATOR].lang = \
-                Settings.producer.settings.__dict__.get("default_lang")
-            print(f"Settings: init NARRATOR.lang={Settings.defined_actions[mc.NARRATOR].lang}")
-        #message("SE0010")
+        super().__init__(work, **kwargs)
+
+        if self.work.defined_actions.get(mc.NARRATOR, None) is not None:
+            self.work.defined_actions[mc.NARRATOR].lang = self.default_lang
+
+        self.work.settings = self
+        super().define_action()
+        #message(self.work, "SE0010")
+
+    def do(self, *args, **kwargs):
+        """ Settings DO NOT return audio """
+        return None
+

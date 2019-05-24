@@ -1,3 +1,4 @@
+from pydub import AudioSegment
 from manuscript.elements.sound import Sound
 import manuscript.tools.constants as mc
 
@@ -11,9 +12,12 @@ class Wait(Sound):
         {}
     ]
 
-    def __init__(self, **kwargs):
+    def __init__(self, work, **kwargs):
         """ Define Wait object """
-        super().__init__(**kwargs)
+        #print(f"Wait.__init__: {kwargs}")
+        kwargs["input"] = ""
+        super().__init__(work, **kwargs)
+        super().define_action()
 
     def do(self, **kwargs):
         """
@@ -26,7 +30,7 @@ class Wait(Sound):
         text_ = kwargs.pop(mc.VALUES, "")
         time = kwargs.get(mc.VALUES, "")
         me = super().do(**kwargs)
-        if text != "" and time != "":
-            raise ValueError(message_text("WA80101", (text_, time)))
+        if text_ != "" and time == 0:
+            raise ValueError(message_text(self.work, "WA80101", (text_, time)))
         if text_ == "":
-            add_silence(me.time)
+            add_silence(duration=me.time)

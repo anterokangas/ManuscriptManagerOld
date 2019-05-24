@@ -67,7 +67,7 @@ for code in MESSAGES:
         MESSAGES[code][lang] = code + ": " + txt
 
 
-def message_text(text_="", params=tuple()):
+def message_text(work, text_, params=tuple()):
     """ Recognize used language and get the corresponding text."""
     print(f"message_text text_={text_}")
     message_texts = MESSAGES.get(text_, None)
@@ -75,7 +75,7 @@ def message_text(text_="", params=tuple()):
     if Settings is None:
         lang = 'en'
     else:
-        lang = Definition.settings.default_lang
+        lang = work.settings.default_lang
 
     warning = False
 
@@ -87,18 +87,18 @@ def message_text(text_="", params=tuple()):
         text_ = message_texts.get(lang, text_)
     else:
         warning = True
-
+    print(f"message_text: {text_} {lang} {warning}")
     return text_, lang, warning
 
 
-def message(text_="", params=tuple(), sound=None):
+def message(work, text_="", params=tuple(), sound=None):
     # check if text_ is message code
-    if Definition.settings is None \
-            or Definition.settings.play_while is not True \
+    if work.settings is None \
+            or work.settings.play_while is not True \
             or len(text_) == 6 and text_[2] > '0':
         return
 
-    text_, lang_, warning = message_text(text_, params)
+    text_, lang_, warning = message_text(work, text_, params)
     if warning:
         play(say(MESSAGES["ME4010"].get(
             lang_,

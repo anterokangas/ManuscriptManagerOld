@@ -2,12 +2,16 @@ from manuscript.elements.definition import Definition
 
 
 class Action(Definition):
-    params = [{"default_action": (str, None)},    # Required (== not overriddable)
-              {},                                 # Optional
-              {}]                                 # Dependent
+    params = [{},    # Required (== cannot overridden)
+              {},    # Optional
+              {}]    # Dependent
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *args, **kwargs):
+        self.params = [{**dp, **sp} for dp, sp in zip(Action.params, self.params)]
+        super().__init__(*args, **kwargs)
 
-    def do(self, **kwargs):
-        super().do(**kwargs)
+    def do(self, *args, **kwargs):
+        super().do(*args, **kwargs)
+
+    def define_action(self, *args, **kwargs):
+        super().define_action(*args, **kwargs)

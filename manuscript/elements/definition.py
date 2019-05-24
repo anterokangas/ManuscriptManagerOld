@@ -8,17 +8,7 @@ class Definition:
               {mc.VALUES: (str, "")},   # Optional
               {}]                       # Dependent
 
-    defining_actions = {}   # add defining actions == subclasses
-
-    defined_actions = {}   # add defined actions == objects of subclasses
-
-    narrator = None
-
-    settings = None
-
-    manuscript = []
-
-    def __init__(self, **kwargs):
+    def __init__(self, work, **kwargs):
         """
         Initialize Manuscript Element Object
         ------------------------------------
@@ -28,6 +18,7 @@ class Definition:
         :param kwargs: list of read parameters {key: value}
         :return: None
         """
+        self.work = work
         #
         # Complete params
         #
@@ -43,23 +34,14 @@ class Definition:
                 setattr(self, param, func(val))
             else:
                 raise ValueError(f"*** Required parameter '{param}' missing")
-            if param == 'input':
-                print(
-                    f"super__init0 after func {param} = {self.__dict__[param]}")
-
         #
         # Set optional parameters (default_value = name of the attribute)
         #
         for param, (func, default_value) in {**Definition.params[1], **self.params[1]}.items():
             val = kwargs.get(param, None)
-            if val is not None:
-                setattr(self, param, func(val))
-            else:
-                setattr(self, param, default_value)
-            # if param == 'input':
-            #     print(
-            #         f"super__init after func {param} = {self.__dict__[param]}")
-            #     print(f"That is '{self.input}'")
+            if val is None:
+                val = default_value
+            setattr(self, param, func(val))
         #
         # set dependent parameters
         #
@@ -74,14 +56,11 @@ class Definition:
             if val is None:
                 val = kwargs.get(default_value, None)
             if val is None:
-                val = Definition.producer.settings.__dict__.get(default_value, None)
+                val = self.work.settings.__dict__.get(default_value, None)
             if val is not None:
                 setattr(self, param, func(val))
             else:
                 raise ValueError(f"*** The parameter that {param} is dependent on is not set")
-            if param == 'input':
-                print(
-                    f"super__init2 after func {param} = {self.__dict__[param]}")
         #
         # test if non-defined parameters
         #
@@ -96,24 +75,33 @@ class Definition:
         :return: Overridden copy of object self
         """
         me = copy.deepcopy(self)
+        try:
+            name = me.name
+        except AttributeError:
+            name = "<unknown>"
+
         for key, value in kwargs.items():
             if key == "params":
                 continue
+            if key == "name":
+                continue
             if key not in vars(me):
-                raise ValueError(f"*** {me.name} Trying to override non defined attribute '{key}'")
+                raise ValueError(f"*** '{name}' trying to override non defined attribute '{key}'")
             # Required parameters == params[0] are not allowed to be overridden
-            if key in self.params[0] and value != None:
-                raise ValueError(f"*** {me.name} Trying to override required attribute '{key}'")
+            if key in self.params[0] and value is not None:
+                raise ValueError(f"*** '{name}' trying to override required attribute '{key}'")
             #
             # Find conversion function and set attribute
             #
-            func = self.params[0].get(key,
-                       self.params[1].get(key,
-                           self.params[2].get(key, ("",
-                                (str, "")))))[0]
+            func = self.params[0].get(
+                key, self.params[1].get(
+                    key, self.params[2].get(
+                        key, ("", (str, "")))))[0]
 
-            if key == mc.VALUES:
-                print(f"==>\nkey={key}\nvalue={value}\nfunc={func}\nfunc(value)={func(value)}")
+            # if key == mc.VALUES:
+            #    print(f"==>\nkey={key}\nvalue={value}\nfunc={func}\nfunc(value)={func(value)}")
             setattr(me, key, func(value))
         return me
 
+    def define_action(self):
+        self.work.define_action(self.name, self)
