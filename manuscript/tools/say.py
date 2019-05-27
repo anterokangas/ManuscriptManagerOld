@@ -1,15 +1,19 @@
+import os
 from gtts import gTTS
 from pydub import AudioSegment
-from tempfile import NamedTemporaryFile
+from manuscript.tools.counter import Counter
+import manuscript.tools.constants as mc
 
 
-def say(text_, lang="en"):
-    #print(f"say: text_={text_} lang={lang}")
+def say(text_, lang=mc.DEFAULT_LANG):
     if text_ == "":
-        return
-    tts = gTTS(text=text_,
-               lang=lang)
-    tf = NamedTemporaryFile(delete=False)
-    tmp_file = tf.name
-    tts.save(tmp_file)
-    return AudioSegment.from_mp3(tmp_file)
+        audio = None
+    else:
+        tts = gTTS(text=text_, lang=lang)
+        prefix = "tmp"
+        with Counter(prefix) as counter:
+            tmp_file = prefix + f"_{counter:010d}.mp3"
+            tts.save(tmp_file)
+            audio = AudioSegment.from_mp3(tmp_file)
+            os.remove(tmp_file)
+    return audio

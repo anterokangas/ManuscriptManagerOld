@@ -8,7 +8,7 @@ class Wait(Sound):
     COMMAND = mc.WAIT
     params = [
         {},
-        {"time": (float, 0.5)},
+        {"delay": (float, 0.3)},
         {}
     ]
 
@@ -28,9 +28,12 @@ class Wait(Sound):
         # text_ is alternative for time
         # both defined -> error
         text_ = kwargs.pop(mc.VALUES, "")
-        time = kwargs.get(mc.VALUES, "")
+        if text_ != "":
+            raise ValueError(message_text(self.work, "WA80101", (text_, "")))
+        delay = kwargs.get("delay", "")
+        print(f"delay={delay}")
         me = super().do(**kwargs)
-        if text_ != "" and time == 0:
-            raise ValueError(message_text(self.work, "WA80101", (text_, time)))
-        if text_ == "":
-            add_silence(duration=me.time)
+        if delay != "":
+            add_silence(duration=float(delay))
+        else:
+            add_silence(duration=me.delay)

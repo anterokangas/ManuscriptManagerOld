@@ -4,6 +4,7 @@ import copy
 from manuscript.elements.definition import Definition
 from manuscript.elements.role import Role
 from manuscript.elements.wait import Wait
+from manuscript.elements.sound import Sound
 #from manuscript.elements.settings import Group
 from manuscript.elements.settings import Settings
 
@@ -12,6 +13,7 @@ from manuscript.language.parser import ManuscriptParser
 
 from manuscript.messages.messages import message_text
 
+import manuscript.tools.audio as audio
 import manuscript.tools.constants as mc
 import manuscript.tools.play as play
 
@@ -56,55 +58,53 @@ class Work:
 
         # Names whose re-definition is allowed
         self.re_definition_allowed = {mc.SETTINGS}
+
         # Initialize default defined actions
         self.defined_actions = {}
-        self.define_action(mc.NARRATOR, Role(self, name=mc.NARRATOR, lang='en'))
         self.settings = Settings(self)
-        # self.define_action(mc.SETTINGS, Settings(self))
-        self.define_action(mc.BREAK, Wait(self, name=mc.BREAK, time='0.3'))
-        # self.settings = self.defined_actions[mc.SETTINGS]
-
-        print(f"defining_actions {len(self.defining_actions)} =\n{self.defining_actions}")
-        print(f"defined_actions {len(self.defined_actions)} =\n{self.defined_actions}")
+        Role(self, name=mc.NARRATOR)
+        Wait(self, name=mc.BREAK)
 
         # Make lexer and parser
         lexer = ManuscriptLexer()
         parser = ManuscriptParser(work=self)
         # Make lexical analysisis and parse manuscript
         self.parsed_manuscript = parser.parse(lexer.tokenize(manuscript))
-        print("Work: parsed_manusript")
+
+        print("\nWork: defining actions")
+        for key, value in self.defining_actions.items():
+            print(f"   {key:15}: {value}")
+
+        print("\nWork: parsed_manusript")
         for act in self.parsed_manuscript:
             print(f"   {act}")
+
+        print("\nWork: defined actions")
+        for key, value in self.defined_actions.items():
+            if isinstance(value, Sound):
+                audio_length = len(value.audio) if value.audio is not None else 0
+            else:
+                audio_length = ""
+
+            print(f"   {key:15}: {value} {audio_length}")
 
         # Make audio
         self.audio = self._process_structured_manuscript()
 
     def define_action(self, action_name, object_):
         """ Add new defined action """
-        print(f"define action {action_name} {object_}")
         self.defined_actions[action_name] = object_
-
-    def _append_audio(self, audio):
-        if audio is None:
-            try:
-                print(audio)
-            except Exception as e:
-                self.audio = None
-            return
-        if self.audio is None:
-            self.audio = audio
-        else:
-            self.audio.append(audio)
 
     def export_audio(self):
         print(f"Work.export_audio: {self.settings.export}")
+        if self.audio is None:
+            print(f"Empty audio")
+            return
         self.audio.export(self.settings.export)
 
     def _process_structured_manuscript(self):
         """ Process structured manuscript and create audio """
         the_audio = None
-
-        print(f"1type((the_audio)={type(the_audio)}")
 
         # Execute defined actions
         for i, (command, action, params) in tqdm(enumerate(self.parsed_manuscript)):
@@ -112,50 +112,35 @@ class Work:
             # If asked print current action
             if self.settings.print_executions:
                 print(f"\n{i}: {command}, {action}, {params}")
-                if the_audio is not None:
-                    print(type(the_audio), len(the_audio))
-                for key, value in self.defined_actions.items():
-                    print(f"---> defined action {key}={value}")
 
-            # If action is not defined then the command is a defining action
-            # ==> get the corresponding defining action
+            if command in self.defining_actions:
+                print(f"Command {command} is a defining action")
+                continue
+
+            print(f"defined_actions {self.defined_actions.keys()}")
+            if command not in self.defined_actions:
+                print(f"*** Error: {command} is not defined")
+                continue
+
+            print(f"command {command} is Ok, action={action}")
             if action is None:
-                # Lazy evaluation (e.g. ROLE --> SOUND)
-                # print(f"Lazy evaluation command={command}")
-                action = self.defined_actions.get(command, None)
-                if action is None:
-                    raise ValueError(self, message_text(self, "PL8010")[0].format(command))
+                action = self.defined_actions[command]
 
-            name = params.get("name", "")
-            # print(type(action))
-            if isinstance(action, Definition):
-                # action of a defined action --> makes audio
-                audio = action.do(**params)
-                print(f"action.do()-> audio, the_audio={type(audio)}, {type(the_audio)}")
-                print(f"2type((the_audio)={type(the_audio)}")
-                if audio is not None:
-                    if the_audio is None:
-                        the_audio = copy.copy(audio)
-                        print(f"type3((the_audio)={type(the_audio)}")
-                    else:
-                        print(type(audio), type(the_audio))
-                        the_audio = the_audio.append(audio)
-                        print(f"type3((the_audio)={type(the_audio)}")
-                # print(type(the_audio), len(the_audio))
-            elif self.definition_allowed(name):
-                # Definition of new action object -> defines a new object
-                object_ = action(self, **params)
-                self.define_action(object_.name, object_)
-            else:
-                print(f"Work: create_audio -->{name} was already defined")
-                pass
+            print(f"action={action}")
+            sound = action.do(**params)
+            length = len(sound) if sound is not None else 0
+            print(f"-->sound={sound} {length}")
+            the_audio = audio.append(the_audio, sound)
+            length = len(the_audio) if the_audio is not None else 0
+            print(f"+----> the_audio={the_audio} {length}")
+        print(f"===========> the_audio={the_audio} {length}")
         return the_audio
 
     def definition_allowed(self, name):
         """  Decides can 'name' be defined or re-defined  """
-        return name not in set(self.defined_actions.keys()) \
-            or name in self.re_definition_allowed \
-            or name[0] == "_"
+        return name != "" and \
+            (name not in set(self.defined_actions.keys())
+             or name in self.re_definition_allowed)
 
     def play(self):
         play.play(self.audio, block=False)

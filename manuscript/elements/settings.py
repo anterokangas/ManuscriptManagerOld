@@ -2,7 +2,6 @@ from manuscript.elements.definition import Definition
 import manuscript.tools.constants as mc
 #from manuscript.messages.messages import message
 from manuscript.tools.castings import bool_, list_
-import manuscript.tools.format as fmt
 
 
 class Settings(Definition):
@@ -10,7 +9,7 @@ class Settings(Definition):
     COMMAND = mc.SETTINGS
     params = [
         {"name": (str, mc.SETTINGS)},
-        {"default_lang": (str, "fi"),
+        {"default_lang": (str, mc.DEFAULT_LANG),
          "data_dirs":
              (lambda x: list_(". data "+x, tail=None),
               ""),  # Notice: add, not replace
@@ -52,6 +51,7 @@ class Settings(Definition):
         kwargs["name"] = mc.SETTINGS
         super().__init__(work, **kwargs)
 
+        # Update NARRATOR's language
         if self.work.defined_actions.get(mc.NARRATOR, None) is not None:
             self.work.defined_actions[mc.NARRATOR].lang = self.default_lang
 

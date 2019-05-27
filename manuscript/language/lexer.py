@@ -26,6 +26,11 @@ class ManuscriptLexer(Lexer):
         r'|[^\s@"\'\(\)]+'   # no \s, @, ", ', (, )
     )
 
+    # @_(r'\(\s*[^\s\#%*@\*"\'\(\)]+')
+    # def NAME(self, t):
+    #     t.value = t.value.upper()
+    #     return t
+
     @_(r'@(?s)(.*)')
     def eof(self, t):
         """ End-of-file: @ causes eof (for debugging purposes)

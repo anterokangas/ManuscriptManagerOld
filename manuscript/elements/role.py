@@ -23,7 +23,6 @@ class Role(Action):
          "gain": (float, 1.0),
          "noname": (bool_, False),        # name is never spoken
          "lang_like": (str, mc.NARRATOR), # speak as 'like' except lang, default text == alias
-         mc.SOUND: (str, ""),            # generate SOUND object
          "audio_like": (str, ""),
          "text_like": (str, ""),
          "paragraph": (str, ""),          # paragraph format
@@ -41,6 +40,7 @@ class Role(Action):
 
     def __init__(self, work, **kwargs):
         """ define Role object """
+        print(f"Role.init {kwargs}")
         super().__init__(work, **kwargs)
         super().define_action()
         #message(work, "RO0010", (self.name, self.lang))
@@ -51,7 +51,6 @@ class Role(Action):
         if re.sub('[(){}<> .!?,;]', '', text_) == "":
             # Nothing to say!
             return None
-        print(f"speak: text_={text_} lang={self.lang}")
         sound = say(text_, lang=self.lang)
         sound = Role.speed_change(sound, self.speed)
         sound = Role.pitch_change(sound, self.pitch)
@@ -98,6 +97,7 @@ class Role(Action):
         :param kwargs: overriding parameters
         :return: None
         """
+        print(f"Role.do {kwargs}")
         # ----------------------------------
         # text to speak
         # ----------------------------------
@@ -120,19 +120,29 @@ class Role(Action):
             kwargs["lang"] = like.lang
 
         super().do(**kwargs)
-
-        audio = self.speak(text_)
+        print(f"call speak({text_})")
+        self.audio = self.speak(text_)
+        print(f"audio.length={len(self.audio)}")
 
         #message(self.work, f"Created speak: {self.name} says,", audio)
 
         sound_name = kwargs.pop(mc.SOUND, "")
         if sound_name == "":
-            return audio
+            return self.audio
 
+        print(f"sound_name={sound_name}")
         if self.work.definition_allowed(sound_name):
-            object_ = Sound.from_audio(self.work, name=sound_name, audio=audio, **kwargs)
-
-            self.work.define_action(sound_name, object_)
+            print(f"Create Sound.from_audio object")
+            object_ = Sound.from_audio(self.work, name=sound_name, audio=self.audio, **kwargs)
+            print(f"Sound.from_audio object created")
             return None
+            return object_.audio
+
+        if sound_name in self.work.defined_actions:
+            sound_object = self.work.defined_actions[sound_name]
+            if sound_object.audio is None:
+                sound_object.audio = self.audio
+                return None
+            raise ValueError(f"*** {sound_name} already has audio")
 
         raise ValueError(message_text(self.work, "RO8030", (sound_name,)))

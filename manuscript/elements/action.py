@@ -12,6 +12,3 @@ class Action(Definition):
 
     def do(self, *args, **kwargs):
         super().do(*args, **kwargs)
-
-    def define_action(self, *args, **kwargs):
-        super().define_action(*args, **kwargs)

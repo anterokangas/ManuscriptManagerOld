@@ -50,23 +50,53 @@ if __name__ == "__main__":
         (print_text True)
         (print_defined_actions True)
         (print_manuscript True)
-        (print_executions False)
-        (play_while True)
+        (print_executions True)
+        (play_while False)
     )
     (# ---------------------------- #)
-    (ROLE A (speed 0.9))
-    (ROLE B (pitch 0.7))
-    (A purr (SOUND PURR))
-
-    (PP (input PURR PURR))
-    (PP)
-    """
-
+    Tästä se lähtee
+    (ROLE B C)
+    (ROLE A)
+    (A 1 (SOUND 1))
+    (1 (gain 1))
+    (A 2 (SOUND 2))
+    (SOUND 12 (input 1 2 meow.mp3))
+    Eka (12)
+    Toka (yxkax)
+    (1 (input 2))
+    @
+    (0 1 2) - no
+    (1 2) - play 1 2
+    (1 2 (SOUND yxkax)) -> create yxkax == 1 2
+    (SOUND 12 (input 1 2)) -> create 12 = 1 2
+    (1 (input 2)) -> play 1 2
+    (1  (input 2) (SOUND 12)) -> create 12
+    
+    I PHASE (parse)
+    1. (def name values [params]) -> if allowed(name) and values != "" 
+                                  -> create def-object(name=name, params=values&params)
+    2. (defined [params]) -> defined.do(params)
+    3. (defined values [params]) if defined is not SOUND -> defined.do(values, params)
+                                 if defined is SOUND 
+                                    -> create SOUND-object(name=tmp, 
+                                                           input=defined&values, 
+                                                           params)
+    4. (nondefined [values] [params]) -> create SOUND-object(name=tmp, input=nondefined&values, params); tmp.do()
+    5. (nondefining [values] [params](SOUND=sound_name)) -> if allowed(sound_name)
+                                                    ->create SOUND-object(name=sound_name,
+                                                                          input=nondefining&values
+                                                                          params9
+     
+     """
     print("Manuscript file read in")
 
     work = Work(manuscript_text)
+    len_audio = len(work.audio) if work.audio is not None else 0
 
-    print(f"Audio generated, length={len(work.audio)}")
+    if work.settings.print_manuscript:
+        print("Parsed manuscript:")
+        for i, (command, action, params) in enumerate(work.parsed_manuscript):
+            print(f"{i:4}: {command}, {action}, {params}")
 
     if work.settings.print_defined_actions:
         print("Defined actions")
@@ -75,21 +105,18 @@ if __name__ == "__main__":
             print(f"   {action}")
             for key, value in parameters.__dict__.items():
                 print(f"      {key:15}: {value}")
+                if key != "audio":
+                    continue
+                length = len(value) if value is not None else 0
+                print(f"      - audio_length : {length}")
 
     if work.settings.export:
         work.export_audio()
         print(f"Work exported as {work.settings.export}")
 
-    if work.settings.print_manuscript:
-        print("Parse manuscript:")
-        for i, (command, action, params) in enumerate(work.parsed_manuscript):
-            print(f"{i:4}: {command}, {action}, {params}")
-
+    print(f"work.settings.play_final={work.settings.play_final}")
     if work.settings.play_final:
         message(work, "ME0010")
-        print("Defined actions:")
-        for key, value in work.defined_actions.items():
-            print(f"===> defined action {key}={value}")
         work.play()
 
-    print("\nREADY.")
+    print(f"\nAudio generated, length={len_audio}.")

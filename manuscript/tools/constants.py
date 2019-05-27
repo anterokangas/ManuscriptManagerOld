@@ -27,14 +27,13 @@ NARRATOR = "NARRATOR"
 MESSENGER = "__MESSENGER__"
 BREAK = "BREAK"
 
+# Other constants
+DEFAULT_LANG = "en"
 EPSILON = sys.float_info.epsilon
-
 
 # ----------------
 # Format text
 # ----------------
-
-
 ALIGN_CODES = {"LEFT": "<", "RIGHT": ">", "CENTER": "^"}
 PAGE_WIDTH = 66
 PAGE_LENGTH = 80

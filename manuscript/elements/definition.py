@@ -5,7 +5,8 @@ import manuscript.tools.constants as mc
 class Definition:
     """ Super class for defining actions """
     params = [{"name": (str, None)},    # Required (== not overriddable)
-              {mc.VALUES: (str, "")},   # Optional
+              {mc.VALUES: (str, ""),    # Optional
+               mc.SOUND: (str, "")},    # generate SOUND object
               {}]                       # Dependent
 
     def __init__(self, work, **kwargs):
@@ -66,7 +67,9 @@ class Definition:
         #
         for kwarg in kwargs:
             if self.__dict__.get(kwarg, None) is None:
-                raise ValueError(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}")
+                print(ValueError(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}"))
+
+                # raise ValueError(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}")
 
     def do(self, **kwargs):
         """

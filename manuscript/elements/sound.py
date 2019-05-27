@@ -5,10 +5,10 @@ from playsound import playsound
 from manuscript.elements.definition import Definition
 from manuscript.elements.action import Action
 
+import manuscript.tools.audio as audio
 from manuscript.tools.castings import list_
 from manuscript.tools.castings import as_is
 import manuscript.tools.constants as mc
-from manuscript.tools.play import play
 from manuscript.tools.quotes import remove_quotes
 
 
@@ -43,32 +43,19 @@ class Sound(Action):
 
     def __init__(self, work, **kwargs):
         """ Define Sound object """
-        print(f"Sound.__init__: {kwargs}")
+        print(f"Sound.init {kwargs}")
         self.params = [{**dp, **sp} for dp, sp in zip(Sound.params, self.params)]
         super().__init__(work, **kwargs)
-        #
-        # Process input == list of sound/files
-        #
-        print(f"Sound: self.input={self.input}")
+
+        print(f"-->Sound.init input={self.input}")
         sounds = [Sound.get_audio(self.work, sf) for sf in self.input]
-        # Process other parameters before join
-        # ---
-        # Join
-        print(f"Sound.init sounds={sounds}")
-        audio = None
-        for sound in sounds:
-            if sound is None:
-                self.audio = None
-                return
-            if audio is None:
-                audio = sound
-            else:
-                audio += sound
-        self.audio = audio
+        print(f"-->Sound.init sounds={sounds}")
+        # TODO: Process other parameters before join
 
-
+        self.audio = audio.join(sounds)
         super().define_action()
-        #play(self.audio)
+        length = len(self.audio) if self.audio is not None else 0
+        print(f"Sound element defined {length} audio={self.audio}")
         # message(self.work, "SO0010", self.name, self.audio)
 
     @classmethod
@@ -87,20 +74,24 @@ class Sound(Action):
         Sound object
         """
         # Accept only those kwargs that are also Sound attributes
+        print(f"sound.from_audio {kwargs}")
+        name = kwargs.get('name', None)
+        if name is None:
+            raise ValueError(f"*** Trying to created Sound.from_audio by name {name}")
         audio = kwargs.pop("audio", None)
         if audio is None:
             raise ValueError(f"*** Trying to create Sound object from audio without audio")
-        # print(f"Sound {Sound.pkeys}")
         kwargs = {key: kwargs[key] for key in
                   set(kwargs.keys()).intersection(Sound.pkeys)}
-        # print(f"..> kwargs={kwargs}")
-        obj = cls(work, **kwargs)
-        obj.audio = audio
+        object_ = cls(work, **kwargs)
+        object_.audio = audio
+
+        work.define_action(name, object_)
 
         #message(self.work, f"New Sound Element {obj.name} created."
         #        f"The new sound is:",
         #        obj.audio)
-        return obj
+        return object_
 
     def do(self, **kwargs):
         """
@@ -114,63 +105,28 @@ class Sound(Action):
             Parameters
         Returns
         -------
-        None
         """
-        """
-        Sound-objectilla 
-        - jos on input, haetaan ne
-        
-        """
-        print(f"Sound.do(self={self}")
-        audio = self.audio
-        if audio is not None:
-            return audio
-        # Lazy object, create new object and execute it
-        new_sound = Sound(**self.__dict__)
-        return new_sound(**kwargs)
-
-        # if kwargs.get("input", "") == "":
-        #     try:
-        #         kwargs["input"] = self.name
-        #         # except Exception as e:
-        #         # print(f"Failed {e}")
-        #     finally:
-        #         pass
-        #
-        # super().do(**kwargs)
-        # sounds_and_files = self.input
-        #
-        # sounds = []
-        # for sound_or_file in sounds_and_files:
-        #     sound = Sound.get_audio(self.work, sound_or_file)
-        #     print(f"Sound.do: {sound_or_file} {sound}")
-        #     if sound is not None:
-        #         # process sound and join using parameters
-        #         sounds.append(sound)
-        # if len(sounds) == 0:
-        #     return None
-        # add_sound(sounds[0])
-        #
-        # Make new SOUND
-        # if kwargs.get(SOUND, None) is not None:
-        #    self.audio =
-        #
-        #
-        # Export sound
-        #
-        # export = kwargs.pop("export", "")
-        # if export != "":
-        #     sounds[0].export(export)
-        # # Play resulting sound (later: join)
-        # for sound in sounds:
-        #     print(sound)
-        #     play(sound)
-        #
-        # return sound
+        print(f"Sound.do() {self.name}: {self.audio} {kwargs}")
+        if self.audio is not None:
+            return self.audio
+        input_ = list_(" ".join(self.input)
+                       + " " + kwargs.get(mc.VALUES, "")
+                       + " " + kwargs.get("input", ""))
+        print(f"....> input_ = {input_}")
+        sounds = [Sound.get_audio(self.work, sf) for sf in input_]
+        print(f":::::> sounds={sounds} {len(sounds)}")
+        # TODO: Process other parameters before join
+        self.audio = audio.join(sounds)
+        length = len(self.audio) if self.audio is not None else 0
+        print(f";;;;; {length}")
+        if self.SOUND == "":
+            return self.audio
+        else:
+            return None
 
     @classmethod
     def get_audio(cls, work, sound_or_file):
-        """ Audiosegmment from sound object or mp3 file
+        """ return Audiosegment object from sound object or mp3 file, Not found --> None
 
         If not a sound object then search data dictionaries
 
@@ -191,15 +147,14 @@ class Sound(Action):
         MMFileNotFoundError
             If Sound not found
         """
-        # sound_or_filesound_or_file is
-        # either _ONE_ SOUND name or filename
+        print(f"get_audio sound_or_file1={sound_or_file}")
         settings = work.defined_actions[mc.SETTINGS]
         sound_or_file = remove_quotes(sound_or_file)
+        print(f"get_audio sound_or_file2={sound_or_file}")
+
         sound_name = work.defined_actions.get(sound_or_file, None)
-        print(f"Sound::get_audio {sound_or_file}->{sound_name}")
-        print("Defined actions:")
-        for key, value in work.defined_actions.items():
-            print(f"   {key:15}: {value}")
+        print(f"get_audio sound_name={sound_name}")
+
         if sound_name is not None:
             return sound_name.audio
         for data_dir in settings.data_dirs:
@@ -213,4 +168,3 @@ class Sound(Action):
                 pass
         # Perhaps lazy evaluation
         return None
-        raise ValueError(f"*** Sound or file '{sound_or_file}' not found")
