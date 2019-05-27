@@ -27,12 +27,12 @@ class Wait(Sound):
         :return: None
         """
         # both defined -> error
-        text_ = kwargs.pop(mc.VALUES, "")
+        text_ = kwargs.get(mc.VALUES, "")
         if text_ != "":
             raise ValueError(message_text(self.work, "WA80101", (text_, "")))
-        super().do(**kwargs)
-        delay = float(kwargs.get("delay", self.delay))
-        return silence(delay)
+
+        me = super().copy(**kwargs)
+        return silence(me. delay)
 
 
 def silence(time):

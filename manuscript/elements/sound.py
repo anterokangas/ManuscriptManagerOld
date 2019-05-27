@@ -110,17 +110,15 @@ class Sound(Action):
         # audio is generatd only once
         if self.audio is not None:
             return self.audio
+        me = super.copy(**kwargs)
         input_ = list_(" ".join(self.input)
                        + " " + kwargs.get(mc.VALUES, "")
                        + " " + kwargs.get("input", ""))
-        #print(f"....> input_ = {input_}")
         sounds = [Sound.get_audio(self.work, sf) for sf in input_]
-        #print(f":::::> sounds={sounds} {len(sounds)}")
         # TODO: Process other parameters before join
-        self.audio = audio.join(sounds)
-        length = len(self.audio) if self.audio is not None else 0
-        #print(f";;;;; {length}")
-        return self.audio
+
+        me.audio = audio.join(sounds)
+        return me.audio
 
 
     @classmethod
@@ -146,13 +144,9 @@ class Sound(Action):
         MMFileNotFoundError
             If Sound not found
         """
-        #print(f"get_audio sound_or_file1={sound_or_file}")
         settings = work.defined_actions[mc.SETTINGS]
         sound_or_file = remove_quotes(sound_or_file)
-        #print(f"get_audio sound_or_file2={sound_or_file}")
-
         sound_name = work.defined_actions.get(sound_or_file, None)
-        #print(f"get_audio sound_name={sound_name}")
 
         if sound_name is not None:
             return sound_name.audio
@@ -167,3 +161,6 @@ class Sound(Action):
                 pass
         # Perhaps lazy evaluation
         return None
+
+    def copy(self, *args, **kwargs):
+        return super().copy(*args, **kwargs)

@@ -119,24 +119,19 @@ class Role(Action):
                 raise ValueError(message_text(self.work, "RO8020", (lang_like,)))
             kwargs["lang"] = like.lang
 
-        super().do(**kwargs)
-        #print(f"call speak({text_})")
-        self.audio = self.speak(text_)
-        #print(f"audio.length={len(self.audio)}")
+        me = super().copy(**kwargs)
+        me.audio = self.speak(text_)
 
         #message(self.work, f"Created speak: {self.name} says,", audio)
 
         sound_name = kwargs.pop(mc.SOUND, "")
         if sound_name == "":
-            return self.audio
+            return me.audio
 
-        #print(f"sound_name={sound_name}")
         if self.work.definition_allowed(sound_name):
-            # print(f"Create Sound.from_audio object")
-            object_ = Sound.from_audio(self.work, name=sound_name, audio=self.audio, **kwargs)
-            #print(f"Sound.from_audio object created")
+            Sound.from_audio(self.work, name=sound_name, audio=self.audio, **kwargs)
             return None
-
+        # TODO: there is something odd here!
         if sound_name in self.work.defined_actions:
             sound_object = self.work.defined_actions[sound_name]
             if sound_object.audio is None:

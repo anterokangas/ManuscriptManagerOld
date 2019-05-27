@@ -54,6 +54,16 @@ if __name__ == "__main__":
         (play_while False)
     )
     (# ---------------------------- #)
+    5 (BREAK( delay 5))
+    
+    4 (BREAK( delay 4))
+    3 (BREAK( delay 3))
+    2 (BREAK( delay 1))
+    1 (BREAK( delay 1))
+    0 (BREAK)
+    0 0 0 0 
+    0
+    
     (ROLE A)
     (A Hei 1)
     (A Hei 2 (speed -1))
@@ -80,9 +90,9 @@ if __name__ == "__main__":
     if work.settings.print_defined_actions:
         print("\nDefined actions")
         print( work.defined_actions)
-        for action, parameters in work.defined_actions.items():
-            print(f"   {action}")
-            for key, value in parameters.__dict__.items():
+        for action, object_ in work.defined_actions.items():
+            print(f"   {action}      {object_}")
+            for key, value in object_.__dict__.items():
                 print(f"      {key:15}: {value}")
                 if key != "audio":
                     continue

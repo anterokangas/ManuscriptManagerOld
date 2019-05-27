@@ -1,6 +1,7 @@
 from manuscript.messages.messages import message_text
 
 from manuscript.elements.sound import Sound
+from manuscript.elements.work import Wait
 
 from manuscript.tools.counter import unique_name
 import manuscript.tools.constants as mc
@@ -51,7 +52,6 @@ def process_command(name, params, values, line_number, work):
     -------
         tuple (name, object, params)
     """
-    print(f"process_command: {(name, params, values, line_number, work)}")
     sound_param = params.get(mc.SOUND, "")
 
     if name in work.defining_actions:
@@ -70,20 +70,21 @@ def process_command(name, params, values, line_number, work):
 
     object_ = work.defined_actions.get(name, None)
     # Case 'pure Sound-object need not to be re-created (optimized)
-    additional_sound_object_test = (
+    additional_object_test = (
             (isinstance(object_, get_all_subclasses(Sound, True))
                  and (values != ""
                       or params != dict()))
              or object_ is None)
-    if additional_sound_object_test:
-        # Create additional Sound object
+    if additional_object_test:
+        # Create additional object
         params["input"] = " " + name + " " + values + params.get("input", "")
-        delay = params.get("delay", None)
-        print(f"{type(object_)} {delay}")
-
         params[mc.SOUND] = sound_param  # do not generate copies
         tmp = sound_param if sound_param != "" else unique_name("#tmp_")
-        object_ = Sound(work, name=tmp, **params)
-        return tmp, object_, {name: tmp, **params}
+        params["name"] = tmp
+        if isinstance(object_, Wait):
+            object_ = Wait(work, **params)
+        else:
+            object_ = Sound(work, **params)
+        return tmp, object_, params
 
     return name, object_, {mc.VALUES: values, **params}

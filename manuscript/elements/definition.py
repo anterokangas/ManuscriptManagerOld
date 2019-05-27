@@ -67,17 +67,17 @@ class Definition:
         #
         for kwarg in kwargs:
             if self.__dict__.get(kwarg, None) is None:
-                print(ValueError(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}"))
+                print(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}")
 
                 # raise ValueError(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}")
 
-    def do(self, **kwargs):
+    def copy(self, **kwargs):
         """
         Do defined action
         :param kwargs: Check and override parameters temporary
         :return: Overridden copy of object self
         """
-        me = copy.deepcopy(self)
+        me = copy.copy(self)
         try:
             name = me.name
         except AttributeError:
@@ -89,7 +89,7 @@ class Definition:
             if key == "name":
                 continue
             if key not in vars(me):
-                raise ValueError(f"*** '{name}' trying to override non defined attribute '{key}'")
+                raise ValueError(f"*** '{name}' trying to set non defined attribute '{key}'")
             # Required parameters == params[0] are not allowed to be overridden
             if key in self.params[0] and value is not None:
                 raise ValueError(f"*** '{name}' trying to override required attribute '{key}'")
@@ -101,8 +101,6 @@ class Definition:
                     key, self.params[2].get(
                         key, ("", (str, "")))))[0]
 
-            # if key == mc.VALUES:
-            #    print(f"==>\nkey={key}\nvalue={value}\nfunc={func}\nfunc(value)={func(value)}")
             setattr(me, key, func(value))
         return me
 
