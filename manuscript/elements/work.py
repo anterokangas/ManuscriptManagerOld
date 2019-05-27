@@ -97,7 +97,6 @@ class Work:
         self.defined_actions[action_name] = object_
 
     def export_audio(self):
-        print(f"Work.export_audio: {self.settings.export}")
         if self.audio is None:
             print(f"Empty audio")
             return

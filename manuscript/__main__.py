@@ -26,9 +26,9 @@ if __name__ == "__main__":
         8.5.2019 (c) Antero Kangas
         
         Manuscript to mp3 file:
-        +-------+    +----+    +-----+    +------+    +----+
-        |MM-file| -> |read| -> |parse| -> |create| -> |play|
-        +-------+    +----+    +-----+    +------+    +----+
+        *---------*    +----+    +-----+    +------+    | mp3-> play |
+        | MM-file | -> |read| -> |parse| -> |create| -> | text       |
+        *---------*    +----+    +-----+    +------+    | word?      | 
         """
                    ))
 
@@ -48,7 +48,7 @@ if __name__ == "__main__":
         (* --- DEBUG settings --- *)
         (play_final True)
         (print_text True)
-        (print_defined_actions True)
+        (print_defined_actions False)
         (print_manuscript False)
         (print_executions False)
         (play_while False)
