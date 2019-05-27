@@ -20,7 +20,7 @@ class ManuscriptParser(Parser):
     STRING ::= "..." | '...' | string not starting by ( and not having \s, (, ), ", ', @
     comment ::= (*...*) | (#...#) | (%...%)
     """
-    debugfile = "parser.out"
+    # debugfile = "parser.out"
     tokens = ManuscriptLexer.tokens
 
     def __init__(self, work):

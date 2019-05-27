@@ -40,7 +40,7 @@ class Role(Action):
 
     def __init__(self, work, **kwargs):
         """ define Role object """
-        print(f"Role.init {kwargs}")
+        #print(f"Role.init {kwargs}")
         super().__init__(work, **kwargs)
         super().define_action()
         #message(work, "RO0010", (self.name, self.lang))
@@ -97,7 +97,7 @@ class Role(Action):
         :param kwargs: overriding parameters
         :return: None
         """
-        print(f"Role.do {kwargs}")
+        #print(f"Role.do {kwargs}")
         # ----------------------------------
         # text to speak
         # ----------------------------------
@@ -120,9 +120,9 @@ class Role(Action):
             kwargs["lang"] = like.lang
 
         super().do(**kwargs)
-        print(f"call speak({text_})")
+        #print(f"call speak({text_})")
         self.audio = self.speak(text_)
-        print(f"audio.length={len(self.audio)}")
+        #print(f"audio.length={len(self.audio)}")
 
         #message(self.work, f"Created speak: {self.name} says,", audio)
 
@@ -130,13 +130,12 @@ class Role(Action):
         if sound_name == "":
             return self.audio
 
-        print(f"sound_name={sound_name}")
+        #print(f"sound_name={sound_name}")
         if self.work.definition_allowed(sound_name):
-            print(f"Create Sound.from_audio object")
+            # print(f"Create Sound.from_audio object")
             object_ = Sound.from_audio(self.work, name=sound_name, audio=self.audio, **kwargs)
-            print(f"Sound.from_audio object created")
+            #print(f"Sound.from_audio object created")
             return None
-            return object_.audio
 
         if sound_name in self.work.defined_actions:
             sound_object = self.work.defined_actions[sound_name]

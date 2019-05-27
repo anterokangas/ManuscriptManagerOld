@@ -71,22 +71,23 @@ class Work:
         # Make lexical analysisis and parse manuscript
         self.parsed_manuscript = parser.parse(lexer.tokenize(manuscript))
 
-        print("\nWork: defining actions")
-        for key, value in self.defining_actions.items():
-            print(f"   {key:15}: {value}")
+        if self.settings.print_executions:
+            print("\nWork: defining actions")
+            for key, value in self.defining_actions.items():
+                print(f"   {key:15}: {value}")
 
-        print("\nWork: parsed_manusript")
-        for act in self.parsed_manuscript:
-            print(f"   {act}")
+            print("\nWork: parsed_manusript")
+            for act in self.parsed_manuscript:
+                print(f"   {act}")
 
-        print("\nWork: defined actions")
-        for key, value in self.defined_actions.items():
-            if isinstance(value, Sound):
-                audio_length = len(value.audio) if value.audio is not None else 0
-            else:
-                audio_length = ""
+            print("\nWork: defined actions")
+            for key, value in self.defined_actions.items():
+                if isinstance(value, Sound):
+                    audio_length = len(value.audio) if value.audio is not None else 0
+                else:
+                    audio_length = ""
 
-            print(f"   {key:15}: {value} {audio_length}")
+                print(f"   {key:15}: {value} {audio_length}")
 
         # Make audio
         self.audio = self._process_structured_manuscript()
@@ -107,40 +108,37 @@ class Work:
         the_audio = None
 
         # Execute defined actions
-        for i, (command, action, params) in tqdm(enumerate(self.parsed_manuscript)):
+        i = 0
+        for command, action, params in tqdm(self.parsed_manuscript):
 
             # If asked print current action
             if self.settings.print_executions:
                 print(f"\n{i}: {command}, {action}, {params}")
-
+            i += 1
             if command in self.defining_actions:
-                print(f"Command {command} is a defining action")
+                # print(f"Command {command} is a defining action")
                 continue
 
-            print(f"defined_actions {self.defined_actions.keys()}")
+            # print(f"defined_actions {self.defined_actions.keys()}")
             if command not in self.defined_actions:
                 print(f"*** Error: {command} is not defined")
                 continue
 
-            print(f"command {command} is Ok, action={action}")
+            # print(f"command {command} is Ok, action={action}")
             if action is None:
                 action = self.defined_actions[command]
 
-            print(f"action={action}")
             sound = action.do(**params)
-            length = len(sound) if sound is not None else 0
-            print(f"-->sound={sound} {length}")
-            the_audio = audio.append(the_audio, sound)
-            length = len(the_audio) if the_audio is not None else 0
-            print(f"+----> the_audio={the_audio} {length}")
-        print(f"===========> the_audio={the_audio} {length}")
+            if params.get(mc.SOUND, "") == "":
+                the_audio = audio.append(the_audio, sound)
         return the_audio
 
     def definition_allowed(self, name):
         """  Decides can 'name' be defined or re-defined  """
-        return name != "" and \
-            (name not in set(self.defined_actions.keys())
-             or name in self.re_definition_allowed)
+        return (name != ""
+                and name not in self.defining_actions.keys()
+                and name not in self.defined_actions.keys()
+                or name in self.re_definition_allowed)
 
     def play(self):
         play.play(self.audio, block=False)

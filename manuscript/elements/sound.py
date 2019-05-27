@@ -43,19 +43,19 @@ class Sound(Action):
 
     def __init__(self, work, **kwargs):
         """ Define Sound object """
-        print(f"Sound.init {kwargs}")
+        #print(f"Sound.init {kwargs}")
         self.params = [{**dp, **sp} for dp, sp in zip(Sound.params, self.params)]
         super().__init__(work, **kwargs)
 
-        print(f"-->Sound.init input={self.input}")
+        #print(f"-->Sound.init input={self.input}")
         sounds = [Sound.get_audio(self.work, sf) for sf in self.input]
-        print(f"-->Sound.init sounds={sounds}")
+        #print(f"-->Sound.init sounds={sounds}")
         # TODO: Process other parameters before join
 
         self.audio = audio.join(sounds)
         super().define_action()
         length = len(self.audio) if self.audio is not None else 0
-        print(f"Sound element defined {length} audio={self.audio}")
+        #rint(f"Sound element defined {length} audio={self.audio}")
         # message(self.work, "SO0010", self.name, self.audio)
 
     @classmethod
@@ -74,7 +74,7 @@ class Sound(Action):
         Sound object
         """
         # Accept only those kwargs that are also Sound attributes
-        print(f"sound.from_audio {kwargs}")
+        #print(f"sound.from_audio {kwargs}")
         name = kwargs.get('name', None)
         if name is None:
             raise ValueError(f"*** Trying to created Sound.from_audio by name {name}")
@@ -106,23 +106,22 @@ class Sound(Action):
         Returns
         -------
         """
-        print(f"Sound.do() {self.name}: {self.audio} {kwargs}")
+        #print(f"Sound.do() {self.name}: {self.audio} {kwargs}")
+        # audio is generatd only once
         if self.audio is not None:
             return self.audio
         input_ = list_(" ".join(self.input)
                        + " " + kwargs.get(mc.VALUES, "")
                        + " " + kwargs.get("input", ""))
-        print(f"....> input_ = {input_}")
+        #print(f"....> input_ = {input_}")
         sounds = [Sound.get_audio(self.work, sf) for sf in input_]
-        print(f":::::> sounds={sounds} {len(sounds)}")
+        #print(f":::::> sounds={sounds} {len(sounds)}")
         # TODO: Process other parameters before join
         self.audio = audio.join(sounds)
         length = len(self.audio) if self.audio is not None else 0
-        print(f";;;;; {length}")
-        if self.SOUND == "":
-            return self.audio
-        else:
-            return None
+        #print(f";;;;; {length}")
+        return self.audio
+
 
     @classmethod
     def get_audio(cls, work, sound_or_file):
@@ -147,13 +146,13 @@ class Sound(Action):
         MMFileNotFoundError
             If Sound not found
         """
-        print(f"get_audio sound_or_file1={sound_or_file}")
+        #print(f"get_audio sound_or_file1={sound_or_file}")
         settings = work.defined_actions[mc.SETTINGS]
         sound_or_file = remove_quotes(sound_or_file)
-        print(f"get_audio sound_or_file2={sound_or_file}")
+        #print(f"get_audio sound_or_file2={sound_or_file}")
 
         sound_name = work.defined_actions.get(sound_or_file, None)
-        print(f"get_audio sound_name={sound_name}")
+        #print(f"get_audio sound_name={sound_name}")
 
         if sound_name is not None:
             return sound_name.audio

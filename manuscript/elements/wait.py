@@ -17,6 +17,7 @@ class Wait(Sound):
         #print(f"Wait.__init__: {kwargs}")
         kwargs["input"] = ""
         super().__init__(work, **kwargs)
+        self.audio = silence(self.delay)
         super().define_action()
 
     def do(self, **kwargs):
@@ -25,15 +26,15 @@ class Wait(Sound):
         :param kwargs: overriding parameters
         :return: None
         """
-        # text_ is alternative for time
         # both defined -> error
         text_ = kwargs.pop(mc.VALUES, "")
         if text_ != "":
             raise ValueError(message_text(self.work, "WA80101", (text_, "")))
-        delay = kwargs.get("delay", "")
-        print(f"delay={delay}")
-        me = super().do(**kwargs)
-        if delay != "":
-            add_silence(duration=float(delay))
-        else:
-            add_silence(duration=me.delay)
+        super().do(**kwargs)
+        delay = float(kwargs.get("delay", self.delay))
+        return silence(delay)
+
+
+def silence(time):
+    """ Create silence (time in seconds)"""
+    return AudioSegment.silent(time*1000)
