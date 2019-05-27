@@ -52,6 +52,9 @@ def process_command(name, params, values, line_number, work):
     -------
         tuple (name, object, params)
     """
+    if work.settings.print_executions:
+        print(f"process_command {(name, params, values, line_number, work)}")
+
     sound_param = params.get(mc.SOUND, "")
 
     if name in work.defining_actions:
@@ -72,8 +75,7 @@ def process_command(name, params, values, line_number, work):
     # Case 'pure Sound-object need not to be re-created (optimized)
     additional_object_test = (
             (isinstance(object_, get_all_subclasses(Sound, True))
-                 and (values != ""
-                      or params != dict()))
+                and (values != "" or params != dict()))
              or object_ is None)
     if additional_object_test:
         # Create additional object
@@ -85,6 +87,6 @@ def process_command(name, params, values, line_number, work):
             object_ = Wait(work, **params)
         else:
             object_ = Sound(work, **params)
-        return tmp, object_, params
-
-    return name, object_, {mc.VALUES: values, **params}
+        return tmp, object_, {}
+    params[mc.VALUES] = values
+    return name, object_, params

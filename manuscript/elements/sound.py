@@ -6,9 +6,9 @@ from manuscript.elements.definition import Definition
 from manuscript.elements.action import Action
 
 import manuscript.tools.audio as audio
-from manuscript.tools.castings import list_
-from manuscript.tools.castings import as_is
+from manuscript.tools.castings import as_is, bool_, list_
 import manuscript.tools.constants as mc
+from manuscript.tools.process_sound import reverse_audio
 from manuscript.tools.quotes import remove_quotes
 
 
@@ -30,6 +30,8 @@ class Sound(Action):
          "gain": (float, 1.0),
          "input": (list_, ""),    # (sound|filename)
          "audio": (as_is, None),  # possible AudioSegment object
+         "overlay": (bool_, False),
+         "reverse": (bool_, False),
          "export": (str, ""),     # save sound
          "start": (int, 0),
          "end": (int, -1),
@@ -43,20 +45,20 @@ class Sound(Action):
 
     def __init__(self, work, **kwargs):
         """ Define Sound object """
-        #print(f"Sound.init {kwargs}")
         self.params = [{**dp, **sp} for dp, sp in zip(Sound.params, self.params)]
         super().__init__(work, **kwargs)
 
-        #print(f"-->Sound.init input={self.input}")
         sounds = [Sound.get_audio(self.work, sf) for sf in self.input]
-        #print(f"-->Sound.init sounds={sounds}")
         # TODO: Process other parameters before join
-
-        self.audio = audio.join(sounds)
+        if self.overlay:
+            self.audio = audio.overlay(sounds)
+        else:
+            self.audio = audio.join(sounds)
+        print(f"Sound.init audio={self.audio}")
+        if self.audio is not None and self.reverse:
+            self.audio = reverse_audio(self.audio)
+            self.reverse = False
         super().define_action()
-        length = len(self.audio) if self.audio is not None else 0
-        #rint(f"Sound element defined {length} audio={self.audio}")
-        # message(self.work, "SO0010", self.name, self.audio)
 
     @classmethod
     def from_audio(cls, work, **kwargs):
@@ -74,23 +76,21 @@ class Sound(Action):
         Sound object
         """
         # Accept only those kwargs that are also Sound attributes
-        #print(f"sound.from_audio {kwargs}")
         name = kwargs.get('name', None)
         if name is None:
             raise ValueError(f"*** Trying to created Sound.from_audio by name {name}")
-        audio = kwargs.pop("audio", None)
-        if audio is None:
+        audio_ = kwargs.get("audio", None)
+        if audio_ is None:
             raise ValueError(f"*** Trying to create Sound object from audio without audio")
         kwargs = {key: kwargs[key] for key in
                   set(kwargs.keys()).intersection(Sound.pkeys)}
+
         object_ = cls(work, **kwargs)
-        object_.audio = audio
+        object_.audio = audio_
 
         work.define_action(name, object_)
 
         #message(self.work, f"New Sound Element {obj.name} created."
-        #        f"The new sound is:",
-        #        obj.audio)
         return object_
 
     def do(self, **kwargs):
@@ -106,19 +106,29 @@ class Sound(Action):
         Returns
         -------
         """
-        #print(f"Sound.do() {self.name}: {self.audio} {kwargs}")
+        print(f"Sound.do() {self.name}: {self.audio} {kwargs}")
         # audio is generatd only once
         if self.audio is not None:
             return self.audio
-        me = super.copy(**kwargs)
+        me = super().copy(**kwargs)
         input_ = list_(" ".join(self.input)
                        + " " + kwargs.get(mc.VALUES, "")
                        + " " + kwargs.get("input", ""))
+        print(f"input_={input_}")
         sounds = [Sound.get_audio(self.work, sf) for sf in input_]
-        # TODO: Process other parameters before join
+        print(f"Sound.do sounds={sounds}")
+        # TODO: Process other parameters after/before join
 
-        me.audio = audio.join(sounds)
-        return me.audio
+        if self.overlay:
+            self.audio = audio.overlay(sounds)
+        else:
+            self.audio = audio.join(sounds)
+        print(f"Sound.do audio={self.audio}")
+        if self.audio is not None and self.reverse:
+            self.audio = reverse_audio(self.audio)
+            self.reverse = False
+
+        return self.audio
 
 
     @classmethod

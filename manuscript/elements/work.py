@@ -5,7 +5,7 @@ from manuscript.elements.definition import Definition
 from manuscript.elements.role import Role
 from manuscript.elements.wait import Wait
 from manuscript.elements.sound import Sound
-#from manuscript.elements.settings import Group
+from manuscript.elements.group import Group
 from manuscript.elements.settings import Settings
 
 from manuscript.language.lexer import ManuscriptLexer
@@ -71,23 +71,27 @@ class Work:
         # Make lexical analysisis and parse manuscript
         self.parsed_manuscript = parser.parse(lexer.tokenize(manuscript))
 
-        if self.settings.print_executions:
+        if self.settings.print_defining_actions:
             print("\nWork: defining actions")
             for key, value in self.defining_actions.items():
                 print(f"   {key:15}: {value}")
 
+        if self.settings.print_manuscript_parsed:
             print("\nWork: parsed_manusript")
             for act in self.parsed_manuscript:
                 print(f"   {act}")
 
+        if self.settings.print_defined_actions:
             print("\nWork: defined actions")
             for key, value in self.defined_actions.items():
                 if isinstance(value, Sound):
                     audio_length = len(value.audio) if value.audio is not None else 0
+                    input_ = value.input
                 else:
                     audio_length = ""
+                    input_ = ""
 
-                print(f"   {key:15}: {value} {audio_length}")
+                print(f"   {key:15}: {value} {audio_length} {input_}")
 
         # Make audio
         self.audio = self._process_structured_manuscript()

@@ -32,11 +32,13 @@ class Settings(Definition):
          # play results in the end
          "play_final": (bool_, True),
          # show results
-         "print_text": (bool_, False),
-         "print_defined_actions": (bool_, False),
-         "print_manuscript": (bool_, False),
+         "print_final_text": (bool_, False),
          # debug settings
          "play_while": (bool_, False),
+         "print_defining_actions": (bool_, False),
+         "print_defined_actions": (bool_, False),
+         "print_manuscript_text": (bool_, False),
+         "print_manuscript_parsed": (bool_, False),
          "print_executions": (bool_, False)},
         {}
     ]

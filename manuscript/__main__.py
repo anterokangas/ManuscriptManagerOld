@@ -45,44 +45,41 @@ if __name__ == "__main__":
         (comments The best Test-file ever!)
         (date 2019)
         (genre pop)
-        (* --- DEBUG settings --- *)
+        (* --- finals --- *)
         (play_final True)
-        (print_text True)
-        (print_defined_actions False)
-        (print_manuscript False)
-        (print_executions False)
+        (print_final_text True)
+        (* --- DEBUG settings --- *)
+        (print_defining_actions True)
+        (print_defined_actions True)
+        (print_manuscript_text True)
+        (print_manuscript_parsed False)
+        (print_executions True)
         (play_while False)
     )
     (# ---------------------------- #)
-    5 (BREAK( delay 5))
+    (ROLE A (speed 0.99))
+    (ROLE B (speed 1.01))
+    (ROLE C (speed 1) (pitch 0.9))
+   
+    (A Eläköön! (SOUND AA))
+    (B Eläköön! (SOUND BB))
+    (C Eläköön! (SOUND CC))
+    (SOUND RC (input CC) (reverse True) (speed -1))
+    (RC)
+    (BREAK (delay 5))
+    (#(AA BB CC (overlay True))
+    #)
+    (GROUP ABC (members A B C))
+    (ABC Eläköön! Eläköön! Eläköön!)
     
-    4 (BREAK( delay 4))
-    3 (BREAK( delay 3))
-    2 (BREAK( delay 1))
-    1 (BREAK( delay 1))
-    0 (BREAK)
-    0 0 0 0 
-    0
     
-    (ROLE A)
-    (A Hei 1)
-    (A Hei 2 (speed -1))
-    (A Hei 3)
-    (meow.mp3 meow.mp3(SOUND MEOW))
-    2 2 naukaisua
-    (MEOW)tauko(MEOW) 
-    Uusiksi, välissä tauko.
-    (WAIT Pitkä_tauko (delay 10))
-    (MEOW)(BREAK (delay 5))(MEOW) 
-    ja vielä tuplatupla
-    (MEOW Pitkä_tauko MEOW)  
      """
     print("\nManuscript file read in")
 
     work = Work(manuscript_text)
     len_audio = len(work.audio) if work.audio is not None else 0
 
-    if work.settings.print_manuscript:
+    if work.settings.print_manuscript_parsed:
         print("\nParsed manuscript:")
         for i, (command, action, params) in enumerate(work.parsed_manuscript):
             print(f"{i:4}: {command}, {action}, {params}")
@@ -98,6 +95,13 @@ if __name__ == "__main__":
                     continue
                 length = len(value) if value is not None else 0
                 print(f"      - audio_length : {length}")
+
+        for action, object_ in work.defined_actions.items():
+            try:
+                length = len(object_.audio)
+            except:
+                length = ""
+            print(f"   {action:15}: {type(object_)} {length}")
 
     if work.settings.export:
         work.export_audio()

@@ -1,4 +1,3 @@
-
 from gtts import gTTS
 from playsound import playsound
 from pydub import AudioSegment
@@ -7,18 +6,6 @@ import re
 import os
 from manuscript.elements.definition import Definition
 from manuscript.tools.quotes import remove_quotes
-
-
-# class Playlist():
-#     def __init__(self, sound=None):
-#         self.playlist = sound
-#
-#     def append(self, sound):
-#         if self.playlist is None:
-#             self.playlist = sound
-#         else:
-#             self.playlist = self.playlist.append(sound)
-
 
 
 def speak(text_, create_sound=None, prefix="tmp", **kwargs):
@@ -102,11 +89,9 @@ def add_sound(filename, **kwargs):
         playsound(filename)
 
 
-def add_silence(time):
+def silence(time):
     """ Create silence (time in seconds)"""
-    silence = AudioSegment.silent(time*1000)
-    append_to_playlist(silence)
-
+    return AudioSegment.silent(time*1000)
 
 
 def get_sound(sound_or_file):
@@ -134,3 +119,11 @@ def get_sound(sound_or_file):
     else:
         sound = sound_name.audio
     return sound
+
+
+def reverse_audio(audio_):
+    print(f"reverse_audio: audio_={audio_}")
+    if audio_ is None:
+        return None
+    else:
+        return audio_.reverse()

@@ -1,6 +1,7 @@
 from pydub import AudioSegment
 from manuscript.elements.sound import Sound
 import manuscript.tools.constants as mc
+from manuscript.tools.process_sound import silence
 
 
 class Wait(Sound):
@@ -35,6 +36,3 @@ class Wait(Sound):
         return silence(me. delay)
 
 
-def silence(time):
-    """ Create silence (time in seconds)"""
-    return AudioSegment.silent(time*1000)

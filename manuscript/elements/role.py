@@ -97,7 +97,7 @@ class Role(Action):
         :param kwargs: overriding parameters
         :return: None
         """
-        #print(f"Role.do {kwargs}")
+        print(f"Role.do {kwargs}")
         # ----------------------------------
         # text to speak
         # ----------------------------------
@@ -120,23 +120,26 @@ class Role(Action):
             kwargs["lang"] = like.lang
 
         me = super().copy(**kwargs)
-        me.audio = self.speak(text_)
+        audio = me.speak(text_)
 
         #message(self.work, f"Created speak: {self.name} says,", audio)
 
-        sound_name = kwargs.pop(mc.SOUND, "")
+        sound_name = kwargs.get(mc.SOUND, "")
         if sound_name == "":
-            return me.audio
+            return audio
 
         if self.work.definition_allowed(sound_name):
-            Sound.from_audio(self.work, name=sound_name, audio=self.audio, **kwargs)
+            Sound.from_audio(self.work, name=sound_name, audio=audio, **kwargs)
             return None
         # TODO: there is something odd here!
         if sound_name in self.work.defined_actions:
             sound_object = self.work.defined_actions[sound_name]
             if sound_object.audio is None:
-                sound_object.audio = self.audio
+                sound_object.audio = me.audio
                 return None
             raise ValueError(f"*** {sound_name} already has audio")
 
         raise ValueError(message_text(self.work, "RO8030", (sound_name,)))
+
+    def copy(self, *args, **kwargs):
+        return super().copy(*args, **kwargs)
