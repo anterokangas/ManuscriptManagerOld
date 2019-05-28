@@ -437,7 +437,7 @@ if __name__ == "__main__":
     p.franz(
         "Tuohan kuulostaa kuin Johan Straussin, niiden kolmen kuuluisan säveltäjän isän, valssi-musiikilta. ")
     p.franz(
-        "Eiköhän poiketa kahville kuun#te#lemaan ja nauttimaan siitä. Nytpäs me po#jat vie#täm#me#kin oi#kea#ta "
+        "Eiköhän poiketa kahville kuun#te#lemaan ja nauttimaan siitä. Nytpäs .py po#jat vie#täm#.py#kin oi#kea#ta "
         "Pää-ääliö-öljy-yö-öykkäri-ilkiö-yötä!"
     )
     p.josef("No niinpäs kuulostaakin. Mennään vain.")

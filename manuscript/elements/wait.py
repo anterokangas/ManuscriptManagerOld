@@ -1,6 +1,7 @@
 from pydub import AudioSegment
 from manuscript.elements.sound import Sound
 import manuscript.tools.constants as mc
+import manuscript.exceptions.exceptions as me
 from manuscript.tools.process_sound import silence
 
 
@@ -30,7 +31,7 @@ class Wait(Sound):
         # both defined -> error
         text_ = kwargs.get(mc.VALUES, "")
         if text_ != "":
-            raise ValueError(message_text(self.work, "WA80101", (text_, "")))
+            raise mex.MMValueError(message_text(self.work, "WA80101", (text_, "")))
 
         me = super().copy(**kwargs)
         return silence(me. delay)

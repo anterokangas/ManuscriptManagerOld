@@ -3,6 +3,8 @@ from manuscript.messages.messages import message_text
 from manuscript.elements.sound import Sound
 from manuscript.elements.work import Wait
 
+import manuscript.exceptions.exceptions as mex
+
 from manuscript.tools.counter import unique_name
 import manuscript.tools.constants as mc
 from manuscript.tools.subclasses import get_all_subclasses
@@ -52,31 +54,32 @@ def process_command(name, params, values, line_number, work):
     -------
         tuple (name, object, params)
     """
-    if work.settings.print_executions:
-        print(f"process_command {(name, params, values, line_number, work)}")
-
     sound_param = params.get(mc.SOUND, "")
+    if work.settings.print_executions:
+        print(f"process_command {(name, params, values, line_number, work)} {sound_param}")
 
     if name in work.defining_actions:
         if sound_param != "":
-            raise ValueError(f"*** SOUND parameter illegal in defining action '{name}'")
+            raise mex.MMParameterError(f"*** SOUND parameter illegal in defining action '{name}'")
         if values == "":
-            raise ValueError(message_text(work, "C8010", (line_number, name)))
+            raise mex.MMParameterError(message_text(work, "C8010", (line_number, name)))
 
         # Create new object ==> VALUES is the new name and must be given
         if not work.definition_allowed(values):
             print(f"*** Illegal double definition {(line_number, name, values)}")
-            raise ValueError(message_text(work, "C8020", (line_number, name, values)))
+            raise mex.MMParameterError(message_text(work, "C8020", (line_number, name, values)))
 
         object_ = work.defining_actions[name](work, name=values, **params)
         return name, object_, {"name": values, **params}
 
     object_ = work.defined_actions.get(name, None)
     # Case 'pure Sound-object need not to be re-created (optimized)
+
     additional_object_test = (
             (isinstance(object_, get_all_subclasses(Sound, True))
                 and (values != "" or params != dict()))
              or object_ is None)
+
     if additional_object_test:
         # Create additional object
         params["input"] = " " + name + " " + values + params.get("input", "")
@@ -87,6 +90,13 @@ def process_command(name, params, values, line_number, work):
             object_ = Wait(work, **params)
         else:
             object_ = Sound(work, **params)
-        return tmp, object_, {}
+
+        return tmp, object_, dict()
+
     params[mc.VALUES] = values
+    if sound_param != "":
+        if isinstance(object_, Wait):
+            Wait(work, name=sound_param, **params)
+        else:
+            Sound(work, name=sound_param, **params)
     return name, object_, params

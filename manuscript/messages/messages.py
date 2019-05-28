@@ -1,7 +1,7 @@
 from manuscript.elements.definition import Definition
 from manuscript.elements.settings import Settings
 from manuscript.tools.say import say
-from manuscript.tools.play import play
+from manuscript.tools.play import play_sound
 
 
 """
@@ -100,13 +100,13 @@ def message(work, text_="", params=tuple(), sound=None):
 
     text_, lang_, warning = message_text(work, text_, params)
     if warning:
-        play(say(MESSAGES["ME4010"].get(
+        play_sound(say(MESSAGES["ME4010"].get(
             lang_,
             "Text of code ME4010 {} for lang {} missing.").format(text_, lang_)))
     # print(text_.format(*params), lang_)
     # play(say(text_.format(*params), lang_))
 
     print(text_, lang_)
-    play(say(text_, lang_))
-    play(sound)
+    play_sound(say(text_, lang_))
+    play_sound(sound)
 

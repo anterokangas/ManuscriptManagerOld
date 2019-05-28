@@ -2,6 +2,7 @@
 Castings
 """
 import shlex
+import copy
 
 
 def bool_(input_):
@@ -11,6 +12,7 @@ def bool_(input_):
     str and not in FALSE; F --> bool()
     otherwise --> False
     """
+    input_ = copy.copy(input_)
     if isinstance(input_, str):
         input_ = input_.strip().upper()
     return bool(input_) \

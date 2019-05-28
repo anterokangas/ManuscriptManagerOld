@@ -1,5 +1,6 @@
 import copy
 import manuscript.tools.constants as mc
+import manuscript.exceptions.exceptions as mex
 
 
 class Definition:
@@ -34,7 +35,7 @@ class Definition:
             if val is not None:
                 setattr(self, param, func(val))
             else:
-                raise ValueError(f"*** Required parameter '{param}' missing")
+                raise mex.MMParameterError(f"*** Required parameter '{param}' missing")
         #
         # Set optional parameters (default_value = name of the attribute)
         #
@@ -61,15 +62,13 @@ class Definition:
             if val is not None:
                 setattr(self, param, func(val))
             else:
-                raise ValueError(f"*** The parameter that {param} is dependent on is not set")
+                raise mex.MMParameterError(f"*** The parameter that {param} is dependent on is not set")
         #
         # test if non-defined parameters
         #
         for kwarg in kwargs:
             if self.__dict__.get(kwarg, None) is None:
-                print(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}")
-
-                # raise ValueError(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}")
+                mex.MMParameterError(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}")
 
     def copy(self, **kwargs):
         """
@@ -89,10 +88,10 @@ class Definition:
             if key == "name":
                 continue
             if key not in vars(me):
-                raise ValueError(f"*** '{name}' trying to set non defined attribute '{key}'")
+                raise mex.MMParameterError(f"*** '{name}' trying to set non defined attribute '{key}'")
             # Required parameters == params[0] are not allowed to be overridden
             if key in self.params[0] and value is not None:
-                raise ValueError(f"*** '{name}' trying to override required attribute '{key}'")
+                raise mex.MMParameterError(f"*** '{name}' trying to override required attribute '{key}'")
             #
             # Find conversion function and set attribute
             #

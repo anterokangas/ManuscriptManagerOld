@@ -4,8 +4,11 @@ Syntax parser
 """
 from sly import Parser
 from manuscript.language.lexer import ManuscriptLexer
-import manuscript.tools.constants as mc
+
 from manuscript.language.process_command import process_command
+
+import manuscript.tools.constants as mc
+import manuscript.exceptions.exceptions as mex
 
 
 class ManuscriptParser(Parser):
@@ -108,3 +111,11 @@ class ManuscriptParser(Parser):
     @_('STRING')
     def values(self, p):
         return p.STRING
+
+
+
+def p_error(p):
+    if p:
+        raise mex.MMSyntaxError("*** Syntax error at token {p.type}, line {p.lineno}")
+    else:
+        raise mex.MM.SyntaxError("*** Syntax Error at EOF, line {p.lineno}")

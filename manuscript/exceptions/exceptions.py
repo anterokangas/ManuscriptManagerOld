@@ -14,6 +14,10 @@ class MMValueError(MMError):
     pass
 
 
+class MMParameterError(MMError):
+    pass
+
+
 class MMNotDefiningActionError(MMError):
     pass
 

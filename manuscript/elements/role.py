@@ -5,8 +5,9 @@ from manuscript.elements.sound import Sound
 
 import manuscript.tools.constants as mc
 from manuscript.tools.castings import bool_
+import manuscript.exceptions.exceptions as mex
 from manuscript.tools.say import say
-from manuscript.tools.play import play
+from manuscript.tools.play import play_sound
 
 from manuscript.messages.messages import message_text
 
@@ -40,7 +41,6 @@ class Role(Action):
 
     def __init__(self, work, **kwargs):
         """ define Role object """
-        #print(f"Role.init {kwargs}")
         super().__init__(work, **kwargs)
         super().define_action()
         #message(work, "RO0010", (self.name, self.lang))
@@ -97,7 +97,6 @@ class Role(Action):
         :param kwargs: overriding parameters
         :return: None
         """
-        print(f"Role.do {kwargs}")
         # ----------------------------------
         # text to speak
         # ----------------------------------
@@ -112,34 +111,34 @@ class Role(Action):
         lang_like = kwargs.pop("lang_like", "")
         lang = kwargs.get("lang", "")
         if lang_like != "" and lang != "":
-            raise ValueError(message_text("self.work, RO8010", (lang_like, lang)))
+            raise me.MMValueError(message_text("self.work, RO8010", (lang_like, lang)))
         if lang_like != "":
             like = self.work.defined_actions.get(lang_like, None)
             if like is None or not isinstance(like, Role):
-                raise ValueError(message_text(self.work, "RO8020", (lang_like,)))
+                raise mm.MMValueError(message_text(self.work, "RO8020", (lang_like,)))
             kwargs["lang"] = like.lang
 
         me = super().copy(**kwargs)
-        audio = me.speak(text_)
+        the_audio = me.speak(text_)
 
         #message(self.work, f"Created speak: {self.name} says,", audio)
 
         sound_name = kwargs.get(mc.SOUND, "")
         if sound_name == "":
-            return audio
+            return the_audio
 
         if self.work.definition_allowed(sound_name):
-            Sound.from_audio(self.work, name=sound_name, audio=audio, **kwargs)
+            Sound.from_audio(self.work, name=sound_name, audio=the_audio, **kwargs)
             return None
-        # TODO: there is something odd here!
+
         if sound_name in self.work.defined_actions:
             sound_object = self.work.defined_actions[sound_name]
             if sound_object.audio is None:
-                sound_object.audio = me.audio
+                sound_object.audio = the_audio
                 return None
-            raise ValueError(f"*** {sound_name} already has audio")
+            raise mex.MMValueError(f"*** {sound_name} already has audio")
 
-        raise ValueError(message_text(self.work, "RO8030", (sound_name,)))
+        raise mex.MMValueError(message_text(self.work, "RO8030", (sound_name,)))
 
     def copy(self, *args, **kwargs):
         return super().copy(*args, **kwargs)

@@ -14,6 +14,7 @@ class Settings(Definition):
              (lambda x: list_(". data "+x, tail=None),
               ""),  # Notice: add, not replace
          mc.VALUES: (str, ""),
+         "temp_dir": (str, "."),
          # TODO: text export
          # text
          "page_width": (int, mc.PAGE_WIDTH),

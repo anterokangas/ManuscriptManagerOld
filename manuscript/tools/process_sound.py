@@ -5,10 +5,11 @@ from tempfile import NamedTemporaryFile
 import re
 import os
 from manuscript.elements.definition import Definition
+import manuscript.exceptions.exceptions as mex
 from manuscript.tools.quotes import remove_quotes
 
 
-def speak(text_, create_sound=None, prefix="tmp", **kwargs):
+def speak(text_, work, create_sound=None, prefix="tmp", **kwargs):
     """ Convert text to AudioSegment (sound) object"""
     if re.sub('[(){}<> .!?,;]', '', text_) == "":
         # Nothing to say!
@@ -33,7 +34,7 @@ def speak(text_, create_sound=None, prefix="tmp", **kwargs):
     if create_sound is None:
         append_to_playlist(sound)
 
-        if settings.play_while:
+        if work.settings.play_while:
             with Counter(prefix) as counter:
                 tmp_file = prefix + f"_{counter:04d}.mp3"
                 sound.export(tmp_file)
@@ -97,9 +98,7 @@ def silence(time):
 def get_sound(sound_or_file):
     # sound_or_filesound_or_file is
     # either _ONE_ SOUND name or filename
-    print(f"1get_sound {sound_or_file}")
     sound_or_file = remove_quotes(sound_or_file)
-    print(f"2get_sound {sound_or_file}")
     sound_name = Definition.defined_actions.get(sound_or_file, None)
     if sound_name is None:
         for voice_directory in Definition.settings.voice_directories:
@@ -107,7 +106,6 @@ def get_sound(sound_or_file):
                 name = os.path.join(
                         voice_directory,
                         sound_or_file)
-                print(f"trying to open mp3 file {name}")
                 sound = AudioSegment.from_mp3(
                     os.path.join(
                         voice_directory,
@@ -115,7 +113,7 @@ def get_sound(sound_or_file):
                 return sound
             except:
                 pass
-        raise ValueError(f"*** Sound or file {sound_or_file} not found")
+        raise mex.MMFileNotFoundError(f"*** Sound or file {sound_or_file} not found")
     else:
         sound = sound_name.audio
     return sound

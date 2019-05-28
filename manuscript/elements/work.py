@@ -69,15 +69,16 @@ class Work:
         lexer = ManuscriptLexer()
         parser = ManuscriptParser(work=self)
         # Make lexical analysisis and parse manuscript
-        self.parsed_manuscript = parser.parse(lexer.tokenize(manuscript))
 
+        print(f"{'Parse manuscript'}")
+        self.parsed_manuscript = parser.parse(lexer.tokenize(manuscript))
         if self.settings.print_defining_actions:
             print("\nWork: defining actions")
             for key, value in self.defining_actions.items():
                 print(f"   {key:15}: {value}")
 
         if self.settings.print_manuscript_parsed:
-            print("\nWork: parsed_manusript")
+            print("\nWork: parsed_manuscript")
             for act in self.parsed_manuscript:
                 print(f"   {act}")
 
@@ -94,6 +95,7 @@ class Work:
                 print(f"   {key:15}: {value} {audio_length} {input_}")
 
         # Make audio
+        print(f"{'Process manuscript'}")
         self.audio = self._process_structured_manuscript()
 
     def define_action(self, action_name, object_):
@@ -119,18 +121,13 @@ class Work:
                 print(f"\n{i}: {command}, {action}, {params}")
             i += 1
             if command in self.defining_actions:
-                # print(f"Command {command} is a defining action")
                 continue
 
-            # print(f"defined_actions {self.defined_actions.keys()}")
             if command not in self.defined_actions:
-                print(f"*** Error: {command} is not defined")
                 continue
 
-            # print(f"command {command} is Ok, action={action}")
             if action is None:
                 action = self.defined_actions[command]
-
             sound = action.do(**params)
             if params.get(mc.SOUND, "") == "":
                 the_audio = audio.append(the_audio, sound)
@@ -139,12 +136,13 @@ class Work:
     def definition_allowed(self, name):
         """  Decides can 'name' be defined or re-defined  """
         return (name != ""
-                and name not in self.defining_actions.keys()
-                and name not in self.defined_actions.keys()
+                    and name not in self.defining_actions.keys()
+                    and name not in self.defined_actions.keys()
                 or name in self.re_definition_allowed)
 
     def play(self):
-        play.play(self.audio, block=False)
+        print(f"work play {self.audio} {len(self.audio)}")
+        play.play_sound(self.audio)
 
     def to_formatted_text(self):
         # TODO: Create readable formatted manuscript

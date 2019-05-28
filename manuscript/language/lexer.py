@@ -5,8 +5,8 @@ Lexical analyser
 from sly import Lexer
 
 from manuscript.language.find_column import find_column
-from manuscript.tools.highlight import highlight
-
+#from manuscript.tools.highlight import highlight
+import manuscript.exceptions.exceptions as mex
 
 class ManuscriptLexer(Lexer):
     """ Lexical analyser """
@@ -53,8 +53,10 @@ class ManuscriptLexer(Lexer):
         :return: error, increase index
         """
         ill_char = ascii(t.value[0])
+        raise mex.MMSyntaxError(f"*** Lexical error: illegal character {ill_char} in line {self.lineno}")
+
         print(highlight(
-            f"*** Lexigal error: illegal character '{ill_char}' in line {self.lineno}",
+            f"*** Lexical error: illegal character '{ill_char}' in line {self.lineno}",
             color='red'))
         self.index += 1
 
