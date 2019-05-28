@@ -33,8 +33,7 @@ class Role(Action):
          "caps": (bool_, mc.CAPS),
          "underline": (str, mc.UNDERLINE),
          "leading_newline": (bool_, mc.LEADING_NEWLINE),
-         "trailing_newline": (bool_, mc.TRAILING_NEWLINE)
-        },
+         "trailing_newline": (bool_, mc.TRAILING_NEWLINE)},
         {"alias": (str, "name"),          # default value == dependent on
          "lang": (str, "default_lang")}   # look first self, then settings
     ]
