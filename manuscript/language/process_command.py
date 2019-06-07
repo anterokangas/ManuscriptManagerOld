@@ -12,12 +12,12 @@ from manuscript.tools.subclasses import get_all_subclasses
 
 def process_command(name, params, values, line_number, work):
     """
-    Process command NAME params ')'
+    Process command NAME _params ')'
 
     First Phase (parse textual manuscript to parsed manuscript)
 
     Error cases.
-        (1) name is defining action and (params has SOUND-parameter or values is empty or values is not allowed)
+        (1) name is defining action and (_params has SOUND-parameter or values is empty or values is not allowed)
     Cases:
         (1) name is defining action and values is allowed
             -> create and define object
@@ -52,7 +52,7 @@ def process_command(name, params, values, line_number, work):
 
     Returns
     -------
-        tuple (name, object, params)
+        tuple (name, object, _params)
     """
     sound_param = params.get(mc.SOUND, "")
     if work.settings.print_executions:

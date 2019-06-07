@@ -15,8 +15,8 @@ class ManuscriptParser(Parser):
     """ Syntax parser
     manuscript ::= manuscript part | part
     part ::= command | values
-    command ::= NAME values params ')' | NAME params ')' | NAME values ')' | NAME ')' |
-    params ::= params param | param
+    command ::= NAME values _params ')' | NAME _params ')' | NAME values ')' | NAME ')' |
+    _params ::= _params param | param
     param ::= NAME values ')'
     values ::= values STRING | STRING
     NAME ::= "("+string_without \s, (, ), ", ', @, #, %, *
@@ -25,6 +25,11 @@ class ManuscriptParser(Parser):
     """
     # debugfile = "parser.out"
     tokens = ManuscriptLexer.tokens
+
+    def error(self, p):
+        if not p:
+            raise mex.MMSyntaxError("*** SyntaxError: EOF encountered too early")
+        raise mex.MMSyntaxError(f"*** SyntaxError {p}")
 
     def __init__(self, work):
         """ initialization """
@@ -46,19 +51,19 @@ class ManuscriptParser(Parser):
     def part(self, p):
         return mc.NARRATOR, self.work.defined_actions[mc.NARRATOR], {mc.VALUES: p.values}
 
-    @_('NAME values params RPAREN')
+    @_('NAME values _params RPAREN')
     def command(self, p):
         name = p.NAME[1:].strip()
         params = p.params
-        values = p.values  # params.pop(mc.VALUES, "")
+        values = p.values  # _params.pop(mc.VALUES, "")
         line_number = p.lineno
         return process_command(name, params, values, line_number, self.work)
 
-    @_('NAME params RPAREN')
+    @_('NAME _params RPAREN')
     def command(self, p):
         name = p.NAME[1:].strip()
         params = p.params
-        values = ""  # p.values  # params.pop(mc.VALUES, "")
+        values = ""  # p.values  # _params.pop(mc.VALUES, "")
         line_number = p.lineno
         return process_command(name, params, values, line_number, self.work)
 
@@ -66,7 +71,7 @@ class ManuscriptParser(Parser):
     def command(self, p):
         name = p.NAME[1:].strip()
         params = {}
-        values = p.values  # params.pop(mc.VALUES, "")
+        values = p.values  # _params.pop(mc.VALUES, "")
         line_number = p.lineno
         return process_command(name, params, values, line_number, self.work)
 
@@ -74,11 +79,11 @@ class ManuscriptParser(Parser):
     def command(self, p):
         name = p.NAME[1:].strip()
         params = {}
-        values = ""  # params.pop(mc.VALUES, "")
+        values = ""  # _params.pop(mc.VALUES, "")
         line_number = p.lineno
         return process_command(name, params, values, line_number, self.work)
 
-    @_('params param')
+    @_('_params param')
     def params(self, p):
         return {**p.params, **p.param} if list(p.param.keys())[0] not in p.params.keys() else p.params
 
@@ -87,7 +92,7 @@ class ManuscriptParser(Parser):
         return p.param
 
     # @_('empty')
-    # def params(self, p):
+    # def _params(self, p):
     #     return {}
     #
     # @_('')
@@ -95,7 +100,7 @@ class ManuscriptParser(Parser):
     #     pass
 
     # @_('values')
-    # def params(self, p):
+    # def _params(self, p):
     #     return {mc.VALUES: p.values}
 
     @_('NAME values RPAREN')

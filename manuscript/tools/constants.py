@@ -11,6 +11,8 @@ import sys
 COMMAND = "__COMMAND__"
 COMMENT = "__COMMENT__"
 VALUES = "__VALUES__"
+DEFINING = "__DEFINING__"
+NON_DEFINED = (None,)  # Must be non-string and not None!
 
 
 # Defining actions

@@ -1,4 +1,4 @@
-import manuscript.tools.audio as audio
+
 
 
 def append(the_audio, sound):
@@ -10,7 +10,7 @@ def append(the_audio, sound):
     return the_audio + sound
 
 
-def join(sounds):
+def join(sounds, **kwargs):
     """ Join list of sounds to one audio """
     the_audio = None
     for sound in sounds:
@@ -20,7 +20,7 @@ def join(sounds):
     return the_audio
 
 
-def overlay(sounds):
+def overlay(sounds, **kwargs):
     """ Overlay lst of sounds to one audio """
     if sounds is None or len(sounds) == 0:
         return None

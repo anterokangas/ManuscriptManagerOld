@@ -8,7 +8,7 @@ from manuscript.tools.castings import bool_
 
 class Role(Definition):
     """ Definition of Role object and dialogue """
-    # params[required, optional, dependent]
+    # _params[required, optional, dependent]
     # (attribute name, type conversion function, default value)
     params = [
         {},

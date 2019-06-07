@@ -15,6 +15,7 @@ from manuscript.messages.messages import message_text
 
 import manuscript.tools.audio as audio
 import manuscript.tools.constants as mc
+import manuscript.tools.format as fmt
 import manuscript.tools.play as play
 
 from manuscript.tools.subclasses import get_all_subclasses
@@ -50,10 +51,10 @@ class Work:
         """
         self.manuscript_text = manuscript
 
-        # The defining actions are subclassess of Definition having COMMAND
+        # The defining actions are subclassess of Definition having _COMMAND
         self.defining_actions = {}
         for subclass in get_all_subclasses(Definition):
-            if 'COMMAND' in subclass.__dict__.keys():
+            if '_COMMAND' in subclass.__dict__.keys():
                 self.defining_actions[subclass.COMMAND] = subclass
 
         # Names whose re-definition is allowed
@@ -62,9 +63,26 @@ class Work:
         # Initialize default defined actions
         self.defined_actions = {}
         self.settings = Settings(self)
-        Role(self, name=mc.NARRATOR)
+        narrator = Role(self, name=mc.NARRATOR)
         Wait(self, name=mc.BREAK)
 
+        self.defaults = {"lang": narrator.lang,
+                         "pitch": narrator.pitch,
+                         "speed": narrator.speed,
+                         "gain": narrator.gain}
+
+        # Textual roles/paragph styles
+        book = fmt.Book()
+        self.paragraphs = [
+            Role(self, name="title", **fmt.merge(book.par_title, self.defaults)),
+            Role(self, name="title_line", **fmt.merge(book.par_title_line, self.defaults)),
+            Role(self, name="synopsis", **fmt.merge(book.par_synopsis, self.defaults)),
+            Role(self, name="header", **fmt.merge(book.par_header, self.defaults)),
+            Role(self, name="parenthesis", **fmt.merge(book.par_parenthesis, self.defaults)),
+            Role(self, name="name", **fmt.merge(book.par_name, self.defaults)),
+            Role(self, name="reply", **fmt.merge(book.par_reply, self.defaults)),
+        ]
+        # TODO: update pargaraph-Roles' lang-like when Settings is updated
         # Make lexer and parser
         lexer = ManuscriptLexer()
         parser = ManuscriptParser(work=self)
@@ -97,6 +115,9 @@ class Work:
         # Make audio
         print(f"{'Process manuscript'}")
         self.audio = self._process_structured_manuscript()
+
+
+
 
     def define_action(self, action_name, object_):
         """ Add new defined action """

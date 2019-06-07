@@ -2,19 +2,16 @@
 Manuscript Manger
 The main program
 """
+import sys
+
 import colorama
-from colorama import Fore, Back, Style
 from termcolor import colored
 
 from manuscript.elements.work import Work
 import manuscript.exceptions.exceptions as mex
-
-from manuscript.messages.messages import message
+from manuscript.tools.castings import supported_languages
 import manuscript.tools.play as play
-from playsound import playsound
 from manuscript.tools.box_text import box_text
-#from manuscript.tools.highlight import highlight
-import time
 
 
 if __name__ == "__main__":
@@ -57,26 +54,28 @@ if __name__ == "__main__":
         (play_final True)
         (print_final_text True)
         (* --- DEBUG settings --- *)
+        (print_supported_languages False)
         (print_defining_actions False)
-        (print_defined_actions False)
+        (print_defined_actions True)
         (print_manuscript_text False)
         (print_manuscript_parsed False)
         (print_executions False)
         (play_while False)
     )
     (# ---------------------------- #)
+    (title Löikö Mörkö sisään?)
     (ROLE A (speed 0.99))
-    (ROLE B (speed 1.01))
+    (ROLE B (speed 1.01) (gain 10))
     (ROLE C (speed 1) (pitch 0.9))
     
-    (A Hei vaan (SOUND HEI))
-    (HEI)
-    (GROUP FANIT (members A B C))
-    (FANIT Löikö Mörkö sisään?(SOUND Löikö_MÖRKÖ_SISÄÄN?))
-    (Löikö_MÖRKÖ_SISÄÄN? BREAK (SOUND LÖIKÖ_MÖRKÖ?))
-    (LÖIKÖ_MÖRKÖ?)(LÖIKÖ_MÖRKÖ?)(LÖIKÖ_MÖRKÖ?)(LÖIKÖ_MÖRKÖ?)(LÖIKÖ_MÖRKÖ?)
+    (A A Mörkö, mörkö!)
+    (B B Mörkö, mörkö!)
+    (C C Mörkö, mörkö!)
     
-     """
+    Tavataanko Kankkulan kaivolla?
+    (BREAK)
+    Ei toki, vaan torilla, Keskustorilla, nääs!
+    """
     try:
         work = Work(manuscript_text)
 
@@ -107,6 +106,9 @@ if __name__ == "__main__":
                     length = ""
                 print(f"   {action:15}: {type(object_)} {length}")
 
+        if work.settings.print_supported_languages:
+            print(f"\n{supported_languages()}")
+
         if work.settings.export:
             work.export_audio()
             print(f"\nWork exported as {work.settings.export}")
@@ -114,14 +116,16 @@ if __name__ == "__main__":
         if work.settings.play_final:
             #message(work, "ME0010")
             print("Play audio")
-            play.play_sound(work.audio)
+            play.play_sound(work.audio, block=True)
+
+            from playsound import playsound
+            playsound("data//Kling.mp3", block=False)
 
         print("READY.")
 
 
     except (mex.MMSyntaxError,
-            mex.MMSyntaxError,
             mex.MMValueError,
             mex.MMParameterError) as exception_text:
-        print(colored(exception_text, 'red'))
-        raise SyntaxError
+        print(colored("\n" + str(exception_text), 'red'))
+        sys.exit(1)

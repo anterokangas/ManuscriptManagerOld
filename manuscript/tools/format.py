@@ -289,6 +289,14 @@ def format_text(text_="",
     return formatted_text + "\n"
 
 
+def merge(cls, *args):
+    """ merge dicts = args"""
+    merged_lists = []
+    for arg in args:
+        merged_lists += list(arg.items())
+    return dict(merged_lists)
+
+
 class Book:
     """
     Formats text
@@ -329,6 +337,7 @@ class Book:
         self.par_parenthesis = kwargs.get("parenthesis", PARENTHESIS)
         self.par_name = kwargs.get("name", NAME)
         self.par_reply = kwargs.get("reply", REPLY)
+        #self.paragraphs = []
 
         self.text = ""
         self.previous = ""
@@ -341,6 +350,9 @@ class Book:
         def role_function(self, text):
             self.reply(role, text)
         return role_function
+
+    def add_role(self, role):
+        setattr(self, role, MethodType(self._role_template_function(role), self))
 
     def title(self, text_=""):
         self.text += format_text(text_, **self.par_title)

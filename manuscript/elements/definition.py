@@ -22,13 +22,13 @@ class Definition:
         """
         self.work = work
         #
-        # Complete params
-        #
+        # Complete _params
+        # TODO: from parent classes
         self.params = [{**dp, **sp} for dp, sp in zip(Definition.params, self.params)]
 
         #
         # Set required parameters
-        # Order: subclass's params can override superclass' params
+        # Order: subclass's _params can override superclass' _params
         #
         for param, (func, default_value) in {**self.params[0], **Definition.params[0]}.items():
             val = kwargs.get(param, None)
@@ -83,13 +83,13 @@ class Definition:
             name = "<unknown>"
 
         for key, value in kwargs.items():
-            if key == "params":
+            if key == "_params":
                 continue
             if key == "name":
                 continue
             if key not in vars(me):
                 raise mex.MMParameterError(f"*** '{name}' trying to set non defined attribute '{key}'")
-            # Required parameters == params[0] are not allowed to be overridden
+            # Required parameters == _params[0] are not allowed to be overridden
             if key in self.params[0] and value is not None:
                 raise mex.MMParameterError(f"*** '{name}' trying to override required attribute '{key}'")
             #

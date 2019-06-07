@@ -4,17 +4,16 @@ from manuscript.elements.action import Action
 from manuscript.elements.sound import Sound
 
 import manuscript.tools.constants as mc
-from manuscript.tools.castings import bool_
+from manuscript.tools.castings import bool_, language
 import manuscript.exceptions.exceptions as mex
 from manuscript.tools.say import say
-from manuscript.tools.play import play_sound
 
 from manuscript.messages.messages import message_text
 
 
 class Role(Action):
     """ Definition of Role object and dialogue """
-    # params[required, optional, dependent]
+    # _params[required, optional, dependent]
     # (attribute name, type conversion function, default value)
     COMMAND = mc.ROLE
     params = [
@@ -22,6 +21,7 @@ class Role(Action):
         {"pitch": (float, 0.0),
          "speed": (float, 0.0),
          "gain": (float, 1.0),
+         "desc": (str, "No description"), # description
          "noname": (bool_, False),        # name is never spoken
          "lang_like": (str, mc.NARRATOR), # speak as 'like' except lang, default text == alias
          "audio_like": (str, ""),
@@ -35,7 +35,7 @@ class Role(Action):
          "leading_newline": (bool_, mc.LEADING_NEWLINE),
          "trailing_newline": (bool_, mc.TRAILING_NEWLINE)},
         {"alias": (str, "name"),          # default value == dependent on
-         "lang": (str, "default_lang")}   # look first self, then settings
+         "lang": (language, "default_lang")}   # look first self, then settings
     ]
 
     def __init__(self, work, **kwargs):
@@ -53,6 +53,7 @@ class Role(Action):
         sound = say(text_, lang=self.lang)
         sound = Role.speed_change(sound, self.speed)
         sound = Role.pitch_change(sound, self.pitch)
+        sound = sound + self.gain
         return sound
 
     @classmethod
@@ -86,7 +87,7 @@ class Role(Action):
            text: the text to be spoken, default=A.alias
            SOUND: create Sound object B with audio=A.speak(text), empty: say
            lang_like: set lang=AA.lang
-           params: Role params, override A's params, not allowed lang_like & lang
+           _params: Role _params, override A's _params, not allowed lang_like & lang
         - action:
           -- generate audio object
           -- if SOUND given

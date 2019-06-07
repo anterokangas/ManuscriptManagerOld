@@ -1,4 +1,4 @@
-from manuscript.elements.definition import Definition
+from manuscript.atoms.definition import Definition
 import manuscript.tools.constants as mc
 #from manuscript.messages.messages import message
 from manuscript.tools.castings import bool_, list_, language
@@ -6,8 +6,8 @@ from manuscript.tools.castings import bool_, list_, language
 
 class Settings(Definition):
     """ Definition of Group object and action"""
-    COMMAND = mc.SETTINGS
-    params = [
+    _COMMAND = mc.SETTINGS
+    _params = [
         {"name": (str, mc.SETTINGS)},
         {"default_lang": (language, mc.DEFAULT_LANG),
          "data_dirs":
@@ -54,7 +54,7 @@ class Settings(Definition):
         kwargs["name"] = mc.SETTINGS
         super().__init__(work, **kwargs)
 
-        # Update fields that depend on settings
+        # Update fields that depend on settings (and NARRATOR)
         if self.work.defined_actions.get(mc.NARRATOR, None) is not None:
             # Update NARRATOR
             narrator = self.work.defined_actions[mc.NARRATOR]

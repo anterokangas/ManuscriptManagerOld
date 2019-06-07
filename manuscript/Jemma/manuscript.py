@@ -235,13 +235,13 @@ class Definition:
         assert len(self.params) == 3
 
         #
-        # Complete params
+        # Complete _params
         #
         self.params = [{**dp, **sp} for dp, sp in zip(Definition.params, self.params)]
 
         #
         # Set required parameters
-        # Order: subclass's params can override superclass' params
+        # Order: subclass's _params can override superclass' _params
         #
         for param, (func, default_value) in {**self.params[0], **Definition.params[0]}.items():
             val = kwargs.get(param, None)
@@ -303,11 +303,11 @@ class Definition:
         """
         me = copy.deepcopy(self)
         for key, value in kwargs.items():
-            if key == "params":
+            if key == "_params":
                 continue
             if key not in vars(me):
                 raise ValueError(f"*** {me.name} Trying to override non defined attribute '{key}'")
-            # Required parameters == params[0] are not allowed to be overridden
+            # Required parameters == _params[0] are not allowed to be overridden
             if key in self.params[0] and value != None:
                 raise ValueError(f"*** {me.name} Trying to override required attribute '{key}'")
             #
@@ -325,7 +325,7 @@ class Definition:
 
 class Role(Definition):
     """ Definition of Role object and dialogue """
-    # params[required, optional, dependent]
+    # _params[required, optional, dependent]
     # (attribute name, type conversion function, default value)
     params = [
         {},
@@ -621,8 +621,8 @@ class ManuscriptParser(Parser):
     """ Syntax parser
     manuscript ::= manuscript part | part
     part ::= command | values
-    command ::= name params ')'
-    params ::= params param | param | empty
+    command ::= name _params ')'
+    _params ::= _params param | param | empty
     param ::= name values ')' | values
     values ::= values STRING | STRING
     STRING ::= "..." | '...' | non-terminal string
@@ -701,7 +701,7 @@ class ManuscriptParser(Parser):
     def part(self, p):
         return NARRATOR, defined_actions[NARRATOR], {VALUES: p.values}
 
-    @_('NAME params RPAREN')
+    @_('NAME _params RPAREN')
     def command(self, p):
         name = p.NAME[1:].strip()
         params = p.params
@@ -727,7 +727,7 @@ class ManuscriptParser(Parser):
         #
         return name, None, {VALUES: values, **params}
 
-    @_('params param')
+    @_('_params param')
     def params(self, p):
         if list(p.param.keys())[0] not in p.params.keys():
             return {**p.params, **p.param}
@@ -903,7 +903,7 @@ if __name__ == "__main__":
             print(f"\n{name} {type(action)}")
             length = max([len(value) for value in action.__dict__]) + 1
             for key, value in action.__dict__.items():
-                if key != 'params':
+                if key != '_params':
                     print(f"   {key:{length}} {value}")
         lprint("Defined actions", defined_actions)
 

@@ -28,13 +28,13 @@ class Definition:
         assert len(self.params) == 3
 
         #
-        # Complete params
-        # self.params overrides Definition.params
+        # Complete _params
+        # self._params overrides Definition._params
         self.params = [{**dp, **sp} for dp, sp in zip(Definition.params, self.params)]
 
         #
         # Set required parameters
-        # Order: subclass's params can override superclass' params
+        # Order: subclass's _params can override superclass' _params
         #
         for param, (func, default_value) in {**self.params[0], **Definition.params[0]}.items():
             val = kwargs.get(param, None)
@@ -96,11 +96,11 @@ class Definition:
         """
         me = copy.deepcopy(self)
         for key, value in kwargs.items():
-            if key == "params":
+            if key == "_params":
                 continue
             if key not in vars(me):
                 raise ValueError(f"*** {me.name} Trying to override non defined attribute '{key}'")
-            # Required parameters == params[0] are not allowed to be overridden
+            # Required parameters == _params[0] are not allowed to be overridden
             if key in self.params[0] and value != None:
                 raise ValueError(f"*** {me.name} Trying to override required attribute '{key}'")
             #

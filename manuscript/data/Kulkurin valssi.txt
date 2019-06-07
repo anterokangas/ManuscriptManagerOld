@@ -1,0 +1,326 @@
+(###########################################################
+ #                                                         #
+ #                      KULKURIN VALSSI                    #
+ #                      ===============                    #
+ #                                                         #
+ #                       Käsikirjoitus                     #
+ #                                                         #
+ #           Versio 23 (c) 16.12.2018 Antero Kangas        #
+ #        Näytelmä on esitetty Lempäälän Nuorisoseuran     #
+ #                Loppiaistanssiaisissa 5.1.2019           #
+ #                                                         #
+ ###########################################################)
+
+
+(SETTINGS General
+    (default_lang fi)
+    (* --- mp3 settings --- *)
+    (export testi.mp3)
+    (format mp3)
+    (title MM-kielen testi)
+    (artist Various Artists)
+    (album MM-single number 1)
+    (comments The best Test-file ever!)
+    (date 2019)
+    (genre pop)
+    (* --- finals --- *)
+    (play_final True)
+    (print_final_text True)
+    (* --- DEBUG settings --- *)
+    (print_defining_actions False)
+    (print_defined_actions False)
+    (print_manuscript_text False)
+    (print_manuscript_parsed False)
+    (print_executions False)
+    (play_while False)
+)
+
+
+
+(title KULKURIN VALSSI)
+(title_line)
+(title_line VERSIO 23)
+(title_line 16.12.2018)
+(title_line)
+
+(header SYNOPSIS)
+
+(synopsis
+Suomalainen paroni Arnold ampuu kaksintaistelussa venäläisen ruhtinas Avertsejevin ja pakenee Suomeen.
+Matkallaan Arnold tapaa mustalaisia.
+Kaunis Rosinka ihastuu häneen, minkä vuoksi häntä uhataan puukolla ja hän lähtee jälleen kulkemaan.
+Ennustajaeukko povaa hänelle pitkää tietä, mutta myös menestystä.
+)
+(synopsis
+Kreivitär Helena on kävelyllä sulhasensa Ericin kanssa.
+Eric kyllästyy, mutta Helena jatkaa kävelyään ja tapaa Arnoldin onkimassa.
+Helena ottaa Arnoldin töihin karta-noonsa, ja matkalla sinne he huomaavat väentuvassa tanssittavan.
+Arnold tanssittaa Helenaa, joka ihastuu häneen.
+)
+(synopsis
+Helena haluaa testata sulhasensa Ericin rohkeutta ja majoittaa tämän huoneeseen, jossa väitetään kummittelevan.
+Helena pyytää Arnoldia avukseen ja yhdessä he pelottelevat Ericiä, kunnes tämä peloissaan laukaisee pistoolinsa.
+)
+(synopsis
+Aamulla Eric rehentelee rohkeudellaan ja tivaa hääpäivää.
+Helena suuttuu tälle ensin, mutta suostuukin, jos häät vietetään heti.
+Arnold saa kuulla, että ruhtinas onkin elossa ja lähtee talosta.
+Hän etsii mustalaiset käsiinsä ja palaa heidän kanssaan häihin kuokkimaan.
+Arnold tanssii Helenan kanssa ja pyytää tätä seuraamaan häntä.
+)
+
+(#
+                                     ROOLIHAHMOT
+#)
+(ROLE KERTOJA)
+(ROLE AVERSTEJEV (alias ruhtinas Avertsejev)
+    (desc Venäläinen upseeri ja ruhtinas, varakas, pitää pelaamisesta, mutta inhoaa häviämistä.))
+(ROLE ARNOLD (alias paroni Arnold)
+    (desc Suomalainen paroni, joka on jo jonkin aikaa oleskellut Pietarissa.
+          Rikas, kevytmielinen ja suhtautuu rahaan välinpitämättömästi, pitää naisista.)
+(ROLE ARNOLDIN_SEKUNDANTTI)
+(ROLE RUHTINAAN_SEKUNDANTTI)
+(ROLE FEDJA
+    (desc Tulisieluinen mustalaisten johtaja. On hyvin mustasukkainen Rosinkasta.))
+(ROLE ENNUSTAJAEUKKO
+    (desc Mustalaisnainen, joka ansaitsee elantonsa povaamalla muille. Hän usein oikeassa.))
+(ROLE ROSINKA
+    (desc Kiihkeä mustalaisnainen, joka mielellään liehittelee miehiä.)
+(ROLE ERIC
+    (desc Kreivitär Helenan sulhanen. Arka ja hieman vätys, mutta rikas, minkä vuoksi
+          Helenan isä on antanut luvan parille mennä naimisiin.))
+(ROLE HELENA (alias kreivitär Helena)
+    (desc Kaunis Helena asuu isänsä, kreivi Crohjelmin, kartanossa.
+          Helena on menossa naimisiin.
+          Kreivi on rahavaikeuksissa, mutta toivoo Helenan rikkaan
+          sulhasen pelastavan kartanon.))
+(ROLE PIIKA)
+(ROLE PIIKA2 (alias toinen piika))
+
+
+(#
+                                     TAUOT JA ÄÄNET
+#)
+(WAIT -- (delay 0.5))
+(WAIT tauko (delay 1))
+(WAIT p (delay 0)) (# Voi käyttää jakamaan NARRATORIN tekstiosuudet kappaleiksi. #)
+
+(SOUND HUOMIO! (input -- kopskops.mp3 --))
+(SOUND LAUKAUS (input pang.mp3))
+(SOUND KELLO (input pingpong.mp3))
+(SOUND KLING (input kling.mp3))
+(SOUND HÄLINÄÄ (input noise.mp3))
+
+(SOUND poloneesi (input -- poloneesi.mp3))
+
+(*
+                                     LOPPIAISTANSSIAISET
+#)
+
+LOPPIAISTANSSIAISET 2019
+(tauko)
+Vieraat saapuvat ja saavat sekä tanssikortit että nimikortit. Nimikortit täytetään.
+(--)
+Vieraat siirtyvät saliin ja samalla kerätään nimikortit (# Erkki ja Marja  #)
+(tauko)
+Esittelijä koputtaa seremoniasauvalla. (# Juhani #)
+(HUOMIO!)
+Esittelijä kuuluttaa vieraat, jotka nousevat ja kumartavat muille.
+(HUOMIO!)
+Lempälän Nuorisoseuran puheenjohtaja toivottaa kaikki tervetulleiksi. (# Harri #)
+(HUOMIO!)
+
+(# Lyhyt teeman esittely (Antero) #)
+Hyvät tanssiaisvieraat. Loppiais¬tanssiaisissamme on viime vuosina ollut tee¬ma.
+Toissa¬vuonna tutus-tuimme vuoteen 1917, Suo-men itsenäistymis¬vuoteen,
+viime vuonna teemamme oli naamio¬huvit sekä niiden ja tans¬siaisten
+suuri ystävä ku¬ningas Kustaa III, joka mm. perusti Tampereen kaupungin
+Lempäälän kirkkoherra Eric Ednerin ehdotuksesta.
+Täksi vuodeksi olemme va-linneet romanttisen elokuva¬tarinan Kulkurin valssin.
+Siinä suomalainen paroni pakenee Pietarista Suomeen. Hän vaeltelee kulkurina,
+kunnes päätyy erään kreivin kartanolle keskelle hää¬humua.
+(--)
+Julistan tanssiaiset ava-tuiksi. Soittajat, saamme-ko poloneesin, kiitos.
+
+(# TANSSIAISET ALKAVAT #)
+(tauko)(poloneesi)
+(tauko)(suomalainen_valssi)
+
+(HUOMIO!)
+Hyvät tanssiaisvieraat, seuraa illan ensimmäinen tauko. Sen aikana on hyvä
+mahdollisuus täydentää tanssikorttinsa, jos siinä vielä on vapaata.
+
+(# Ensimmäinen tauko alkaa #)
+(HÄLINÄÄ)
+(# Ensimmäinen tauko päättyy #)
+(HUOMIO!)
+
+(header KOHTAUS 1:KAKSINTAISTELU PIETARISSA)
+
+(KERTOJA
+On varhainen aamu Pieta-rissa Nevan rannalla vuon-na 1880.
+Aurinko on juuri noussut.
+Suomalainen paro-ni ARNOLD ja venäläinen ruhtinas AVERTSEJEV ovat istuneet
+ravintolassa il-taa ja pelanneet korttia koko yön.)
+
+(KERTOJA
+Ruhtinas on huonolla tuu-lella hävittyään raskaasti)
+
+Suomalainen paroni ARNOLD ja venäläinen RUHTINAS AVERT-SEJEV saapuvat keskelle salia,
+ruhtinas äksyilee Arnol-dille.
+(p)
+Heidän perässään saapuvat myös kaksi muuta henkilöä, ARNOLDIN ja RUHTINAAN SEKUNDANTIT.
+(p)
+Henkilöillä on hienot vaatteet, ruhtinaalla sotilastak-ki. Pistoolit ovat toisella sekundantilla laukussa pii-lossa.
+
+(AVERTSEJEV
+Paroni Arnold, olette hui-jari! Lisäksi olette vie-tellyt naiseni.)
+(AVERTSEJEV
+Kunniani vaatii kaksin-taistelua.)
+
+Ruhtinas ottaa kädestään hansikkaan ja lyö sillä Arnol-dia kasvoihin.)
+
+(ARNOLD
+Ruhtinas Avertsejev, en ole huijari, voitin teidät kortti¬pelissä aivan rehel-lisesti.)
+
+Arnold levittää kätensä.
+
+(ARNOLD
+Ja, mitä tulee naisiin, niin minkä minä niille mahdan.
+Mutta taistellaan vaan.)
+
+Sekundantit ottavat pistoolit esille, virittävät ja an-tavat ne ruhtinaalle ja Arnoldille.
+(p)
+Ruhtinas ja Arnold asettuvat selin, pistoolien piiput ylöspäin.
+(p)
+Arnoldin sekundantti kertaa säännöt.
+
+(ARNOLDIN_SEKUNDANTTI
+Astutte luvun mukaan kum-pikin ensin viisi askelta eteenpäin, vasta sitten saatte kääntyä ja ampua.)
+
+Ruhtinaan sekundantti alkaa laskea rauhallisesti. Ruh-tinas ja Arnold ottavat vastaavasti lyhyitä askeleita.
+
+(RUHTINAAN_SEKUNDANTTI
+Yksi. (--) Kaksi. (--) Kolme. (--) Neljä.
+(tauko)
+
+Luvun ollessa vasta neljä, ruhtinas kääntyykin ja ampuu (LAUKAUS) Arnoldia kohti. Ruhtinas ampuu kuitenkin ohi.
+(p)
+Arnold pysähtyy, pyyhkäisee verta ohimoltaan, mutta jatkaa laskemista itse ottaen vielä yhden askeleen,
+minkä jälkeen hän kääntyy.
+(ARNOLD Ja viisi.)
+
+Arnold kääntyy ja kohottaa aseensa.
+(p)
+Ruhtinas vapisee peloissaan ja peittää kasvonsa.
+(p)Arnold ampuu (LAUKAUS) osuen ruhtinaaseen, joka kaatuu maahan rintaansa pidellen.
+
+(p)Ruhtinaan sekundantti menee ruhtinaan luo ja toteaa tä-män kuolleeksi.
+(RUHTINAAN_SEKUNDANTTI Hän on kuollut.)
+
+(ARNOLDIN_SEKUNDANTTI
+Paroni, paetkaa! Venäläi-set haluavat kostaa, ei-vätkä he välitä, että se oli reilu kaksintaistelu.)
+
+(ARNOLD Lähden kotimaahani Suomeen. )
+Arnold poistuu pää pystyssä.
+(p)
+Muut näyttelijät poistuvat hetken päästä eri ovesta kuin  Arnold.
+
+(# TANSSISETTI 1 ALKAA #)
+
+Annetaan merkki soittajille. (# Antero #)
+(tauko)(mignon)
+(tauko)(tango)
+(tauko)(foxtrot) (# hidas #)
+(tauko (vengerka)
+(tauko) (suomalainen_valssi_2)
+
+(header KOHTAUS 2: MUSTALAISTEN LUONA)
+Mustalaiset ovat odotelleet leirissä näyttämön vierei-sen oven edessä.
+He tulevat valmiiksi näyttämön eteen.
+Näyttämön reunalla on taiteltu mustalaisliivi.
+Fedjalla on puukko vyöllään.
+
+(HUOMIO!)
+(KERTOJA
+Arnold on pakomatkalla koti¬maassaan Suomessa. Hän on tekeytynyt kulkuriksi ja vaeltelee maaseudulla.)
+
+Arnold vaeltelee maaseudulla kulkurin vaatteissa: hattu, ruudullinen paita ja liivit, kaulassa huivi
+ja olalla keppi, jossa vaatenyytti.
+Hän tapaa iloisella tuulella olevat mustalaiset.
+ENNUSTAJAEUKKO povaa mustalaisnai-nen ROSINKALLE ja mustalaismies FEDJALLE.
+(p)
+Arnold tulee ovesta. Hän on kulkemassa mustalaisten ohi, kun nämä huomaavat tämän ja pyytävät luokseen.
+(FEDJA Hei kulkumies, sinulla näyttää olevan pitkä matka.)
+(FEDJA Pidähän pieni tauko.
+Olemme juuri tehneet hyvät hevoskaupat ja aiomme hiu-kan juhlia.)
+
+(ENNUSTAJAEUKKO
+Hai, tuu siekii tänne, niin mie povvaan "siul’.")
+
+(ROSINKA Joo, liity sinäkin jouk-koon tummaan.)
+
+Arnold kiittää ja menee mustalaisten luo.
+
+(ARNOLD Kiitos.)
+
+(ROSINKA Mitäs kulkumies etsii?=
+
+Arnold huokaa ja vastaa haikeasti.
+(ARNOLD Vapautta, unohdusta.)
+
+(FEDJA No sitten olet tullut oi-keaan paikkaan!)
+(FEDJA Me mustalaiset olemme va-paita kuin taivaan linnut, ja kun me juhlimme,
+niin kaikki huolet ja murheet unohtuvat.)
+
+Fedja ottaa esille koreat mustalaisliivit ja ojentaa ne Arnoldille.
+(FEDJA
+Ota sinä nämä veljeni lii-vit. Hän ei niitä enää tarvitse. Hän sai puukosta.)
+(TAUKO)
+(FEDJA Naisen vuoksi!)
+(ARNOLD Kiitos.)
+Arnold laittaa liivit päälleen.
+(p)
+Rosinka alkaa liehitellä Arnoldia. Hän tulee Arnoldin vierelle, ottaa kädestä ja katsoo häntä pitkään.
+(p)Fedja suuttuu, ottaa puukkonsa esiin ja sanoo vihaises-ti.
+
+(FEDJA Sinä et kyllä vie minulta minun Rosinkaani!)
+(ARNOLD
+Rauhoitu, Rosinka on kyllä kaunis ja kiihkeä nainen, mutta mieleni palaa jo ta-kaisin maantielle.)
+
+Arnold ja Fedja tekevät mustalaistervehdyksen eli kumpikin laittaa oikean kätensä toisen oikealle olalle.
+(p)
+Rosinka hymähtää, nakkelee niskojaan ja menee Fedjan luo.
+(p)
+Ennustajaeukko ottaa Arnoldia kädestä ja povaa tälle.
+
+(ENNUSTAJAEUKKO
+Sie et ookkaan mikkään ta-vallinen valkolaine, mie nään, et siul’ on eessäs pitkä tie.
+Älä huoli, siun käy viel’ lopus hyväs¬tikki.)
+
+Arnold poistuu heilauttaen kättään. Mustalaiset hei-lauttavat myös käsiään Arnoldille.
+Mustalaiset poistu-vat takaisin leiriinsä.
+
+(# TANSSISETTI 1 JATKUU #)
+
+Annetaan merkki soittajille (# Antero #)
+(Verushka) (# humppa #)
+(Ländler))
+(Bolero)
+(Royal_Empress_Tango)
+(Pompadour)
+(Hidas_valssi)
+
+(# TOINEN TAUKO ALKAA #)
+(tamburiini)
+Ennustajaeukko kutsuu kaikki kahville.
+(kahvilla)
+
+KALASTUS KIELLETTY -kyltti viedään tauon aikana paikal-leen näyttämön reunalle.
+
+(# TOINEN TAUKO PÄÄTTYY #)
+
+
+
+
+
