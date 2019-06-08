@@ -74,7 +74,7 @@ class Sound(Definition):
     params = [
         {},
         {mc.SOUND: (str, ""),               # generate SOUND object (SOUND-name)
-         mc.DEFINING: (bool, False),        # is the command just defining or not
+         mc.DEFINING: (bool, True),        # is the command just defining or not
          "gain": (float, 1.0),
          "input": (list_, ""),              # (sound/filename(s) separated by space)
          "audio": (as_is, mc.NON_DEFINED),  # possible AudioSegment object
@@ -103,36 +103,15 @@ class Sound(Definition):
         kwargs : dict
             parameters
         """
-        print(f"Sound.init: {kwargs.keys()}")
         # Either input (input and/or VALUES )or audio must be given (xor)
         audio = kwargs.get("audio", None)
-        input = kwargs.get("input", "")
-        name = kwargs.get("_name", "")
-        values = kwargs.get(mc.VALUES, "")
         defining = kwargs.get(mc.DEFINING, False)
 
-        # if defining is True audio shoukd not be given
+        # if defining is True then audio should not be given
         if defining and audio is not None:
             raise mex.MMParameterError(f"*** Defining SOUND command with audio is not allowed.")
 
-        required_parameters = xor(audio is not None, input+values != "")
-        if not required_parameters:
-            raise mex.MMParameterError(f"*** Either audio or input (´+name+VALUES)  must be given")
-
-        #self._params = [{**dp, **sp} for dp, sp in zip(Sound._params, self._params)]
-        self.reserved_names = self.get_reserved_names()
-        #self.param_keys = self.get_param_keys()
         super().__init__(work, **kwargs)
-
-        if self.audio is None:
-            input_ = list_(name + " " + values + input)
-            audios = Sound.get_audios(work, input_)
-            self.combine_audios(audios)
-
-        if self.audio is not None:
-            self.process_audio()
-
-        super().define_action()
 
     def combine_audios(self, audios, **kwargs):
         """ Combine == overlay or join audio segments
@@ -194,16 +173,9 @@ class Sound(Definition):
         if name in work.defined_actions:
             raise mex.MMParameterError(f"*** Trying to Create Sound.from_audio by already defined name '{name}'")
 
-
-        # class_param_keys = set()
-        # for parent_class in cls.mro():
-        #     for class_params in parent_class.__dict__.get("_params, []"):
-        #         class_param_keys = class_param_keys.union(class_params.keys())
-        #
-        # kwargs = {key: kwargs[key] for key in
-        #           set(kwargs.keys()).intersection(class_param_keys)}
-
-
+        # Create Sound-object wit audio and define it
+        kwargs[mc.DEFINING] = False     # Allow audio
+        kwargs[mc.SOUND] = ""           # Create Sound-object with audio only once
         object_ = cls(work, name=name, audio=audio, **kwargs)
         work.define_action(name, object_)
         return object_
@@ -229,11 +201,14 @@ class Sound(Definition):
         if self.audio is None:
             # audio is generated only once
             me = self
+
+            # combine sound-inputs: first from definition (name + original input)
+            # second the new paramaters (values + new input)
             input_ = list_(self._name
                            + " ".join(self.input)
                            + " " + kwargs.get(mc.VALUES, "")
                            + " " + kwargs.get("input", ""))
-            sounds = [Sound.get_audio(me._work, sf) for sf in input_]
+            sounds = [Sound.get_audio(me.work, sf) for sf in input_]
 
             # sounds are either overlayed or joined
             me.combine_audios(sounds, **kwargs)
@@ -242,11 +217,14 @@ class Sound(Definition):
 
         me.process_audio()
 
+        # Is result new Sound-object or just audio
         sound_name = kwargs.get(mc.SOUND, "")
         if sound_name == "":
             return me.audio
 
-        Sound.from_audio(me._work, name=sound_name, audio=me.audio)
+        # Create Sound-onbject with audio
+        kwargs[mc.DEFINING] = False
+        Sound.from_audio(me.work, name=sound_name, audio=me.audio, **kwargs)
         return None
 
     @classmethod

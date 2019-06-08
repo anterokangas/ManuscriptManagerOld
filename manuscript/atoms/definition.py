@@ -59,14 +59,12 @@ class Definition:
         kwargs :    dict
             Given params
         """
-        print(f"Definition.init: {kwargs.keys()}")
         self.work = work                 # Tie elements to specific work
         self.params = self.get_params()  # Complete params
         self.illegal_combinations = self.get_illegal_combinations()  # Complete  illegal combinations of param values
-        print(self.get_params_as_text())
+        # print(self.get_params_as_text())
         # Set required parameters
         for param, (func, default_value) in self.params[0].items():
-            print(f"param ([0])={param}")
             val = kwargs.get(param, None)
             if val is not None:
                 setattr(self, param, func(val))
@@ -75,7 +73,6 @@ class Definition:
 
         # Set optional parameters (default_value = name of the attribute)
         for param, (func, default_value) in self.params[1].items():
-            print(f"param ([1])={param}")
             val = kwargs.get(param, None)
             if val is None:
                 val = default_value
@@ -89,7 +86,6 @@ class Definition:
         #   3. default value from settings
         #   4. otherwise --> error
         for param, (func, default_value) in self.params[2].items():
-            print(f"param ([2])={param}")
             val = kwargs.get(param, None)
             if val is None:
                 val = kwargs.get(default_value, None)
@@ -100,12 +96,13 @@ class Definition:
             else:
                 raise mex.MMParameterError(f"*** The parameter that '{param}'' is dependent on is not set")
 
+        self.define_action()
+
         # test if non-defined parameters
         for kwarg in kwargs:
             """
-            if defining and audio is not defined IS OK
+            if defining and audio is not defined ==> OK
             """
-            print(f"kwarg={kwarg}: {kwargs[kwarg]}")
             if self.__dict__.get(kwarg, None) is None:
                 raise mex.MMParameterError(f"*** Non-defined parameter '{kwarg} = {kwargs[kwarg]}' in {self.__dict__}")
 
@@ -153,11 +150,9 @@ class Definition:
         self_cls = self.__class__
         params = [{}, {}, {}]
         for cls in self_cls.mro():
-            print(f"cls={cls}: {cls.__dict__.get('params', [{}, {}, {}] ) } ")
             params = [{**pp, **cp}
                       for pp, cp in zip(params, cls.__dict__.get(
                           "params", [{}, {}, {}]))]
-            print(f"-->params={params}")
         return params
 
     def get_params_as_text(self):
@@ -185,7 +180,7 @@ class Definition:
         for combination in self.get_illegal_combinations():
             next_combination = False
             for true_condition_key, true_condition_value in combination.get(True, {}).items():
-               if not self.__dict__[true_condition_key] == true_condition_value:
+                if not self.__dict__[true_condition_key] == true_condition_value:
                     next_combination = True
                     break
             if next_combination:

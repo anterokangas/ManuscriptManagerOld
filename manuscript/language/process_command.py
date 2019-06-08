@@ -73,7 +73,7 @@ def process_command(name, params, values, line_number, work):
         return name, object_, {"name": values, **params}
 
     object_ = work.defined_actions.get(name, None)
-    # Case 'pure Sound-object need not to be re-created (optimized)
+    # Case 'pure Sound-object' need not to be re-created (optimized)
 
     additional_object_test = (
             (isinstance(object_, get_all_subclasses(Sound, True))
