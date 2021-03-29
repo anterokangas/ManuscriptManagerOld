@@ -22,7 +22,7 @@ ply==3.10
 PyAudio==0.2.11
 pycparser==2.18
 pydub==0.20.0
-Pygments==2.2.0
+Pygments==2.7.4
 pylint==1.7.4
 pypiwin32==220
 requests>=2.20.0
